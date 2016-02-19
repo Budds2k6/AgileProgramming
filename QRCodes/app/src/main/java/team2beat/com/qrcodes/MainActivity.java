@@ -17,6 +17,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import java.io.File;
+
 public class MainActivity extends AppCompatActivity {
 
     static final String SCAN = "com.google.zxing.client.android.SCAN";
@@ -102,12 +104,37 @@ public class MainActivity extends AppCompatActivity {
 
                 String format = intent.getStringExtra("SCAN_RESULT_FORMAT");
 
-                Toast toast = Toast.makeText(this, "Content " + contents + "Format: " + format, Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(this, "Content: " + contents + "\nFormat: " + format, Toast.LENGTH_LONG);
 
                 toast.show();
 
             }
         }
+    }
+
+    private void generateQRCode()
+    {
+        // The value to be represented by the QR Code
+        String scanValue = "HI! I am Andrew!!!";
+
+        // File Path of where to save the image
+        String filePath = "tmpFile.jpg";
+
+        int size = 125;
+        String fileType = ".jpg";
+
+        File myFile = new File(filePath);
+
+        try
+        {
+            // Generate the image and store in the specified location
+
+        }catch(Exception e)
+        {
+
+        }
+
+
     }
 
 }
