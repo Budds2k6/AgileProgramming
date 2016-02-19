@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
     static final String SCAN = "com.google.zxing.client.android.SCAN";
 
-   /* @Override
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-    } */
+    }
 
 
     public void ScanQR(View v)
@@ -78,8 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
 
                 try {
-
-                    //activity.startActivity(activity.getIntent());
+                    
                     activity.startActivity(intent);
 
                 } catch (ActivityNotFoundException e) {
