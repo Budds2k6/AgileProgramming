@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
     static final String SCAN = "com.google.zxing.client.android.SCAN";
 
-    @Override
+   /* @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-    }
+    } */
 
 
     public void ScanQR(View v)
@@ -55,12 +55,12 @@ public class MainActivity extends AppCompatActivity {
         }catch (ActivityNotFoundException e)
         {
 
-            showDialog(MainActivity.this, "No Scanner Found", "Download a scanner code activity?", "Yes", "No");
+            showDialog(MainActivity.this, "No Scanner Found", "Download a scanner code activity?", "Yes", "No").show();
 
         }
     }
 
-    private Dialog showDialog(final Activity activity, CharSequence title, CharSequence message,CharSequence Yes, CharSequence No)
+    private Dialog showDialog(final Activity activity, CharSequence title, CharSequence message, CharSequence Yes, CharSequence No)
     {
 
         AlertDialog.Builder download = new AlertDialog.Builder(activity);
@@ -73,11 +73,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
 
                 // Go to a Scanner on the market
-                Uri uri = Uri.parse("market://search?q-pname:" + "com.google.zxing.client.android");
+                Uri uri = Uri.parse("market://search?q=pname:" + "com.google.zxing.client.android");
+
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
 
                 try {
 
-                    activity.startActivity(activity.getIntent());
+                    //activity.startActivity(activity.getIntent());
+                    activity.startActivity(intent);
 
                 } catch (ActivityNotFoundException e) {
                 }
