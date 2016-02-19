@@ -1,9 +1,11 @@
 
-public class Module {
-	Module(){}
+public class Module 
+{
+	private String moduleID;
+	private String name;
+	private String coordinator;
 	
-	String moduleID;
-	String name;
-	String coordinator;
-	
+	// Class Constructor
+	Module()
+	{}
 }
