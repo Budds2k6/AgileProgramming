@@ -1,5 +1,9 @@
 
-public class AttendanceList {
-AttendanceList(){}
-String attListID;
+public class AttendanceList
+{
+	private String attListID;
+	
+	// Class Constructor
+	public AttendanceList()
+	{}
 }

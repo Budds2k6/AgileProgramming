@@ -1,7 +1,13 @@
 
-public class Job {
-Job(){}
-String jobID;
-String jobTitle;
-String accessID;
+public class Job
+{
+	private String jobID;
+	private String jobTitle;
+	private String accessID;
+
+	// Class Constructor
+	Job()
+	{}
+	
+	
 }

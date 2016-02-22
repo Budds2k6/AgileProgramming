@@ -1,10 +1,12 @@
 
-public class Location {
-Location(){}
+public class Location 
+{
+	private String locationID;
+	private String roomID;
+	private String buildingID;
+	//private int capacity;
 
-String locationID;
-String roomID;
-String buildingID;
-//int capacity;
-
+	// Class Constructor
+	public Location()
+	{}
 }

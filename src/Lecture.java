@@ -1,10 +1,12 @@
 
-public class Lecture {
-//instead of class
-	Lecture(){}
-String classID;
-String moduleID;
-enum LectType{Lab, Tutorial, Lecture, Extra, Other};
-LectType theType;
+public class Lecture 
+{
+	private String classID;
+	private String moduleID;
+	public enum LectType{Lab, Tutorial, Lecture, Extra, Other};
+	private LectType theType;
 
+	// Class Constructor
+	Lecture()
+	{}
 }
