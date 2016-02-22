@@ -1,6 +1,9 @@
 
-public class Student {
-Student(){}
-String studentID;
-String userID;
+public class Student 
+{
+	private String studentID;
+	private String userID;
+	
+	// Constructor
+	Student(){}
 }

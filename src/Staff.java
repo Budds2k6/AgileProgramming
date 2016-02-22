@@ -1,5 +1,10 @@
 
-public class Staff {
-Staff(){}
-String jobID;
+public class Staff
+{
+	private String jobID;
+
+	// Constructor
+	Staff()
+	{}
+
 }
