@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -41,7 +42,7 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
-    static final String SCAN = "com.google.zxing.client.android.SCAN";
+    static final String SCANNER_DOWNLOAD_LOCATION = "com.google.zxing.client.android.SCAN";
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -63,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
     public void ScanQR(View v) {
         try {
             // Create a new 'Intent to scan'
-            Intent intent = new Intent(SCAN);
+            Intent intent = new Intent(SCANNER_DOWNLOAD_LOCATION);
             // Set up a variable called 'Scan Mode' which tells us which type of scan it will be doing (QR)
             intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
 
@@ -134,73 +135,40 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void generateQRCode(View v) {
-        String content = "Hi Rachel, This is a code";
-        QRCodeWriter write = new QRCodeWriter();
-        try {
-            int width = 125;
-            int height = 125;
-            BitMatrix bitMatrix = write.encode(content, BarcodeFormat.QR_CODE, width, height);
+        String content = "10375"; //Booking 1 on Monday morning
+
+        // Create a QR Code Writer
+        QRCodeWriter qrWriter = new QRCodeWriter();
+
+        int width = 150;
+        int height = 150;
+
+        try
+        {
+
+            //BitMatrix bitMatrix = new BitMatrix(width, height);
+            BitMatrix bitMatrix = qrWriter.encode(content, BarcodeFormat.QR_CODE, width, height);
             Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-            for (int i = 0; i < width; i++) {
-                for (int j = 0; j < height; j++) {
-                    bitmap.setPixel(i, j, bitMatrix.get(i, j) ? Color.BLACK : Color.WHITE);
+
+            for(int i = 0; i < width; i++)
+            {
+                for (int j = 0; j < height; j++)
+                {
+                    if (bitMatrix.get(i, j) == true)
+                    {
+                        bitmap.setPixel(i, j, Color.BLACK);
+                    }else
+                    {
+                        bitmap.setPixel(i, j, Color.WHITE);
+                    }
                 }
             }
 
-            saveBitmap(bitmap);
 
-            ImageView image = (ImageView)findViewById(R.id.qrImage);
-            image.setImageBitmap(bitmap);
+        }catch(Exception e){}
 
-
-            //mImageView.setImageBitmap(bitmap);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
-    private void saveBitmap(Bitmap image) {
-        File pictureFile = getOutputMediaFile();
-        if (pictureFile == null) {
-            //Log.d(TAG,
-            //"Error creating media file, check storage permissions: ");// e.getMessage());
-            Log.d("TEST", "BROKEN A LOT");
-            return;
-        }
-        try {
-            FileOutputStream fos = new FileOutputStream(pictureFile);
-            image.compress(Bitmap.CompressFormat.PNG, 90, fos);
-            fos.close();
-            Log.d("TEST", "WORKED");
-        } catch (Exception e) {
-            Log.d("TEST", "BROKEN");
-        }
-    }
-
-    private File getOutputMediaFile() {
-        // To be safe, you should check that the SDCard is mounted
-        // using Environment.getExternalStorageState() before doing this.
-        File mediaStorageDir = new File(Environment.getExternalStorageDirectory()
-                + "/Android/data/"
-                + getApplicationContext().getPackageName()
-                + "/Files");
-
-        // This location works best if you want the created images to be shared
-        // between applications and persist after your app has been uninstalled.
-
-        // Create the storage directory if it does not exist
-        if (!mediaStorageDir.exists()) {
-            if (!mediaStorageDir.mkdirs()) {
-                return null;
-            }
-        }
-        // Create a media file name
-        String timeStamp = new SimpleDateFormat("ddMMyyyy_HHmm").format(new Date());
-        File mediaFile;
-        String mImageName = "MI_" + timeStamp + ".jpg";
-        mediaFile = new File(mediaStorageDir.getPath() + File.separator + mImageName);
-        return mediaFile;
-    }
 
     @Override
     public void onStart() {
