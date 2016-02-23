@@ -75,7 +75,7 @@
             android:layout_height="76dp"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="QR Result text here"
-            android:id="@+id/textView"
+            android:id="@+id/qrOutput"
             android:layout_gravity="center"
             android:textAlignment="center" />
     </FrameLayout>

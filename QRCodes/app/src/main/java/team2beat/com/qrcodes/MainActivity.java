@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -73,9 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
             // If the activity does not exist - i.e. no scanner found
         } catch (ActivityNotFoundException e) {
-
             showDialog(MainActivity.this, "No Scanner Found", "Download a scanner code activity?", "Yes", "No").show();
-
         }
     }
 
@@ -113,7 +112,6 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-
         return download.show();
     }
 
@@ -121,21 +119,49 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (requestCode == 0) {
             if (resultCode == RESULT_OK) {
+
                 // Is called when activity exists. Gives the result it found - with any additional data
                 String contents = intent.getStringExtra("SCAN_RESULT");
 
-                String format = intent.getStringExtra("SCAN_RESULT_FORMAT");
+                try {
+                    //Cast string content to integer (bookingID needs to be an int for sending)
+                    int bookingContent = Integer.parseInt(contents);
 
-                Toast toast = Toast.makeText(this, "Content: " + contents + "\nFormat: " + format, Toast.LENGTH_LONG);
+                    // TODO get actual data to send
+                    sendAttendanceToDatabase(bookingContent, "12345678");
 
-                toast.show();
+                    // Display it on the form
+                    TextView theText = (TextView) findViewById(R.id.qrOutput);
+                    theText.setText(contents);
 
+                    Toast toast = Toast.makeText(this, "SUCCESSFULLY SCANNED INTO CLASSNAME", Toast.LENGTH_LONG);
+
+                    toast.show();
+                }catch (Exception e)
+                {
+                    Toast toast = Toast.makeText(this, "QR Code not recognised", Toast.LENGTH_LONG);
+
+                    toast.show();
+                }
             }
         }
     }
 
+
+    public void sendAttendanceToDatabase(int bookingID, String studentID)
+    {
+        PresentRecord record = new PresentRecord(bookingID, studentID);
+
+        // TODO pass object to controller to write to database
+
+        // TODO get class name from database
+
+        // return "Class Name";
+    }
+
+
     public void generateQRCode(View v) {
-        String content = "10375"; //Booking 1 on Monday morning
+        String content = "101"; //Booking 1 on Monday morning (for example)
 
         // Create a QR Code Writer
         QRCodeWriter qrWriter = new QRCodeWriter();
