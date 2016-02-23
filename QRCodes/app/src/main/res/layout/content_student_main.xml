@@ -10,7 +10,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="team2beat.com.qrcodes.MainActivity"
-    tools:showIn="@layout/activity_main"
+    tools:showIn="@layout/activity_student_main"
     android:weightSum="1">
 
     <FrameLayout
@@ -41,28 +41,15 @@
             android:layout_gravity="center_horizontal|bottom"
             android:layout_marginBottom="50dp">
 
+
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="GENERATE"
-                android:id="@+id/button2"
-                android:onClick="generateQRCode"
-                android:layout_column="11"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignEnd="@id/button2" />
-
-            <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="SCAN"
-                    android:id="@+id/button"
+                android:text="SCAN"
+                android:id="@+id/button"
                 android:layout_row="2"        android:onClick="ScanQR"
-                    android:layout_column="0"
-                    android:layout_span="12"
+                android:layout_column="0"
+                android:layout_span="12"
                 android:layout_below="@+id/button2"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
