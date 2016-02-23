@@ -6,6 +6,10 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import team2beat.com.src.Controllers.LoginController;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -15,15 +19,24 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+    }
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+    public void submitLogin(View v)
+    {
+        // TODO this function!
+        EditText usernameBox = (EditText) findViewById(R.id.editText);
+        String username = usernameBox.getText().toString();
+
+        EditText passwordBox = (EditText) findViewById(R.id.editText2);
+        String password = usernameBox.getText().toString();
+
+        LoginController lc = new LoginController(username, password);
+        boolean success = lc.doLogin();
+
+        Toast toast = Toast.makeText(this, "WAS IT SUCCESSFUL? " + success, Toast.LENGTH_LONG);
+
+        toast.show();
+
     }
 
 }

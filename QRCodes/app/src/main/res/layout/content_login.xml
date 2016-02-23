@@ -37,6 +37,7 @@
         android:text="LOGIN"
         android:id="@+id/loginMusic"
         android:layout_centerVertical="true"
+        android:onClick="submitLogin"
         android:layout_alignLeft="@+id/editText2"
         android:layout_alignStart="@+id/editText2" />
 </RelativeLayout>
