@@ -32,6 +32,42 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".StaffMainActivity"
+            android:label="@string/title_activity_staff_main"
+            android:parentActivityName=".LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="team2beat.com.qrcodes.LoginActivity" />
+        </activity>
+        <activity
+            android:name=".QR_and_Register_Activity"
+            android:label="@string/title_activity_qr_and__register_"
+            android:parentActivityName=".StaffMainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="team2beat.com.qrcodes.StaffMainActivity" />
+        </activity>
+        <activity
+            android:name=".QrDisplayActivity"
+            android:label="@string/title_activity_qr_display"
+            android:parentActivityName=".QR_and_Register_Activity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="team2beat.com.qrcodes.QR_and_Register_Activity" />
+        </activity>
+        <activity
+            android:name=".RegisterView"
+            android:label="@string/title_activity_register_view"
+            android:parentActivityName=".QR_and_Register_Activity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="team2beat.com.qrcodes.QR_and_Register_Activity" />
         </activity>
     </application>
 
