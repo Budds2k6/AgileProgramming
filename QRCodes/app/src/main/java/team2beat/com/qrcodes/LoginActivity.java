@@ -28,7 +28,7 @@ public class LoginActivity extends AppCompatActivity {
         String username = usernameBox.getText().toString();
 
         EditText passwordBox = (EditText) findViewById(R.id.editText2);
-        String password = usernameBox.getText().toString();
+        String password = passwordBox.getText().toString();
 
         LoginController lc = new LoginController(username, password);
         boolean success = lc.doLogin();

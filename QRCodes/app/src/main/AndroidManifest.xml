@@ -31,8 +31,12 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
 
-            android:theme="@style/AppTheme.NoActionBar" />
+
+
+
+
         <activity
             android:name=".StaffMainActivity"
             android:label="@string/title_activity_staff_main"
