@@ -137,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast toast = Toast.makeText(this, "SUCCESSFULLY SCANNED INTO CLASSNAME", Toast.LENGTH_LONG);
 
                     toast.show();
+                    
                 }catch (Exception e)
                 {
                     Toast toast = Toast.makeText(this, "QR Code not recognised", Toast.LENGTH_LONG);
