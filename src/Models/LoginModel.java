@@ -28,14 +28,17 @@ public class Login
 		Driver driver = (Driver) driver_class.newInstance();
 		DriverManager.registerDriver(driver);
 	    Connection conn = DriverManager.getConnection("jdbc:mysql://silva.computing.dundee.ac.uk:3306/15agileteam2db?" + "user=15agileteam2&password=349.at2.psswd");         
-	    PreparedStatement ps = conn.prepareStatement("Select * from testlogin where username=? and password=?");
+	    PreparedStatement ps = conn.prepareStatement("Select * from user where username=? and password=?");
 	    ps.setString(1, username); 
 	    ps.setString(2, password);
 	    ResultSet rs = ps.executeQuery();
 	    if(rs.next())  {                      
 	    	   String returnedUser = rs.getString("username");
 	           String returnedPwd = rs.getString("password");
-	           String theDatas = rs.getString("somedatas");	       
+	           
+	           String firstname = rs.getString("firstname");
+	           String surname = rs.getString("surname");
+	           
 	           System.out.println(returnedUser + "  |  " + returnedPwd + "  |  " + theDatas);
 	           return true;	    
 	    }
