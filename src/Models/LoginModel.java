@@ -1,4 +1,12 @@
 import java.util.regex.Pattern;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.Driver;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 
 public class Login
 {
@@ -6,23 +14,57 @@ public class Login
 	public Login()
 	{}
 	
+
 	// Perform login
-	public void doLogin()
+	public boolean doLogin(String username, String password)
 	{	
+		try{
 		// TODO: Gain username && password from somewhere
-		string username = "000001";
-		string password = "bakedBeans";
+		//username = "000001";
+		//password = "bakedBeans";
 		
-		if (checkValid(username, password))
-		{
+		String theDriver = "com.mysql.jdbc.Driver";  
+		Class driver_class = Class.forName(theDriver);		   
+		Driver driver = (Driver) driver_class.newInstance();
+		DriverManager.registerDriver(driver);
+	    Connection conn = DriverManager.getConnection("jdbc:mysql://silva.computing.dundee.ac.uk:3306/15agileteam2db?" + "user=15agileteam2&password=349.at2.psswd");         
+	    PreparedStatement ps = conn.prepareStatement("Select * from testlogin where username=? and password=?");
+	    ps.setString(1, username); 
+	    ps.setString(2, password);
+	    ResultSet rs = ps.executeQuery();
+	    if(rs.next())  {                      
+	    	   String returnedUser = rs.getString("username");
+	           String returnedPwd = rs.getString("password");
+	           String theDatas = rs.getString("somedatas");	       
+	           System.out.println(returnedUser + "  |  " + returnedPwd + "  |  " + theDatas);
+	           return true;	    
+	    }
+	       else{
+	    	   writer.println("FAILED | "+ username + " | " + password);
+			   writer.close();
+			   return false;}
+
+	       
+	   }
+	   catch(Exception e){
+	       e.printStackTrace();
+	       return false;
+	   }
+	    
+	    
+		
+		
+		
+		//if (checkValid(username, password))
+		//{
 			// TODO: Implement successful login
 			// Transfer to new section
-		}
-		else if
-		{
+		//}
+		//else if
+		//{
 			// TODO: Login unsuccessful
 			// Display error detailing such
-		}
+		//}
 	}
 	
 	// Checks the user has valid access
