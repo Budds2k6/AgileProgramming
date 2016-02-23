@@ -14,6 +14,6 @@ public class Booking
 	private String staffUsername;
 
 	// Constructor
-	Booking()
+	Booking ()
 	{}	
 }

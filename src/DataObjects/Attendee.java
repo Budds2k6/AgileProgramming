@@ -1,11 +1,14 @@
 
 public class Attendee 
 {
-	String reason;
 	String userID;
-	boolean attended;
 	String attListID;
+	String reason;
+	boolean attended;
 	
 	// Constructor
-	Attendee(){}
+	Attendee (String userID, String attListID, String reason, boolean attended)
+	{
+		
+	}
 }
