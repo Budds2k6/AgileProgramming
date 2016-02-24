@@ -1,9 +1,8 @@
 package team2beat.com.qrcodes;
 
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -16,7 +15,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 
 public class QrDisplayActivity extends AppCompatActivity {
 
@@ -39,28 +43,7 @@ public class QrDisplayActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qr_display);
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-
-        // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
-
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
+        generateQRCode();
     }
 
 
@@ -121,6 +104,42 @@ public class QrDisplayActivity extends AppCompatActivity {
         }
     }
 
+    public void generateQRCode() {
+        String content = "101"; //Booking 1 on Monday morning (for example)
+
+        // Create a QR Code Writer
+        QRCodeWriter qrWriter = new QRCodeWriter();
+
+        int width = 300;
+        int height = 300;
+
+        try
+        {
+
+            //BitMatrix bitMatrix = new BitMatrix(width, height);
+            BitMatrix bitMatrix = qrWriter.encode(content, BarcodeFormat.QR_CODE, width, height);
+            Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+
+            for(int i = 0; i < width; i++)
+            {
+                for (int j = 0; j < height; j++)
+                {
+                    if (bitMatrix.get(i, j) == true)
+                    {
+                        bitmap.setPixel(i, j, Color.BLACK);
+                    }else
+                    {
+                        bitmap.setPixel(i, j, Color.WHITE);
+                    }
+                }
+            }
+
+            ImageView theImage = (ImageView) this.findViewById(R.id.qrCode);
+            theImage.setImageBitmap(bitmap);
+
+        }catch(Exception e){}
+
+    }
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
@@ -156,5 +175,6 @@ public class QrDisplayActivity extends AppCompatActivity {
             }
             return null;
         }
+
     }
 }

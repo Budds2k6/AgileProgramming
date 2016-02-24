@@ -1,5 +1,6 @@
 package team2beat.com.qrcodes;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,8 +18,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
     }
 
     public void submitLogin(View v)
@@ -37,6 +36,18 @@ public class LoginActivity extends AppCompatActivity {
 
         toast.show();
 
+    }
+
+    public void dummyLogin(View v)
+    {
+        Intent i = new Intent(getBaseContext(), StaffMainActivity.class);
+        LoginActivity.this.startActivity(i);
+    }
+
+    public void dummyLoginStudent(View v)
+    {
+        Intent i = new Intent(getBaseContext(), MainActivity.class);
+        LoginActivity.this.startActivity(i);
     }
 
 }

@@ -6,15 +6,18 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="team2beat.com.qrcodes.QrDisplayActivity$PlaceholderFragment">
+    tools:context="team2beat.com.qrcodes.QrDisplayActivity">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
         android:id="@+id/qrCode"
         android:layout_column="10"
         android:layout_span="2"
-        android:contentDescription="Generated QR code" />
+        android:contentDescription="Generated QR code"
+        android:foreground="#8e8e8e"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>
