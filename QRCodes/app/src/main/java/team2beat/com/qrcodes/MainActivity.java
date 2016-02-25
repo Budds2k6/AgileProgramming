@@ -131,7 +131,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     public void sendAttendanceToDatabase(int bookingID, String studentID)
     {
         PresentRecord record = new PresentRecord(bookingID, studentID);

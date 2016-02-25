@@ -35,12 +35,12 @@ public class BookingController
     {}
 
     // Sets the student as logged in
-    public void setAttendance (PresentRecord pRecord, int bookingID, String moduleID)
+    public void setAttendance (PresentRecord pRecord)
     {
         BookingModel bookingModel = new BookingModel();
 
         // Update attendee status
-        bookingModel.setStudentPresent(pRecord.studentID, bookingID, moduleID);
+        bookingModel.setStudentPresent(pRecord.studentID, pRecord.bookingID);
     }
 
     // Updates the reason for the student

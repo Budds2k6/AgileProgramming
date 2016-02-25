@@ -1,5 +1,6 @@
 package team2beat.com.src.Models;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -21,7 +22,7 @@ public class BookingModel
 	public BookingModel()
 	{}
 
-	private void FudgeMethod (Connection conn)
+	private void fudgeMethod (Connection conn)
 	{
 		// FIXME: Replace method with actual connection string
 		this._conn = conn;
@@ -35,9 +36,23 @@ public class BookingModel
 	}
 
 	// Sets the student present
-	public void setStudentPresent (String studentID, int bookingID, String moduleID)
+	public void setStudentPresent (String studentID, int bookingID)
 	{
 		// TODO: Access database, and set attendance
+		CallableStatement callState = null;
+
+		try
+		{
+			// FIXME: Replace with correct Stored Procedure call
+			String query = "{call TEMP_PROCEDURE (?, ?)}";
+			callState = _conn.prepareCall(query);
+
+			callState.close();
+		}
+		catch (Exception e)
+		{
+
+		}
 	}
 
 	// Set the reason for absence
@@ -85,6 +100,8 @@ public class BookingModel
 
 				bookingList.add(thisBooking);
 			}
+
+			temp.close();
 		}
 		catch (Exception e)
 		{

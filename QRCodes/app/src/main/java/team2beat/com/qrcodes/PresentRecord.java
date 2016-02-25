@@ -1,18 +1,14 @@
 package team2beat.com.qrcodes;
 
-/**
- * Created by asuth on 23/02/2016.
- */
 public class PresentRecord
 {
-    public int moduleID;
+    public int bookingID;
     public String studentID;
-    public boolean present;
 
-    public PresentRecord(int module, String student)
+    // Constructor
+    public PresentRecord(int bookingID, String studentID)
     {
-        moduleID = module;
-        studentID = student;
-        present = true;
+        this.bookingID = bookingID;
+        this.studentID = studentID;
     }
 }
