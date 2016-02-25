@@ -1,3 +1,4 @@
+package team2beat.com.src.DataObjects;
 
 public class Lecture 
 {

@@ -5,9 +5,9 @@ package team2beat.com.qrcodes;
  */
 public class PresentRecord
 {
-    int moduleID;
-    String studentID;
-    boolean present;
+    public int moduleID;
+    public String studentID;
+    public boolean present;
 
     public PresentRecord(int module, String student)
     {
@@ -15,5 +15,4 @@ public class PresentRecord
         studentID = student;
         present = true;
     }
-
 }

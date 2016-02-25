@@ -1,20 +1,20 @@
-
-
-public class LoginController {
-	
+// Controls the login for the application
+public class LoginController 
+{
 	private String username;
 	private String password;
-	
-	LoginController(String u, String p)
+
+	// Constructor
+	LoginController (String username, String password)
 	{
-		this.username = u;
-		this.password = p;	
+		this.username = username;
+		this.password = password;	
 	}
 	
+	// Performs the login
 	public void doLogin()
 	{
-		LoginModel lm = new LoginModel();
-		lm.doLogin(username,password);	
+		LoginModel loginModel = new LoginModel();
+		loginModel.doLogin(username, password);	
 	}
-
 }

@@ -33,7 +33,7 @@ public class UserController
 		User newUser = new User(username, password, firstname, surname);
 		
 		// Adds the user to the database, and recovers the ID
-		string userID = userModel.createUser (newUser);
+		String userID = userModel.createUser (newUser);
 		
 		// TODO: Adding of user complete
 	}
@@ -44,7 +44,7 @@ public class UserController
 		
 	}
 	
-	private bool LoginCheck ()
+	private boolean LoginCheck ()
 	{
 		// TODO: Check user is logged in
 		return true;

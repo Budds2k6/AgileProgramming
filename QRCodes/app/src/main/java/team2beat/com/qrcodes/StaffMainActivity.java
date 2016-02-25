@@ -24,14 +24,12 @@ public class StaffMainActivity extends AppCompatActivity {
 
     public void loadQRCode(View v)
     {
-        Intent i = new Intent(getBaseContext(), QrDisplayActivity.class);
+    Intent i = new Intent (getBaseContext(), QrDisplayActivity.class);
         StaffMainActivity.this.startActivity(i);
     }
-
-    public void loadRegister(View v)
+  public void loadRegister(View v)
     {
-        Intent i = new Intent(getBaseContext(), RegisterView.class);
-        StaffMainActivity.this.startActivity(i);
+
     }
 
 }

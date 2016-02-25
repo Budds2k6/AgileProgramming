@@ -6,7 +6,7 @@ public class BookingController ()
 	{}
 		
 	// Creates a new booking via the booking model
-	public void CreateBooking ()
+	public void createBooking ()
 	{
 			if (loginCheck())
 			{
