@@ -1,5 +1,6 @@
 package team2beat.com.qrcodes;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -46,6 +47,11 @@ public class QrDisplayActivity extends AppCompatActivity {
         generateQRCode();
     }
 
+    public void BackToModule(View v)
+    {
+        Intent i = new Intent(getBaseContext(), QR_and_Register_Activity.class);
+        QrDisplayActivity.this.startActivity(i);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

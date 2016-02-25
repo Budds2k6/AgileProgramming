@@ -13,31 +13,33 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView3"
+        android:layout_above="@+id/button5" />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add New Student"
         android:id="@+id/button5"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_above="@+id/BackToQR"
+        android:layout_alignRight="@+id/BackToQR"
+        android:layout_alignEnd="@+id/BackToQR"
+        android:layout_toRightOf="@+id/section_label"
+        android:layout_toEndOf="@+id/section_label" />
 
-    <ScrollView
-        android:layout_width="match_parent"
+    <Button
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/scrollView2"
-        android:layout_toEndOf="@+id/button5"
-        android:layout_alignTop="@+id/section_label"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_above="@+id/button5">
-
-        <ListView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/listView3" />
-    </ScrollView>
+        android:text="Back to QR View"
+        android:id="@+id/BackToQR"
+        android:onClick="BackToQR"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@+id/section_label"
+        android:layout_toEndOf="@+id/section_label" />
 
 </RelativeLayout>

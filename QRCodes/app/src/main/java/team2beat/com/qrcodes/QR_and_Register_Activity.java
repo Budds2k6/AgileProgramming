@@ -1,5 +1,6 @@
 package team2beat.com.qrcodes;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 
 import android.support.v4.app.Fragment;
@@ -38,6 +39,11 @@ public class QR_and_Register_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_qr_and__register_);
     }
 
+    public void BackToStaff(View v)
+    {
+        Intent i = new Intent(getBaseContext(), StaffMainActivity.class);
+        QR_and_Register_Activity.this.startActivity(i);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
