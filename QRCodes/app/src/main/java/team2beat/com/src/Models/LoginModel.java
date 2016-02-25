@@ -1,5 +1,13 @@
 package team2beat.com.src.Models;
 
+import android.app.DownloadManager;
+import android.os.AsyncTask;
+import android.util.Log;
+
+import java.io.IOException;
+import java.net.HttpCookie;
+import java.net.HttpURLConnection;
+import java.net.URLConnection;
 import java.util.regex.Pattern;
 import java.io.FileWriter;
 import java.io.PrintWriter;
@@ -9,6 +17,17 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.params.HttpClientParams;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 
 public class LoginModel {
 	// Class Constructor
@@ -61,6 +80,44 @@ public class LoginModel {
 		// TODO: Login unsuccessful
 		// Display error detailing such
 		//}
+	}
+
+
+	public boolean doLoginNew(String username, String password)
+	{
+		String url = "http://silva.computing.dundee.ac.uk/Agile/Login";
+
+		HttpClient httpClient = new DefaultHttpClient();
+
+		HttpPost httpPost = new HttpPost(url);
+
+		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+
+		nameValuePairs.add(new BasicNameValuePair("username", username));
+		nameValuePairs.add(new BasicNameValuePair("password", password));
+
+		try
+		{
+
+			httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+		}catch(Exception e){}
+
+		try
+		{
+
+			HttpResponse response = httpClient.execute(httpPost);
+
+			Log.d("RESPONSE: ",  response.toString());
+
+		}catch(Exception e)
+		{
+
+
+		}
+
+		return false;
+
 	}
 
 	// Checks the user has valid access

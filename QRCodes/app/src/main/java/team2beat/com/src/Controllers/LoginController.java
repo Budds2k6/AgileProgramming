@@ -17,7 +17,7 @@ public class LoginController {
 	public boolean doLogin()
 	{
 		LoginModel lm = new LoginModel();
-		return lm.doLogin(username,password);
+		return lm.doLoginNew(username,password);
 	}
 
 }
