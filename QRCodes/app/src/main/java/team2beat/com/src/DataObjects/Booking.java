@@ -1,8 +1,9 @@
+package team2beat.com.src.DataObjects;
+
 import java.sql.Date;
 import java.sql.Time;
 
-
-public class Booking 
+public class Booking
 {
 	private String bookingID;
 	private String classID;

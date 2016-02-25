@@ -1,6 +1,5 @@
-// import.DataModels_Stuff
-
 package team2beat.com.src.Controllers;
+
 import java.util.Date;
 
 import team2beat.com.src.Models.*;

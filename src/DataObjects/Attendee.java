@@ -7,8 +7,8 @@ public class Attendee
 	boolean attended;
 	
 	// Constructor
-	Attendee (String userID, String attListID, String reason, boolean attended)
+	Attendee (String attListID, String reason, boolean attended)
 	{
-		
+				
 	}
 }
