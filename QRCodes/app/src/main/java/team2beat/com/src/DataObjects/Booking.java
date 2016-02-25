@@ -1,6 +1,7 @@
 import java.sql.Date;
 import java.sql.Time;
 
+
 public class Booking 
 {
 	private String bookingID;
@@ -14,6 +15,15 @@ public class Booking
 	private String staffUsername;
 
 	// Constructor
-	Booking ()
-	{}	
+	public Booking (String bookingID, String classID, Time start, Time end, Date theDate, String attListID, String locationID, String staffUsername)
+	{
+		this.bookingID = bookingID;
+		this.classID = classID;
+		this.start = start;
+		this.end = end;
+		this.theDate = theDate;
+		this.attListID = attListID;
+		this.locationID = locationID;
+		this.staffUsername = staffUsername;
+	}
 }
