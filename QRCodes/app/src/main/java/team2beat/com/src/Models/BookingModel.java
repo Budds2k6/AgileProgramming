@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 import team2beat.com.src.DataObjects.Booking;
+import team2beat.com.src.DataObjects.Lecture;
 
 public class BookingModel
 {
@@ -16,13 +17,11 @@ public class BookingModel
 
 	// Constructor
 	public BookingModel()
-	{
-		// TODO: Remove from constructor parameter, and make static
-		this._conn = conn;
-	}
+	{}
 
 	private void FudgeMethod (Connection conn)
 	{
+		// FIXME: Replace method with actual connection string
 		this._conn = conn;
 	}
 
@@ -65,6 +64,7 @@ public class BookingModel
 				String bookingID = resultSet.getString(1);
 				String lectureID = resultSet.getString(2);
 				Time start = resultSet.getTime(3);
+				Date theDate = resultSet.getDate(3);
 				Time end = resultSet.getTime(4);
 				String locationID = resultSet.getString(5);
 				// result 6 is redundant
@@ -75,6 +75,7 @@ public class BookingModel
 				String roomNo = resultSet.getString(11);
 				String building = resultSet.getString(12);
 
+				Booking thisBooking = new Booking(bookingID, start, end, theDate, attListID, locationID);
 
 			}
 		}

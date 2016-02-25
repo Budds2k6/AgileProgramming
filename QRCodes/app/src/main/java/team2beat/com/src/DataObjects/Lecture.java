@@ -5,9 +5,13 @@ public class Lecture
 	private String classID;
 	private String moduleID;
 	public enum LectType{Lab, Tutorial, Lecture, Extra, Other};
-	private LectType theType;
+	private LectType lType;
 
 	// Class Constructor
-	Lecture()
-	{}
+	public Lecture(String classID, String moduleID, LectType lType)
+	{
+		this.classID = classID;
+		this.moduleID = moduleID;
+		this.lType = lType;
+	}
 }

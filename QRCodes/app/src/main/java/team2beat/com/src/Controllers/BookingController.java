@@ -4,6 +4,7 @@ import team2beat.com.src.DataObjects.Booking;
 import team2beat.com.src.Models.BookingModel;
 import java.sql.Date;
 import java.sql.Time;
+import java.util.List;
 
 import team2beat.com.qrcodes.PresentRecord;
 import team2beat.com.src.Models.BookingModel;
@@ -56,7 +57,7 @@ public class BookingController
     {
         BookingModel bookingModel = new BookingModel();
 
-        //List<Booking> bookingList = bookingModel.getBookingList (staffID);
+        List<Booking> bookingList = bookingModel.getBookingList (staffID);
 
         // TODO: Redirect to booking view with list
     }
