@@ -1,21 +1,27 @@
 package team2beat.com.src.Models;
 
-import java.sql.Date;
-import java.sql.Time;
-
 public class BookingModel
 {
-	private String bookingID;
-	private String classID;
-	// Date start;
-	private Time start;
-	private Time end;
-	private Date theDate;
-	private String attListID;
-	private String locationID;
-	private String staffUsername;
-
 	// Constructor
 	public BookingModel()
-	{}	
+	{}
+
+	// Sets the student present
+	public void setStudentPresent (String studentID, int bookingID, String moduleID)
+	{
+		// TODO: Access database, and set attendance
+	}
+
+	// Set the reason for absence
+	public void updateAttendanceReason (String studentID, int bookingID, String moduleID, String reason)
+	{
+		// TODO: Access the database, and set reason
+	}
+
+	// Obtains a list of bookings
+	public void getBookingList (String staffID)
+	{
+		// TODO: Access the database, and collect the booking list
+		// Return the booking list for given lecturer
+	}
 }
