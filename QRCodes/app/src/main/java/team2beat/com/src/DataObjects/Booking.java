@@ -1,6 +1,7 @@
 package team2beat.com.src.DataObjects;
 
 import team2beat.com.src.DataObjects.Lecture;
+import team2beat.com.src.DataObjects.Location;
 
 import java.sql.Date;
 import java.sql.Time;
@@ -16,20 +17,10 @@ public class Booking
 	private String attListID;
 	private String locationID;
 	private String staffUsername;
+
 	private Lecture lecture;
-
-
-
-	// Constructor
-	public Booking(String bookingID, Time start, Time end, Date theDate, String attListID, String locationID)
-	{
-		this.bookingID = bookingID;
-		this.start = start;
-		this.end = end;
-		this.theDate = theDate;
-		this.attListID = attListID;
-		this.locationID = locationID;
-	}
+	private Location location;
+	private Module module;
 
 	// Constructor
 	public Booking (String bookingID, String classID, Time start, Time end, Date theDate, String attListID, String locationID, String staffUsername)
@@ -44,8 +35,15 @@ public class Booking
 		this.staffUsername = staffUsername;
 	}
 
-	public void addLecture (String classID, String moduleID, Lecture.LectType lType)
+	// Booking Constructor
+	public Booking(Time start, Time end, Date theDate, String attListID, Location location, Module module, Lecture lecture)
 	{
-		lecture = new Lecture (classID, moduleId, lType);
+		this.start = start;
+		this.end = end;
+		this.theDate = theDate;
+		this.attListID = attListID;
+		this.location = location;
+		this.module = module;
+		this.lecture = lecture;
 	}
 }
