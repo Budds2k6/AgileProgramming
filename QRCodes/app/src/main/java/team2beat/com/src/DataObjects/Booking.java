@@ -14,6 +14,12 @@ public class Booking
 	private String locationID;
 	private String staffUsername;
 
+	// Blank constructor
+	public Booking()
+	{
+
+	}
+
 	// Constructor
 	public Booking (String bookingID, String classID, Time start, Time end, Date theDate, String attListID, String locationID, String staffUsername)
 	{
