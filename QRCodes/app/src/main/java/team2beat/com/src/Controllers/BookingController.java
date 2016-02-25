@@ -1,9 +1,10 @@
 package team2beat.com.src.Controllers;
 
+import team2beat.com.src.DataObjects.Booking;
+import team2beat.com.src.Models.BookingModel;
 import java.sql.Date;
 import java.sql.Time;
 
-=======
 import team2beat.com.qrcodes.PresentRecord;
 import team2beat.com.src.Models.BookingModel;
 
@@ -14,7 +15,6 @@ public class BookingController
         // TODO: Get from form
         String bookingID = "";
         String classID = "";
-        // Date start = "";
         Time start = null;
         Time end = null;
         Date theDate = null;

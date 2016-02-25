@@ -7,7 +7,6 @@ public class Booking
 {
 	private String bookingID;
 	private String classID;
-	// Date start;
 	private Time start;
 	private Time end;
 	private Date theDate;
