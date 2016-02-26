@@ -47,6 +47,12 @@ public class QrDisplayActivity extends AppCompatActivity {
         generateQRCode();
     }
 
+    public void BackToRegister(View v)
+    {
+        Intent i = new Intent(getBaseContext(), RegisterView.class);
+        QrDisplayActivity.this.startActivity(i);
+    }
+
     public void BackToModule(View v)
     {
         Intent i = new Intent(getBaseContext(), QR_and_Register_Activity.class);
