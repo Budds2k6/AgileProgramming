@@ -23,6 +23,8 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 
+import team2beat.com.src.Controllers.BookingController;
+
 public class QrDisplayActivity extends AppCompatActivity {
 
     /**
@@ -44,7 +46,20 @@ public class QrDisplayActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qr_display);
-        generateQRCode();
+
+        // create a booking and return the id of the attendance list
+        BookingController bc = new BookingController();
+        int listID = bc.createNewBooking();
+
+        // create a QR Code, representing the attendance list ID
+        generateQRCode(String.valueOf(listID));
+
+        // find the label to display the class id on and display the text
+        TextView text = (TextView) findViewById(R.id.lblLoggedInAs);
+        text.setText("CLASS ID: " + listID);
+
+        // TODO return the string to represent the class name
+
     }
 
     public void BackToRegister(View v)
@@ -116,8 +131,7 @@ public class QrDisplayActivity extends AppCompatActivity {
         }
     }
 
-    public void generateQRCode() {
-        String content = "101"; //Booking 1 on Monday morning (for example)
+    public void generateQRCode(String attendanceListID) {
 
         // Create a QR Code Writer
         QRCodeWriter qrWriter = new QRCodeWriter();
@@ -129,7 +143,7 @@ public class QrDisplayActivity extends AppCompatActivity {
         {
 
             //BitMatrix bitMatrix = new BitMatrix(width, height);
-            BitMatrix bitMatrix = qrWriter.encode(content, BarcodeFormat.QR_CODE, width, height);
+            BitMatrix bitMatrix = qrWriter.encode(attendanceListID, BarcodeFormat.QR_CODE, width, height);
             Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
 
             for(int i = 0; i < width; i++)

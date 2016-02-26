@@ -47,6 +47,14 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal|top" />
+
+        <TextView
+            android:layout_width="299dp"
+            android:layout_height="173dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="ATTENDANCE LIST ID"
+            android:id="@+id/lblClassID"
+            android:layout_gravity="center_horizontal|bottom" />
     </FrameLayout>
 
 
