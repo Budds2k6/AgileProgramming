@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import team2beat.com.src.Controllers.LoginController;
+import team2beat.com.src.DataObjects.Staff;
+import team2beat.com.src.DataObjects.Student;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -39,6 +41,27 @@ public class LoginActivity extends AppCompatActivity {
         if (successDetails[0] != null) {
             if (!successDetails[0].equals("Login Failed")) {
                 toast = Toast.makeText(this, "Successfully Logged In as " + successDetails[2] + successDetails[3], Toast.LENGTH_LONG);
+                if(successDetails[0].equals("AECobley")){
+
+                    String StaffID = "SSE1325";
+                    String JobID = "2751";
+
+                    Staff theStaff = new Staff(StaffID, JobID, successDetails[0],successDetails[1],successDetails[2],successDetails[3]);
+
+
+                    dummyLogin(v, theStaff);
+            }else if (successDetails[0].equals("FClyne")){
+
+
+                    String StudentID = "120005432";
+
+                    Student theStudent = new Student(StudentID, successDetails[0],successDetails[1],successDetails[2],successDetails[3]);
+
+
+
+                    dummyLoginStudent(v, successDetails);
+
+                }
             } else {
                 toast = Toast.makeText(this, "LOGIN FAILED...", Toast.LENGTH_LONG);
             }
@@ -56,12 +79,15 @@ public class LoginActivity extends AppCompatActivity {
     }
     }
 
-    public void dummyLogin(View v) {
+    public void dummyLogin(View v, Staff theStaff) {
         Intent i = new Intent(getBaseContext(), StaffMainActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("Details", theStaff);
+
         LoginActivity.this.startActivity(i);
     }
 
-    public void dummyLoginStudent(View v) {
+    public void dummyLoginStudent(View v,  String [] datas) {
         Intent i = new Intent(getBaseContext(), MainActivity.class);
         LoginActivity.this.startActivity(i);
     }

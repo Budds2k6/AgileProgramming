@@ -1,9 +1,15 @@
-// DataObject for the student
-public class Student 
+package team2beat.com.src.DataObjects;
+
+public class Student extends User
 {
 	private String studentID;
-	private String userID;
-	
+
 	// Constructor
-	Student(){}
+	public Student(String studentID, String username, String password, String firstname, String surname)
+	{
+		super(username,password,firstname,surname);
+
+		this.studentID = studentID;
+	}
+
 }
