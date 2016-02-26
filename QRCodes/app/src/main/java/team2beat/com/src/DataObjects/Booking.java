@@ -46,6 +46,6 @@ public class Booking
 
 	public void addLecture (String classID, String moduleID, Lecture.LectType lType)
 	{
-		lecture = new Lecture (classID, moduleId, lType);
+		lecture = new Lecture (classID, moduleID, lType);
 	}
 }

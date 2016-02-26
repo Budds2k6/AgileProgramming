@@ -1,12 +1,18 @@
 package team2beat.com.src.Models;
 
 import android.app.DownloadManager;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.HttpCookie;
 import java.net.HttpURLConnection;
+import java.net.URL;
 import java.net.URLConnection;
 import java.util.regex.Pattern;
 import java.io.FileWriter;
@@ -20,6 +26,10 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
+
+
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -28,61 +38,104 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.params.HttpClientParams;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 
-public class LoginModel {
+
+import android.os.Bundle;
+
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
+
+import javax.net.ssl.HttpsURLConnection;
+
+public class LoginModel extends ActionBarActivity {
+	/**
+	 * ATTENTION: This was auto-generated to implement the App Indexing API.
+	 * See https://g.co/AppIndexing/AndroidStudio for more information.
+	 */
+	private GoogleApiClient client;
+	private String username;
+	private String password;
+	public String [] theReturns;
+
 	// Class Constructor
-	public LoginModel() {
-	}
-
-
-	// Perform login
-	public boolean doLogin(String username, String password) {
-		try {
-			// TODO: Gain username && password from somewhere
-			//username = "000001";
-			//password = "turkeyBaconSandwich";
-
-			String theDriver = "com.mysql.jdbc.Driver";
-			Class driver_class = Class.forName(theDriver);
-			Driver driver = (Driver) driver_class.newInstance();
-			DriverManager.registerDriver(driver);
-			Connection conn = DriverManager.getConnection("jdbc:mysql://silva.computing.dundee.ac.uk:3306/15agileteam2db?" + "user=15agileteam2&password=349.at2.psswd");
-			PreparedStatement ps = conn.prepareStatement("Select * from user where username=? and password=?");
-			ps.setString(1, username);
-			ps.setString(2, password);
-			ResultSet rs = ps.executeQuery();
-			if (rs.next()) {
-				String returnedUser = rs.getString("username");
-				String returnedPwd = rs.getString("password");
-				String returnedFirstname = rs.getString("firstname");
-				String returnedSurname = rs.getString("surname");
-
-				System.out.println(returnedUser + "  |  " + returnedPwd + "  |  " + "  |  " + returnedFirstname + "  |  " + returnedSurname);
-				return true;
-			} else {
-				return false;
-			}
-
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
+	public LoginModel(String u, String p)
+		{
+			this.username = u;
+			this.password = p;
+			new PostClass().execute(username, password);
 		}
 
 
-		//if (checkValid(username, password))
-		//{
-		// TODO: Implement successful login
-		// Transfer to new section
-		//}
-		//else if
-		//{
-		// TODO: Login unsuccessful
-		// Display error detailing such
-		//}
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		//setContentView();
+		new PostClass().execute(username, password);
+
+		// ATTENTION: This was auto-generated to implement the App Indexing API.
+		// See https://g.co/AppIndexing/AndroidStudio for more information.
+		//client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 	}
 
+/*
+	public boolean theThings(String username, String password)
+	{
+		try {
+			String url = "http://silva.computing.dundee.ac.uk/Agile/Login";
+			URL obj = new URL(url);
+			HttpsURLConnection con = (HttpsURLConnection)obj.openConnection();
 
+			//add reuqest header
+			con.setRequestMethod("POST");
+			con.setRequestProperty("User-Agent","Mozilla/5.0");
+			con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+
+			//String urlParameters = "sn=C02G8416DRJM&cn=&locale=&caller=&num=12345";
+			String urlParameters = ("username="+username+"&password="+password);
+
+
+
+			// Send post request
+			con.setDoOutput(true);
+			DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+			wr.writeBytes(urlParameters);
+			wr.flush();
+			wr.close();
+
+			int responseCode = con.getResponseCode();
+			System.out.println("\nSending 'POST' request to URL : " + url);
+			System.out.println("Post parameters : " + urlParameters);
+			System.out.println("Response Code : " + responseCode);
+
+			BufferedReader in = new BufferedReader(
+					new InputStreamReader(con.getInputStream()));
+			String inputLine;
+			StringBuffer response = new StringBuffer();
+
+			while ((inputLine = in.readLine()) != null) {
+				response.append(inputLine);
+			}
+			in.close();
+
+			//print result
+			System.out.println(response.toString());
+
+			return true;
+
+
+		}catch(Exception e){
+
+			e.printStackTrace();
+
+		}
+
+		return false;
+	}
+
+*/
+	/*
 	public boolean doLoginNew(String username, String password)
 	{
 		String url = "http://silva.computing.dundee.ac.uk/Agile/Login";
@@ -101,7 +154,9 @@ public class LoginModel {
 
 			httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
-		}catch(Exception e){}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 
 		try
 		{
@@ -112,43 +167,115 @@ public class LoginModel {
 
 		}catch(Exception e)
 		{
-
-
+			e.printStackTrace();
+			System.out.println("PINEAPPLE");
 		}
 
 		return false;
 
 	}
+*/
 
-	// Checks the user has valid access
-	public boolean checkValid(String username, String password) {
-		if (checkUsername(username) && checkPassword(password)) {
-			return true;
-		} else {
-			return false;
+	private class PostClass extends AsyncTask<String, Void, Void> {
+
+		protected Void doInBackground(String... params) {
+
+			String url = "http://silva.computing.dundee.ac.uk/Agile/Login";
+
+			HttpClient httpClient = new DefaultHttpClient();
+
+			HttpPost httpPost = new HttpPost(url);
+
+			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+
+			nameValuePairs.add(new BasicNameValuePair("username", params[0]));
+			nameValuePairs.add(new BasicNameValuePair("password", params[1]));
+
+			try {
+
+				httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			try {
+
+				HttpResponse response = httpClient.execute(httpPost);
+
+				Log.d("RESPONSE: ", response.toString());
+				System.out.println("RESPONSE: " + response.toString());
+				String allofthethings = response.toString();
+				System.out.println("RESPONSE: " + response.toString());
+
+				String responseStr = EntityUtils.toString(response.getEntity());
+				System.out.println("RESPONSE: " + response.toString());
+
+				//theList = (String[]) request.getAttribute("list");
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("PINEAPPLE");
+			}
+
+			//return false;
+
+
+			return null;
+
+
 		}
+
+/*
+		protected void onPostExecute(String... params) {
+
+			String url = "http://silva.computing.dundee.ac.uk/Agile/Login";
+
+			HttpClient httpClient = new DefaultHttpClient();
+
+			HttpPost httpPost = new HttpPost(url);
+
+			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+
+			nameValuePairs.add(new BasicNameValuePair("username", params[0]));
+			nameValuePairs.add(new BasicNameValuePair("password", params[1]));
+
+			try {
+
+				httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			try {
+
+				HttpResponse response = httpClient.execute(httpPost);
+
+				Log.d("RESPONSE: ", response.toString());
+				System.out.println("RESPONSE: " + response.toString());
+				String allofthethings = response.toString();
+				System.out.println("RESPONSE: " + response.toString());
+
+				String responseStr = EntityUtils.toString(response.getEntity());
+				System.out.println("RESPONSE: " + response.toString());
+
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("PINEAPPLE");
+			}
+
+			//return false;
+
+
+			//return null;
+
+
+		}
+*/
+
 	}
 
-	// Checks the username is within bounds
-	private boolean checkUsername(String username) {
-		if (username.length() <= 0 || username.length() > 10) {
-			return false;
-		}
 
-		// TODO: Move this to input-control
-		// TODO: Either remove, or separate for students / staff
-		if (Pattern.matches("[a-zA-Z]+", username) == false) {
-			return false;
-		}
-
-		return true;
-	}
-
-	// Checks the password is within bounds
-	private boolean checkPassword(String password) {
-		if (password.length() <= 0 || password.length() > 45) {
-			return false;
-		}
-		return true;
-	}
 }

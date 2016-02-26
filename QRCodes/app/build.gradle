@@ -13,7 +13,18 @@ android {
         versionName "1.0"
         targetCompatibility = JavaVersion.VERSION_1_7
         sourceCompatibility = JavaVersion.VERSION_1_7
+
+
     }
+
+    //this might be needed to fix duplicate file exceeption - maybe not
+    packagingOptions {
+        //exclude 'src/main/java/team2beat/com/src/Library/http-core-4.1.jar'
+        //exclude 'src/main/java/team2beat/com/src/Library/http-client-4.2.3.jar'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+}
+
 
 
     buildTypes {
@@ -30,7 +41,7 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:design:23.1.1'
@@ -40,4 +51,5 @@ dependencies {
     compile files('src/main/java/team2beat/com/src/Library/mysql-connector-java-5.0.8-bin.jar')
     compile files('src/main/java/team2beat/com/src/Library/httpclient-4.2.3.jar')
     compile files('src/main/java/team2beat/com/src/Library/http-core-4.1.jar')
+    compile files('src/main/java/team2beat/com/src/Library/jcip-annotations-1.0.jar')
 }
