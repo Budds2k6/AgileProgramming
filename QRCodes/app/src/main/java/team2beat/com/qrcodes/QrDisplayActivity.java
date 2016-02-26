@@ -47,10 +47,19 @@ public class QrDisplayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qr_display);
 
+        // create a booking and return the id of the attendance list
         BookingController bc = new BookingController();
         int listID = bc.createNewBooking();
 
+        // create a QR Code, representing the attendance list ID
         generateQRCode(String.valueOf(listID));
+
+        // find the label to display the class id on and display the text
+        TextView text = (TextView) findViewById(R.id.lblLoggedInAs);
+        text.setText("CLASS ID: " + listID);
+
+        // TODO return the string to represent the class name
+
     }
 
     public void BackToRegister(View v)
