@@ -44,7 +44,7 @@ public class BookingModel  extends ActionBarActivity
 	String loc_id;
 	String staff_id;
 	String theFlag;
-	public String returnedId;
+	public String [] returnedId;
 
 
 	// Constructor
@@ -181,12 +181,6 @@ public class BookingModel  extends ActionBarActivity
 			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 
 
-			//Parameters needed:
-			//lectureID
-			//LocationID
-			//Staffid
-			//Flag - Create or update
-
 
 			nameValuePairs.add(new BasicNameValuePair("lec_id",params[0]));
 			nameValuePairs.add(new BasicNameValuePair("loc_id", params[1]));
@@ -220,9 +214,14 @@ public class BookingModel  extends ActionBarActivity
 				//theReturns = new String [4];
 				///theReturns[0] = getElementFromTag("username", rootElement);
 
-				String returned = getElementFromTag("AttListID",rootElement);
+				String [] returned = new String [2];
 
-				returnedId = "";
+
+				returned[0] = getElementFromTag("AttListID",rootElement);
+				returned[1] = getElementFromTag("booking",rootElement);
+
+
+				returnedId = new String [2];
 				returnedId = returned;
 
 				//if (!theReturns[0].equals("Login Failed"))

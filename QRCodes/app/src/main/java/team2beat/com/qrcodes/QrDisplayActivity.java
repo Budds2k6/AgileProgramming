@@ -49,10 +49,10 @@ public class QrDisplayActivity extends AppCompatActivity {
 
         // create a booking and return the id of the attendance list
         BookingController bc = new BookingController();
-        String listID = bc.createNewBooking();
+        String [] listID = bc.createNewBooking();
 
         // create a QR Code, representing the attendance list ID
-        generateQRCode(listID);
+        generateQRCode(listID[1]);
 
         // find the label to display the class id on and display the text
         TextView text = (TextView) findViewById(R.id.lblLoggedInAs);

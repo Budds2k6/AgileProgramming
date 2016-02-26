@@ -1,5 +1,7 @@
 package team2beat.com.src.Controllers;
 
+import android.view.View;
+
 import team2beat.com.src.DataObjects.Booking;
 import team2beat.com.src.Models.*;
 import java.sql.Date;
@@ -11,10 +13,10 @@ import team2beat.com.src.Models.BookingModel;
 
 public class BookingController
 {
-    private String attendanceListID;
+    private String [] returnables;
 
 
-	public String createNewBooking ()
+	public String [] createNewBooking ()
     {
         // TODO: Get from form
         String bookingID = "";
@@ -31,11 +33,11 @@ public class BookingController
         int loc_id = 24;
         String staff_id = "SSE1325";
         String theFlag = "Create";
-
+        returnables = new String[2];
 
         BookingModel bm = new BookingModel(lec_id,loc_id,staff_id,theFlag);
-        while (attendanceListID == null || attendanceListID.equals("")) {
-            attendanceListID = bm.returnedId;
+        while (returnables == null || returnables[0].equals("") ||  returnables[1].equals("")) {
+            returnables = bm.returnedId;
 
         }
 
@@ -52,12 +54,20 @@ public class BookingController
 
         //int attendanceListID = bookingModel.createBooking (thisBooking);
 
-        return attendanceListID;
+        return returnables;
     }
 
     // Constructor
     public BookingController ()
     {}
+
+    public void endClass(String booking_id)
+    {
+        String theFlag = "Update";
+        EndClass ec = new EndClass(booking_id,theFlag);
+
+    }
+
 
     // Sets the student as logged in
     public void setAttendance (PresentRecord pRecord)
