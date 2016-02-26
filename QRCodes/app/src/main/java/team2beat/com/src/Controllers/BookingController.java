@@ -14,7 +14,7 @@ import team2beat.com.src.Models.BookingModel;
 public class BookingController
 {
     private String [] returnables;
-
+    public String theBookingID;
 
 	public String [] createNewBooking ()
     {
@@ -36,7 +36,7 @@ public class BookingController
         returnables = new String[2];
 
         BookingModel bm = new BookingModel(lec_id,loc_id,staff_id,theFlag);
-        while (returnables == null || returnables[0].equals("") ||  returnables[1].equals("")) {
+        while (returnables == null || returnables[0] == null || returnables[1] == null || returnables[0].equals("") ||  returnables[1].equals("")) {
             returnables = bm.returnedId;
 
         }
@@ -53,7 +53,7 @@ public class BookingController
 
 
         //int attendanceListID = bookingModel.createBooking (thisBooking);
-
+        theBookingID = returnables[1];
         return returnables;
     }
 
