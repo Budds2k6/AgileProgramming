@@ -17,4 +17,25 @@ public class User implements Serializable {
 		this.firstname = firstname;
 		this.surname = surname;
 	}
+
+	//Accessor methods
+	public String getUsername()
+	{
+		return userID;
+	}
+
+	public String getPassword()
+	{
+		return password;
+	}
+
+	public String getFirstName()
+	{
+		return firstname;
+	}
+
+	public String getSurname()
+	{
+		return surname;
+	}
 }

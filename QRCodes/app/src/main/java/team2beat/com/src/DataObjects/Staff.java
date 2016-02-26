@@ -14,4 +14,14 @@ public class Staff extends User
 		this.jobID = jobID;
 	}
 
+	//Accessor methods
+	public String getStaffID()
+	{
+		return staffID;
+	}
+
+	public String getJobID()
+	{
+		return jobID;
+	}
 }
