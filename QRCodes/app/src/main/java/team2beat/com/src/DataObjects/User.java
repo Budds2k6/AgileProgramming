@@ -1,6 +1,9 @@
 // DataObject for the user
-public class User
-{
+package team2beat.com.src.DataObjects;
+
+import java.io.Serializable;
+
+public class User implements Serializable {
 	String userID;
 	String password;
 	String firstname;
