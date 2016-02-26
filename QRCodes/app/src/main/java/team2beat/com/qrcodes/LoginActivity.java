@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
 
         LoginController lc = new LoginController(username, password);
         String[] successDetails = lc.doLogin();
-
+        //comment
 
 
         Toast toast;
