@@ -1,6 +1,5 @@
 <resources>
 
-    <application theme="@android:style/Theme.UoDqrRegister"/>
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
