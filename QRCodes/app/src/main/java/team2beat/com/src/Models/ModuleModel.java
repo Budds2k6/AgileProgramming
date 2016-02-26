@@ -1,8 +1,7 @@
 package team2beat.com.src.Models;
-
-
 import java.util.List;
 
+//Refactoring - ModuleModel's details were formerly in BookingModel - it now has its own class
 public class ModuleModel
 {
 	private String moduleID;
