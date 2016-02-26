@@ -1,3 +1,5 @@
+package team2beat.com.src.DataObjects;
+
 // DataObject for the student
 public class Student 
 {
@@ -6,4 +8,15 @@ public class Student
 	
 	// Constructor
 	Student(){}
+
+	//Accessor methods
+	public String getStudentID()
+	{
+		return studentID;
+	}
+
+	public String getUserID()
+	{
+		return userID;
+	}
 }
