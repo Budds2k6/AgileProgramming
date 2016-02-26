@@ -1,5 +1,6 @@
 package team2beat.com.src.Models;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -10,6 +11,8 @@ import java.util.ArrayList;
 
 import team2beat.com.src.DataObjects.Booking;
 import team2beat.com.src.DataObjects.Lecture;
+import team2beat.com.src.DataObjects.Location;
+import team2beat.com.src.DataObjects.Module;
 
 public class BookingModel
 {
@@ -19,7 +22,7 @@ public class BookingModel
 	public BookingModel()
 	{}
 
-	private void FudgeMethod (Connection conn)
+	private void fudgeMethod (Connection conn)
 	{
 		// FIXME: Replace method with actual connection string
 		this._conn = conn;
@@ -33,9 +36,23 @@ public class BookingModel
 	}
 
 	// Sets the student present
-	public void setStudentPresent (String studentID, int bookingID, String moduleID)
+	public void setStudentPresent (String studentID, int bookingID)
 	{
 		// TODO: Access database, and set attendance
+		CallableStatement callState = null;
+
+		try
+		{
+			// FIXME: Replace with correct Stored Procedure call
+			String query = "{call TEMP_PROCEDURE (?, ?)}";
+			callState = _conn.prepareCall(query);
+
+			callState.close();
+		}
+		catch (Exception e)
+		{
+
+		}
 	}
 
 	// Set the reason for absence
@@ -67,21 +84,28 @@ public class BookingModel
 				Date theDate = resultSet.getDate(3);
 				Time end = resultSet.getTime(4);
 				String locationID = resultSet.getString(5);
-				// result 6 is redundant
+				String staffName = resultSet.getString(6);
 				String attListID = resultSet.getString(7);
-				String staffName = resultSet.getString(8);
+				String moduleID = resultSet.getString(8);
 				String moduleName = resultSet.getString(9);
 				String lectType = resultSet.getString(10);
 				String roomNo = resultSet.getString(11);
 				String building = resultSet.getString(12);
 
-				Booking thisBooking = new Booking(bookingID, start, end, theDate, attListID, locationID);
+				Location thisLocation = new Location (locationID, roomNo, building);
+				Module thisModule = new Module (moduleID, moduleName);
+				Lecture thisLecture = new Lecture (lectureID, moduleID, Lecture.LectType.valueOf(lectType));
 
+				Booking thisBooking = new Booking (start, end, theDate, attListID, thisLocation, thisModule, thisLecture);
+
+				bookingList.add(thisBooking);
 			}
+
+			temp.close();
 		}
 		catch (Exception e)
 		{
-
+			// TODO: No results exception
 		}
 
 		return bookingList;

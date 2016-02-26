@@ -25,6 +25,8 @@ import com.google.zxing.qrcode.QRCodeWriter;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 
+import team2beat.com.src.Controllers.BookingController;
+
 public class MainActivity extends AppCompatActivity {
 
     static final String SCANNER_DOWNLOAD_LOCATION = "com.google.zxing.client.android.SCAN";
@@ -107,6 +109,8 @@ public class MainActivity extends AppCompatActivity {
                     int bookingContent = Integer.parseInt(contents);
 
                     // TODO get actual data to send
+                    // LEGIT LEWIS YOU NEED TO DO THIS NEXT
+                    // IT'S IMPORTANT
                     sendAttendanceToDatabase(bookingContent, "12345678");
 
                     // Display it on the form
@@ -127,12 +131,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     public void sendAttendanceToDatabase(int bookingID, String studentID)
     {
         PresentRecord record = new PresentRecord(bookingID, studentID);
 
         // TODO pass object to controller to write to database
+        BookingController bc = new BookingController();
+
+        bc.setAttendance(record);
 
         // TODO get class name from database
 

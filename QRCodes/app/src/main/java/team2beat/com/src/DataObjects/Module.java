@@ -6,28 +6,18 @@ public class Module
 	private String name;
 	private String coordinator;
 	
-	// Class Constructor
-	public Module()
-	{}
-	
-	// Creates a new module, and returns the ID
-	public String createModule ()
+	// Constructor
+	public Module (String moduleID, String name, String coordinator)
 	{
-		try
-		{
-			
-		}
-		catch (Exception e)
-		{
-			
-		}
-
-		return "";
-
+		this.moduleID = moduleID;
+		this.name = name;
+		this.coordinator = coordinator;
 	}
-	
-	public void editModule (String moduleID)
+
+	// Constructor
+	public Module (String moduleID, String moduleName)
 	{
-		
+		this.moduleID = moduleID;
+		this.name = name;
 	}
 }
