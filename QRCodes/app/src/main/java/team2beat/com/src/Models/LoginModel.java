@@ -122,21 +122,11 @@ public class LoginModel extends ActionBarActivity {
 
 				HttpResponse response = httpClient.execute(httpPost);
 
-				//Log.d("RESPONSE: ", response.toString());
-				//System.out.println("RESPONSE: " + response.toString());
-				//String allofthethings = response.toString();
-				//System.out.println("RESPONSE: " + response.toString());
 
 				String responseStr = EntityUtils.toString(response.getEntity());
 
 
 				System.out.println("RESPONSE: " + response.toString());
-				//String hopefullyXML = response.
-				//theList = (String[]) request.getAttribute("list");
-
-
-
-				//String responseStr = "<login_details> <user> <username>AECobley</username> <password>Cassandraisbae</password> <firstname>Andrew</firstname> <surname>Cobley</surname> </user> </login_details>";
 
 
 				DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();

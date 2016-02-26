@@ -27,6 +27,7 @@ import android.graphics.Color;
 
 import team2beat.com.src.Controllers.BookingController;
 import team2beat.com.src.DataObjects.Staff;
+import team2beat.com.src.DataObjects.Student;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,14 +40,20 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student_main);
+        try {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_student_main);
 
-        Staff details = (Staff)savedInstanceState.getSerializable("Details");
+            Bundle detailsBundle = getIntent().getExtras();
 
-        TextView txtName = (TextView) findViewById(R.id.lblLoggedInAs);
-        txtName.setText("Logged In As: "+ details.getFirstName() + " " + details.getSurname());
+            Student details = (Student) detailsBundle.getSerializable("details");
 
+            TextView txtName = (TextView) findViewById(R.id.lblLoggedInAs);
+            txtName.setText("Logged In As: " + details.getFirstName() + " " + details.getSurname());
+        }catch(Exception e){
+
+            e.printStackTrace();
+        }
 
     }
 

@@ -21,13 +21,20 @@ public class StaffMainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_staff_main);
+        try {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_staff_main);
 
-        Staff details = (Staff)savedInstanceState.getSerializable("Details");
+            Bundle detailsBundle = getIntent().getExtras();
 
-        TextView txtName = (TextView) findViewById(R.id.lblLoggedInAs);
-        txtName.setText("Logged In As: " + details.getFirstName() + " " + details.getSurname());
+            Staff details = (Staff) detailsBundle.getSerializable("details");
+
+            TextView txtName = (TextView) findViewById(R.id.lblLoggedInAs);
+            txtName.setText("Logged In As: " + details.getFirstName() + " " + details.getSurname());
+        }catch(Exception e){
+
+            e.printStackTrace();
+        }
     }
 
     public void loadQRCode(View v)

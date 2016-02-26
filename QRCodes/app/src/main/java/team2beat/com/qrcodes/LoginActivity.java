@@ -55,6 +55,8 @@ public class LoginActivity extends AppCompatActivity {
 
                     String StudentID = "120005432";
 
+                    //52345234m
+
                     Student theStudent = new Student(StudentID, successDetails[0],successDetails[1],successDetails[2],successDetails[3]);
 
 
@@ -81,16 +83,13 @@ public class LoginActivity extends AppCompatActivity {
 
     public void dummyLogin(View v, Staff theStaff) {
         Intent i = new Intent(getBaseContext(), StaffMainActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("Details", theStaff);
-
+        i.putExtra("details", theStaff);
         LoginActivity.this.startActivity(i);
     }
 
     public void dummyLoginStudent(View v,  Student theStudent) {
         Intent i = new Intent(getBaseContext(), MainActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("Details", theStudent);
+        i.putExtra("details", theStudent);
         LoginActivity.this.startActivity(i);
     }
 
