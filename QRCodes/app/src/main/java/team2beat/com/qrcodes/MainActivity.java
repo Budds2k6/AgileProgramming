@@ -26,6 +26,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 
 import team2beat.com.src.Controllers.BookingController;
+import team2beat.com.src.DataObjects.Staff;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,6 +41,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_main);
+
+        Staff details = (Staff)savedInstanceState.getSerializable("Details");
+
+        TextView txtName = (TextView) findViewById(R.id.lblLoggedInAs);
+        txtName.setText("Logged In As: "+ details.getFirstName() + " " + details.getSurname());
+
+
     }
 
 

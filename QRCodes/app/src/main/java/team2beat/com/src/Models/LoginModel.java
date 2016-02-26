@@ -92,7 +92,6 @@ public class LoginModel extends ActionBarActivity {
 	}
 
 
-
 	private class PostClass extends AsyncTask<String, Void, Void> {
 
 		protected Void doInBackground(String... params) {

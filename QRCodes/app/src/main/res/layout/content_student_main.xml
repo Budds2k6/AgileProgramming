@@ -42,6 +42,12 @@
             android:layout_marginBottom="50dp">
 
 
+            <TextView
+                android:layout_width="345dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Logged In As: "
+                android:id="@+id/lblLoggedInAs" />
         </LinearLayout>
 
         <TextView
