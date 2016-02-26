@@ -59,7 +59,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-                    dummyLoginStudent(v, successDetails);
+                    dummyLoginStudent(v, theStudent);
 
                 }
             } else {
@@ -87,8 +87,10 @@ public class LoginActivity extends AppCompatActivity {
         LoginActivity.this.startActivity(i);
     }
 
-    public void dummyLoginStudent(View v,  String [] datas) {
+    public void dummyLoginStudent(View v,  Student theStudent) {
         Intent i = new Intent(getBaseContext(), MainActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("Details", theStudent);
         LoginActivity.this.startActivity(i);
     }
 
