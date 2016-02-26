@@ -11,7 +11,7 @@ import team2beat.com.src.Models.BookingModel;
 
 public class BookingController
 {
-	public void createNewBooking ()
+	public int createNewBooking ()
     {
         // TODO: Get from form
         String bookingID = "";
@@ -27,7 +27,9 @@ public class BookingController
 
         BookingModel bookingModel = new BookingModel();
 
-        bookingModel.createBooking (thisBooking);
+        int attendanceListID = bookingModel.createBooking (thisBooking);
+
+        return attendanceListID;
     }
 
     // Constructor
