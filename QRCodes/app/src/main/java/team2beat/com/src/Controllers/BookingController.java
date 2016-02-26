@@ -32,7 +32,7 @@ public class BookingController
         int lec_id = 15;
         int loc_id = 24;
         String staff_id = "SSE1325";
-        String theFlag = "Create";
+        String theFlag = "Create";              // Create or Update (i.e. start or end)
         returnables = new String[2];
 
         BookingModel bm = new BookingModel(lec_id,loc_id,staff_id,theFlag);

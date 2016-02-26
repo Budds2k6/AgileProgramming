@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
-    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,10 +45,13 @@ public class MainActivity extends AppCompatActivity {
 
             Bundle detailsBundle = getIntent().getExtras();
 
+            // extract the details from the Bundle which was passed
             Student details = (Student) detailsBundle.getSerializable("details");
 
+            // display the user's name on the screen
             TextView txtName = (TextView) findViewById(R.id.lblLoggedInAs);
             txtName.setText("Logged In As: " + details.getFirstName() + " " + details.getSurname());
+
         }catch(Exception e){
 
             e.printStackTrace();
@@ -58,10 +60,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    // code adapted from:
+    // http://examples.javacodegeeks.com/android/android-barcode-and-qr-scanner-example/
     public void ScanQR(View v) {
         try {
             // Create a new 'Intent to scan'
             Intent intent = new Intent(SCANNER_DOWNLOAD_LOCATION);
+
             // Set up a variable called 'Scan Mode' which tells us which type of scan it will be doing (QR)
             intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
 
@@ -70,28 +75,32 @@ public class MainActivity extends AppCompatActivity {
 
             // If the activity does not exist - i.e. no scanner found
         } catch (ActivityNotFoundException e) {
+            // if theZXing scanner is not found, ask the user if they wish to download one
             showDialog(MainActivity.this, "No Scanner Found", "Download a scanner code activity?", "Yes", "No").show();
         }
     }
 
+
+    // code adapted from:
+    // http://examples.javacodegeeks.com/android/android-barcode-and-qr-scanner-example/
     private Dialog showDialog(final Activity activity, CharSequence title, CharSequence message, CharSequence Yes, CharSequence No) {
 
-        AlertDialog.Builder download = new AlertDialog.Builder(activity);
+        // create a dialog message
+        AlertDialog.Builder downloadMessage = new AlertDialog.Builder(activity);
+        downloadMessage.setTitle(title);
+        downloadMessage.setMessage(message);
 
-        download.setTitle(title);
-        download.setMessage(message);
-
-        download.setPositiveButton(Yes, new DialogInterface.OnClickListener() {
+        // set up the confirm / yes button
+        downloadMessage.setPositiveButton(Yes, new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(DialogInterface dialog, int intf) {
 
                 // Go to a Scanner on the market
-                Uri uri = Uri.parse("market://search?q=pname:" + "com.google.zxing.client.android");
+                Uri downloadLocation = Uri.parse("market://search?q=pname:" + "com.google.zxing.client.android");
 
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                Intent intent = new Intent(Intent.ACTION_VIEW, downloadLocation);
 
                 try {
-
                     activity.startActivity(intent);
 
                 } catch (ActivityNotFoundException e) {
@@ -100,7 +109,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        download.setNegativeButton(No, new DialogInterface.OnClickListener() {
+        // the Cancel / No button will just close the dialog message
+        downloadMessage.setNegativeButton(No, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int intf) {
 
@@ -108,17 +118,24 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-        return download.show();
+        // show the dialog box
+        return downloadMessage.show();
     }
 
+
+    // code adapted from:
+    // http://examples.javacodegeeks.com/android/android-barcode-and-qr-scanner-example/
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+
+        // if the scan was successful - i.e. it found a QR Code
         if (requestCode == 0) {
             if (resultCode == RESULT_OK) {
 
-                // Is called when activity exists. Gives the result it found - with any additional data
+                // called when activity exists. Gives the result it found - with any additional data
                 String contents = intent.getStringExtra("SCAN_RESULT");
 
+                // try to parse the recognised string into an int,
                 try {
                     //Cast string content to integer (bookingID needs to be an int for sending)
                     int bookingContent = Integer.parseInt(contents);
@@ -132,10 +149,12 @@ public class MainActivity extends AppCompatActivity {
                     TextView theText = (TextView) findViewById(R.id.qrOutput);
                     theText.setText(contents);
 
-                    Toast toast = Toast.makeText(this, "SUCCESSFULLY SCANNED INTO CLASSNAME", Toast.LENGTH_LONG);
+                    // tell the user that they scanned in
+                    Toast toast = Toast.makeText(this, "SUCCESSFULLY SCANNED INTO CLASS" + contents, Toast.LENGTH_LONG);
 
                     toast.show();
-                    
+
+                    // if the string does not convert, catch the exception and inform the user
                 }catch (Exception e)
                 {
                     Toast toast = Toast.makeText(this, "QR Code not recognised", Toast.LENGTH_LONG);
@@ -146,6 +165,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
+
+    /*
+    *
+    * THE FUNCTION TO SIGN A STUDENT IN TO A CLASS
+    *
+    * */
     public void sendAttendanceToDatabase(int bookingID, String studentID)
     {
         PresentRecord record = new PresentRecord(bookingID, studentID);

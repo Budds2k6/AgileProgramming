@@ -75,19 +75,16 @@ public class EndClass  extends ActionBarActivity
 
             String url = "http://silva.computing.dundee.ac.uk/2015-agileteam2/CreateBooking";
 
-            //http://silva.computing.dundee.ac.uk/2015-agileteam2/
-
-
+            // resource: http://hayageek.com/android-http-post-get/
             HttpClient httpClient = new DefaultHttpClient();
 
             HttpPost httpPost = new HttpPost(url);
 
+            // the parameters to send through
             List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 
-
-
-            nameValuePairs.add(new BasicNameValuePair("book",params[0]));
-            nameValuePairs.add(new BasicNameValuePair("flag", params[1]));
+            nameValuePairs.add(new BasicNameValuePair("book",params[0]));       // booking id
+            nameValuePairs.add(new BasicNameValuePair("flag", params[1]));      // Create or Update
 
             try {
 
@@ -99,24 +96,26 @@ public class EndClass  extends ActionBarActivity
 
             try {
 
+                // get the response from the command
                 HttpResponse response = httpClient.execute(httpPost);
-
 
                 String responseStr = EntityUtils.toString(response.getEntity());
 
-
                 System.out.println("RESPONSE: " + response.toString());
 
+                // this small chunk was taken from:	------------------------------------------------
+                //http://www.tutorialspoint.com/java_xml/java_dom_create_document.htm
 
+                // build an XML file from the returned code
                 DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
                 DocumentBuilder builder = factory.newDocumentBuilder();
                 Document document = builder.parse(new InputSource(new StringReader(responseStr)));
                 Element rootElement = document.getDocumentElement();
 
-
-            } catch (Exception e) {
+                // up to here ----------------------------------------------------------------------
+            }
+            catch (Exception e) {
                 e.printStackTrace();
-                System.out.println("PINEAPPLE");
             }
 
             //return false;

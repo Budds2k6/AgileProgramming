@@ -139,6 +139,11 @@ public class QrDisplayActivity extends AppCompatActivity {
         }
     }
 
+
+
+    // code modified / inspiration taken from:
+    // http://crunchify.com/java-simple-qr-code-generator-example/
+
     public void generateQRCode(String attendanceListID) {
 
         // Create a QR Code Writer
@@ -146,18 +151,19 @@ public class QrDisplayActivity extends AppCompatActivity {
 
         int width = 300;
         int height = 300;
-        //String seven ="7777777";
+
         try
         {
-
-            //BitMatrix bitMatrix = new BitMatrix(width, height);
+            // create the 2d array of bits - from the content
             BitMatrix bitMatrix = qrWriter.encode(attendanceListID, BarcodeFormat.QR_CODE, width, height);
             Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
 
+            // loop through all pixels and set the colour to the appropriate colour (basede on the bool)
             for(int i = 0; i < width; i++)
             {
                 for (int j = 0; j < height; j++)
                 {
+                    // if true, he colour is black, otherwise, it is white. This wil lmake up the QR Code
                     if (bitMatrix.get(i, j) == true)
                     {
                         bitmap.setPixel(i, j, Color.BLACK);
@@ -168,12 +174,12 @@ public class QrDisplayActivity extends AppCompatActivity {
                 }
             }
 
+            // set image on form
             ImageView theImage = (ImageView) this.findViewById(R.id.qrCode);
             theImage.setImageBitmap(bitmap);
 
-        }catch(Exception e){
-
-
+        }catch(Exception e)
+        {
             e.printStackTrace();
         }
 

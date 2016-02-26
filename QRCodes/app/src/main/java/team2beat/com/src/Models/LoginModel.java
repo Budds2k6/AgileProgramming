@@ -98,20 +98,21 @@ public class LoginModel extends ActionBarActivity {
 
 			String url = "http://silva.computing.dundee.ac.uk/2015-agileteam2/Login";
 
-			//http://silva.computing.dundee.ac.uk/2015-agileteam2/
+			// resource: http://hayageek.com/android-http-post-get/
 
-
+			// do the POST command
 			HttpClient httpClient = new DefaultHttpClient();
 
 			HttpPost httpPost = new HttpPost(url);
 
 			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 
+			// the parameters to pass through
 			nameValuePairs.add(new BasicNameValuePair("username", params[0]));
 			nameValuePairs.add(new BasicNameValuePair("password", params[1]));
 
 			try {
-
+				// set the parameters to pass
 				httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
 			} catch (Exception e) {
@@ -120,43 +121,44 @@ public class LoginModel extends ActionBarActivity {
 
 			try {
 
+				// get the response after the request
 				HttpResponse response = httpClient.execute(httpPost);
-
 
 				String responseStr = EntityUtils.toString(response.getEntity());
 
-
 				System.out.println("RESPONSE: " + response.toString());
 
+				// this small chunk was taken from:	------------------------------------------------
+				//http://www.tutorialspoint.com/java_xml/java_dom_create_document.htm
 
+				// build an XML file from the returned code
 				DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 				DocumentBuilder builder = factory.newDocumentBuilder();
 				Document document = builder.parse(new InputSource(new StringReader(responseStr)));
+				// get the element from the XML file
 				Element rootElement = document.getDocumentElement();
+				// up to here ----------------------------------------------------------------------
 
+				// the 4 things that are returned - username, password, first name and surname
 				theReturns = new String [4];
 				theReturns[0] = getElementFromTag("username", rootElement);
 
-
-
-
+				// unless the login was unsuccessful, get the other values from the XML
 				if (!theReturns[0].equals("Login Failed"))
-				{theReturns[1] = getElementFromTag("password", rootElement);
-				theReturns[2] = getElementFromTag("firstname", rootElement);
-				theReturns[3] = getElementFromTag("surname", rootElement);
+				{
+					theReturns[1] = getElementFromTag("password", rootElement);
+					theReturns[2] = getElementFromTag("firstname", rootElement);
+					theReturns[3] = getElementFromTag("surname", rootElement);
 				}
-							} catch (Exception e) {
+
+			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("PINEAPPLE");
 			}
 
-			//return false;
-
 			return null;
 
 		}
-
-
 
 	}
 

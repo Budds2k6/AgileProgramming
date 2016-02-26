@@ -27,8 +27,10 @@ public class StaffMainActivity extends AppCompatActivity {
 
             Bundle detailsBundle = getIntent().getExtras();
 
+            // get the details which were passed through
             Staff details = (Staff) detailsBundle.getSerializable("details");
 
+            // display the user details on the screen
             TextView txtName = (TextView) findViewById(R.id.lblLoggedInAs);
             txtName.setText("Logged In As: " + details.getFirstName() + " " + details.getSurname());
         }catch(Exception e){
