@@ -14,6 +14,8 @@ import team2beat.com.src.DataObjects.Lecture;
 import team2beat.com.src.DataObjects.Location;
 import team2beat.com.src.DataObjects.Module;
 
+//Refactored - code for BookingModel moved to servlet due to the necessity of them being on the server
+
 public class BookingModel
 {
 	Connection _conn;
@@ -76,6 +78,7 @@ public class BookingModel
 
 			ResultSet resultSet = temp.executeQuery(query);
 
+			//Refactored
 			while (resultSet.next())
 			{
 				String bookingID = resultSet.getString(1);
@@ -92,6 +95,9 @@ public class BookingModel
 				String roomNo = resultSet.getString(11);
 				String building = resultSet.getString(12);
 
+
+				//Refactoring - initially details within BookingModel, location, module and lecture
+				// now have their own data structures to store info
 				Location thisLocation = new Location (locationID, roomNo, building);
 				Module thisModule = new Module (moduleID, moduleName);
 				Lecture thisLecture = new Lecture (lectureID, moduleID, Lecture.LectType.valueOf(lectType));
