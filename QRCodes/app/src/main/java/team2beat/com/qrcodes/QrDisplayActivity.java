@@ -49,14 +49,14 @@ public class QrDisplayActivity extends AppCompatActivity {
 
         // create a booking and return the id of the attendance list
         BookingController bc = new BookingController();
-        int listID = bc.createNewBooking();
+        String listID = bc.createNewBooking();
 
         // create a QR Code, representing the attendance list ID
-        generateQRCode(String.valueOf(listID));
+        generateQRCode(listID);
 
         // find the label to display the class id on and display the text
         TextView text = (TextView) findViewById(R.id.lblLoggedInAs);
-        text.setText("CLASS ID: " + listID);
+        //text.setText("CLASS ID: " + listID);
 
         // TODO return the string to represent the class name
 
@@ -138,7 +138,7 @@ public class QrDisplayActivity extends AppCompatActivity {
 
         int width = 300;
         int height = 300;
-
+        //String seven ="7777777";
         try
         {
 
@@ -163,7 +163,11 @@ public class QrDisplayActivity extends AppCompatActivity {
             ImageView theImage = (ImageView) this.findViewById(R.id.qrCode);
             theImage.setImageBitmap(bitmap);
 
-        }catch(Exception e){}
+        }catch(Exception e){
+
+
+            e.printStackTrace();
+        }
 
     }
     /**

@@ -22,7 +22,7 @@ public class AttendeeListController
 			// Needed Models
 			LocationModel locationModel = new LocationModel ();
 			AttendanceListModel attListModel = new AttendanceListModel();
-			BookingModel bookingModel = new BookingModel();
+			//BookingModel bookingModel = new BookingModel();
 						
 			// Gain booking information from application_form
 			
@@ -41,7 +41,7 @@ public class AttendeeListController
 			
 			AttendanceListModel newAttList = new AttendanceListModel();
 			LocationModel newLocation = new LocationModel();
-			BookingModel newBooking	= new BookingModel();
+			//BookingModel newBooking	= new BookingModel();
 	}
 		
 	// Ensures user is logged in

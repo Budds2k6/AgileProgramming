@@ -44,7 +44,7 @@ public class BookingModel  extends ActionBarActivity
 	String loc_id;
 	String staff_id;
 	String theFlag;
-	String returnedId;
+	public String returnedId;
 
 
 	// Constructor
@@ -222,6 +222,7 @@ public class BookingModel  extends ActionBarActivity
 
 				String returned = getElementFromTag("AttListID",rootElement);
 
+				returnedId = "";
 				returnedId = returned;
 
 				//if (!theReturns[0].equals("Login Failed"))
