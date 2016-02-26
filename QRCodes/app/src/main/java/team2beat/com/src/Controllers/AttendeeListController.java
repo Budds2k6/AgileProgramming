@@ -4,6 +4,8 @@ import java.util.Date;
 
 import team2beat.com.src.Models.*;
 
+//Refactored - AttendeeListController moved to servlet on the server, therefore deprecated here
+
 public class AttendeeListController
 {
 	public AttendeeListController()
