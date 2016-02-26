@@ -1,5 +1,7 @@
 package team2beat.com.src.DataObjects;
 
+//Refactored - created along with LectureModel to store details about the lecture
+
 public class Lecture 
 {
 	private String classID;
