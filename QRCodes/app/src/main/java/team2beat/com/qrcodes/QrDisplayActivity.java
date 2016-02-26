@@ -27,6 +27,8 @@ import team2beat.com.src.Controllers.BookingController;
 
 public class QrDisplayActivity extends AppCompatActivity {
 
+
+    BookingController bookingController;
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -48,11 +50,11 @@ public class QrDisplayActivity extends AppCompatActivity {
         setContentView(R.layout.activity_qr_display);
 
         // create a booking and return the id of the attendance list
-        BookingController bc = new BookingController();
-        String listID = bc.createNewBooking();
+        bookingController = new BookingController();
+        String [] listID = bookingController.createNewBooking();
 
         // create a QR Code, representing the attendance list ID
-        generateQRCode(listID);
+        generateQRCode(listID[1]);
 
         // find the label to display the class id on and display the text
         TextView text = (TextView) findViewById(R.id.lblLoggedInAs);
@@ -66,6 +68,12 @@ public class QrDisplayActivity extends AppCompatActivity {
     {
         Intent i = new Intent(getBaseContext(), RegisterView.class);
         QrDisplayActivity.this.startActivity(i);
+    }
+
+
+    public void endClass(View v)
+    {
+        bookingController.endClass(bookingController.theBookingID);
     }
 
     public void BackToModule(View v)
