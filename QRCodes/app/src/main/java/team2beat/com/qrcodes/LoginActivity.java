@@ -20,9 +20,9 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
     }
 
-    public void submitLogin(View v)
-    {
+    public void submitLogin(View v) {
         // TODO this function!
+    try {
         EditText usernameBox = (EditText) findViewById(R.id.editText);
         String username = usernameBox.getText().toString();
 
@@ -30,22 +30,38 @@ public class LoginActivity extends AppCompatActivity {
         String password = passwordBox.getText().toString();
 
         LoginController lc = new LoginController(username, password);
-        boolean success = lc.doLogin();
+        String[] successDetails = lc.doLogin();
 
-        Toast toast = Toast.makeText(this, "WAS IT SUCCESSFUL? " + success, Toast.LENGTH_LONG);
+
+
+        Toast toast;
+
+        if (successDetails[0] != null) {
+            if (!successDetails[0].equals("Login Failed")) {
+                toast = Toast.makeText(this, "Successfully Logged In as " + successDetails[2] + successDetails[3], Toast.LENGTH_LONG);
+            } else {
+                toast = Toast.makeText(this, "LOGIN FAILED...", Toast.LENGTH_LONG);
+            }
+
+        } else {
+            toast = Toast.makeText(this, "LOGIN FAILED...", Toast.LENGTH_LONG);
+        }
 
         toast.show();
+    }catch(Exception e){
+        Toast toast = Toast.makeText(this, "LOGIN FAILED...", Toast.LENGTH_LONG);
+        toast.show();
+        e.printStackTrace();
 
     }
+    }
 
-    public void dummyLogin(View v)
-    {
+    public void dummyLogin(View v) {
         Intent i = new Intent(getBaseContext(), StaffMainActivity.class);
         LoginActivity.this.startActivity(i);
     }
 
-    public void dummyLoginStudent(View v)
-    {
+    public void dummyLoginStudent(View v) {
         Intent i = new Intent(getBaseContext(), MainActivity.class);
         LoginActivity.this.startActivity(i);
     }

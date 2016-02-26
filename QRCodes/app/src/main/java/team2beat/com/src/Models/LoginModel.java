@@ -10,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.StringReader;
 import java.net.HttpCookie;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -27,6 +28,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 
 
@@ -39,6 +49,7 @@ import org.apache.http.client.params.HttpClientParams;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.xml.sax.InputSource;
 
 
 import android.os.Bundle;
@@ -54,7 +65,7 @@ public class LoginModel extends ActionBarActivity {
 	 * ATTENTION: This was auto-generated to implement the App Indexing API.
 	 * See https://g.co/AppIndexing/AndroidStudio for more information.
 	 */
-	private GoogleApiClient client;
+	//private GoogleApiClient client;
 	private String username;
 	private String password;
 	public String [] theReturns;
@@ -64,6 +75,7 @@ public class LoginModel extends ActionBarActivity {
 		{
 			this.username = u;
 			this.password = p;
+
 			new PostClass().execute(username, password);
 		}
 
@@ -79,108 +91,16 @@ public class LoginModel extends ActionBarActivity {
 		//client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 	}
 
-/*
-	public boolean theThings(String username, String password)
-	{
-		try {
-			String url = "http://silva.computing.dundee.ac.uk/Agile/Login";
-			URL obj = new URL(url);
-			HttpsURLConnection con = (HttpsURLConnection)obj.openConnection();
 
-			//add reuqest header
-			con.setRequestMethod("POST");
-			con.setRequestProperty("User-Agent","Mozilla/5.0");
-			con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
-
-			//String urlParameters = "sn=C02G8416DRJM&cn=&locale=&caller=&num=12345";
-			String urlParameters = ("username="+username+"&password="+password);
-
-
-
-			// Send post request
-			con.setDoOutput(true);
-			DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-			wr.writeBytes(urlParameters);
-			wr.flush();
-			wr.close();
-
-			int responseCode = con.getResponseCode();
-			System.out.println("\nSending 'POST' request to URL : " + url);
-			System.out.println("Post parameters : " + urlParameters);
-			System.out.println("Response Code : " + responseCode);
-
-			BufferedReader in = new BufferedReader(
-					new InputStreamReader(con.getInputStream()));
-			String inputLine;
-			StringBuffer response = new StringBuffer();
-
-			while ((inputLine = in.readLine()) != null) {
-				response.append(inputLine);
-			}
-			in.close();
-
-			//print result
-			System.out.println(response.toString());
-
-			return true;
-
-
-		}catch(Exception e){
-
-			e.printStackTrace();
-
-		}
-
-		return false;
-	}
-
-*/
-	/*
-	public boolean doLoginNew(String username, String password)
-	{
-		String url = "http://silva.computing.dundee.ac.uk/Agile/Login";
-
-		HttpClient httpClient = new DefaultHttpClient();
-
-		HttpPost httpPost = new HttpPost(url);
-
-		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-
-		nameValuePairs.add(new BasicNameValuePair("username", username));
-		nameValuePairs.add(new BasicNameValuePair("password", password));
-
-		try
-		{
-
-			httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-
-		try
-		{
-
-			HttpResponse response = httpClient.execute(httpPost);
-
-			Log.d("RESPONSE: ",  response.toString());
-
-		}catch(Exception e)
-		{
-			e.printStackTrace();
-			System.out.println("PINEAPPLE");
-		}
-
-		return false;
-
-	}
-*/
 
 	private class PostClass extends AsyncTask<String, Void, Void> {
 
 		protected Void doInBackground(String... params) {
 
-			String url = "http://silva.computing.dundee.ac.uk/Agile/Login";
+			String url = "http://silva.computing.dundee.ac.uk/2015-agileteam2/Login";
+
+			//http://silva.computing.dundee.ac.uk/2015-agileteam2/
+
 
 			HttpClient httpClient = new DefaultHttpClient();
 
@@ -203,79 +123,64 @@ public class LoginModel extends ActionBarActivity {
 
 				HttpResponse response = httpClient.execute(httpPost);
 
-				Log.d("RESPONSE: ", response.toString());
-				System.out.println("RESPONSE: " + response.toString());
-				String allofthethings = response.toString();
-				System.out.println("RESPONSE: " + response.toString());
+				//Log.d("RESPONSE: ", response.toString());
+				//System.out.println("RESPONSE: " + response.toString());
+				//String allofthethings = response.toString();
+				//System.out.println("RESPONSE: " + response.toString());
 
 				String responseStr = EntityUtils.toString(response.getEntity());
-				System.out.println("RESPONSE: " + response.toString());
 
+
+				System.out.println("RESPONSE: " + response.toString());
+				//String hopefullyXML = response.
 				//theList = (String[]) request.getAttribute("list");
 
-			} catch (Exception e) {
+
+
+				//String responseStr = "<login_details> <user> <username>AECobley</username> <password>Cassandraisbae</password> <firstname>Andrew</firstname> <surname>Cobley</surname> </user> </login_details>";
+
+
+				DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+				DocumentBuilder builder = factory.newDocumentBuilder();
+				Document document = builder.parse(new InputSource(new StringReader(responseStr)));
+				Element rootElement = document.getDocumentElement();
+
+				theReturns = new String [4];
+				theReturns[0] = getElementFromTag("username", rootElement);
+
+
+
+
+				if (!theReturns[0].equals("Login Failed"))
+				{theReturns[1] = getElementFromTag("password", rootElement);
+				theReturns[2] = getElementFromTag("firstname", rootElement);
+				theReturns[3] = getElementFromTag("surname", rootElement);
+				}
+							} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("PINEAPPLE");
 			}
 
 			//return false;
-
 
 			return null;
 
-
 		}
 
-/*
-		protected void onPostExecute(String... params) {
 
-			String url = "http://silva.computing.dundee.ac.uk/Agile/Login";
-
-			HttpClient httpClient = new DefaultHttpClient();
-
-			HttpPost httpPost = new HttpPost(url);
-
-			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-
-			nameValuePairs.add(new BasicNameValuePair("username", params[0]));
-			nameValuePairs.add(new BasicNameValuePair("password", params[1]));
-
-			try {
-
-				httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-			try {
-
-				HttpResponse response = httpClient.execute(httpPost);
-
-				Log.d("RESPONSE: ", response.toString());
-				System.out.println("RESPONSE: " + response.toString());
-				String allofthethings = response.toString();
-				System.out.println("RESPONSE: " + response.toString());
-
-				String responseStr = EntityUtils.toString(response.getEntity());
-				System.out.println("RESPONSE: " + response.toString());
-
-
-			} catch (Exception e) {
-				e.printStackTrace();
-				System.out.println("PINEAPPLE");
-			}
-
-			//return false;
-
-
-			//return null;
-
-
-		}
-*/
 
 	}
 
+	protected String getElementFromTag(String tagName, Element element) {
+		NodeList list = element.getElementsByTagName(tagName);
+		if (list != null && list.getLength() > 0) {
+			NodeList subList = list.item(0).getChildNodes();
 
+			if (subList != null && subList.getLength() > 0) {
+				return subList.item(0).getNodeValue();
+			}
+		}
+
+		return null;
+	}
 }

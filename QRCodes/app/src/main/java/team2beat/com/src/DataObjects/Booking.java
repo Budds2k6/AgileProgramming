@@ -42,7 +42,7 @@ public class Booking
 		this.end = end;
 		this.theDate = theDate;
 		this.attListID = attListID;
-<<<<<<< HEAD
+
 		this.locationID = locationID;
 		this.staffUsername = staffUsername;
 	}
@@ -50,10 +50,10 @@ public class Booking
 	public void addLecture (String classID, String moduleID, Lecture.LectType lType)
 	{
 		lecture = new Lecture (classID, moduleID, lType);
-=======
+
 		this.location = location;
 		this.module = module;
 		this.lecture = lecture;
->>>>>>> 174256dc3200fac7bf84841376e251836b138039
+
 	}
 }
