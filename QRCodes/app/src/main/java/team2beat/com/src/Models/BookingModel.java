@@ -30,6 +30,9 @@ import java.util.ArrayList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import team2beat.com.src.AsyncClasses.BookingAsync;
+import team2beat.com.src.AsyncClasses.EndClassAsync;
+import team2beat.com.src.AsyncClasses.RegisterAsync;
 import team2beat.com.src.DataObjects.Booking;
 import team2beat.com.src.DataObjects.Lecture;
 import team2beat.com.src.DataObjects.Location;
@@ -37,7 +40,7 @@ import team2beat.com.src.DataObjects.Module;
 
 //Refactored - code for BookingModel moved to servlet due to the necessity of them being on the server
 
-public class BookingModel  extends ActionBarActivity
+public class BookingModel
 {
 	Connection _conn;
 	String lec_id;
@@ -45,18 +48,20 @@ public class BookingModel  extends ActionBarActivity
 	String staff_id;
 	String theFlag;
 	public String [] returnedId;
-
+	public String [] registerSuccess;
 
 	// Constructor
-	public BookingModel(int le,int lo, String sid, String fl)
+	public BookingModel(int lec,int loc, String sid, String flag)
 	{
-		this.lec_id = String.valueOf(le);
-		this.loc_id = String.valueOf(lo);
+		this.lec_id = String.valueOf(lec);
+		this.loc_id = String.valueOf(loc);
 		this.staff_id = sid;
-		this.theFlag = fl;
+		this.theFlag = flag;
 
-		new PostClass().execute(lec_id,loc_id,staff_id,theFlag);
+		//new PostClass().execute(lec_id,loc_id,staff_id,theFlag);
 	}
+
+	public BookingModel(){}
 
 	private void fudgeMethod (Connection conn)
 	{
@@ -65,30 +70,71 @@ public class BookingModel  extends ActionBarActivity
 	}
 
 	// Creates a new booking
-	public int createBooking (Booking thisBooking)
+	//public int createBooking (Booking thisBooking)
+
+	public String createBooking ()
 	{
 		// TODO: Access the database, and return the ID
-		return 0;
+		// DONE
+
+		BookingAsync ba = new BookingAsync(lec_id,loc_id,staff_id,theFlag);
+
+		while (returnedId == null || returnedId[0] == null || returnedId[1] == null || returnedId[0].equals("") ||  returnedId[1].equals("")) {
+			returnedId = ba.returnedId;
+
+		}
+
+
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		//int attendanceListID = bookingModel.createBooking (thisBooking);
+		String theBookingID = returnedId[1];
+		return theBookingID;
 	}
 
 	// Sets the student present
-	public void setStudentPresent (String studentID, int bookingID)
+	public String [] setStudentPresent (String studentID, int bookingID)
 	{
 		// TODO: Access database, and set attendance
-		CallableStatement callState = null;
+		//CallableStatement callState = null;
 
 		try
 		{
 			// FIXME: Replace with correct Stored Procedure call
-			String query = "{call TEMP_PROCEDURE (?, ?)}";
-			callState = _conn.prepareCall(query);
+			//String query = "{call TEMP_PROCEDURE (?, ?)}";
+			//callState = _conn.prepareCall(query);
 
-			callState.close();
+			//callState.close();
+			String bid = String.valueOf(bookingID);
+			RegisterAsync ra = new RegisterAsync(bid, studentID);
+
+			while (registerSuccess == null || registerSuccess[0] == null || registerSuccess[1] == null || registerSuccess[0].equals("") ||  registerSuccess[1].equals("")) {
+				registerSuccess = ra.toReturn;
+
+			}
+
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return null;
+			}
+
+
+
 		}
 		catch (Exception e)
 		{
-
+			e.printStackTrace();
+			return null;
 		}
+		return registerSuccess;
 	}
 
 	// Set the reason for absence
@@ -151,103 +197,7 @@ public class BookingModel  extends ActionBarActivity
 		return bookingList;
 	}
 
-
-
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		//setContentView();
-		new PostClass().execute(lec_id,loc_id,staff_id,theFlag);
-
-		// ATTENTION: This was auto-generated to implement the App Indexing API.
-		// See https://g.co/AppIndexing/AndroidStudio for more information.
-		//client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+	public void endClass(String booking_id){
+		EndClassAsync eca = new EndClassAsync(booking_id,"Update");
 	}
-
-
-	private class PostClass extends AsyncTask<String, Void, Void> {
-
-		protected Void doInBackground(String... params) {
-
-			String url = "http://silva.computing.dundee.ac.uk/2015-agileteam2/CreateBooking";
-
-			// resource: http://hayageek.com/android-http-post-get/
-			HttpClient httpClient = new DefaultHttpClient();
-
-			HttpPost httpPost = new HttpPost(url);
-
-			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-
-			nameValuePairs.add(new BasicNameValuePair("lec_id",params[0]));
-			nameValuePairs.add(new BasicNameValuePair("loc_id", params[1]));
-			nameValuePairs.add(new BasicNameValuePair("staff_id", params[2]));
-			nameValuePairs.add(new BasicNameValuePair("flag", params[3]));
-
-			try {
-
-				httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-			try {
-
-				HttpResponse response = httpClient.execute(httpPost);
-
-				String responseStr = EntityUtils.toString(response.getEntity());
-
-				System.out.println("RESPONSE: " + response.toString());
-
-				// this small chunk was taken from:	------------------------------------------------
-				//http://www.tutorialspoint.com/java_xml/java_dom_create_document.htm
-
-				// build an XML file from the returned code
-				DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-				DocumentBuilder builder = factory.newDocumentBuilder();
-				Document document = builder.parse(new InputSource(new StringReader(responseStr)));
-				Element rootElement = document.getDocumentElement();
-
-				// up to here ----------------------------------------------------------------------
-
-				// return the attendanceList id and the booking id
-				String [] returned = new String [2];
-
-				returned[0] = getElementFromTag("AttListID",rootElement);
-				returned[1] = getElementFromTag("booking",rootElement);
-
-				returnedId = new String [2];
-				returnedId = returned;
-
-			} catch (Exception e) {
-				e.printStackTrace();
-				System.out.println("PINEAPPLE");
-			}
-
-			//return false;
-
-			return null;
-
-		}
-
-
-
-	}
-
-	protected String getElementFromTag(String tagName, Element element) {
-		NodeList list = element.getElementsByTagName(tagName);
-		if (list != null && list.getLength() > 0) {
-			NodeList subList = list.item(0).getChildNodes();
-
-			if (subList != null && subList.getLength() > 0) {
-				return subList.item(0).getNodeValue();
-			}
-		}
-
-		return null;
-	}
-
-
-
-
 }

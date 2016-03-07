@@ -5,15 +5,14 @@ import java.io.Serializable;
 
 public class User implements Serializable {
 	String userID;
-	String password;
+	//String password;
 	String firstname;
 	String surname;
 
 	// Constructor
-	public User(String username, String password, String firstname, String surname)
+	public User(String username, String firstname, String surname)
 	{
 		this.userID = username;
-		this.password = password;
 		this.firstname = firstname;
 		this.surname = surname;
 	}
@@ -24,10 +23,10 @@ public class User implements Serializable {
 		return userID;
 	}
 
-	public String getPassword()
-	{
-		return password;
-	}
+	//public String getPassword()
+	//{
+		//return password;
+	//}
 
 	public String getFirstName()
 	{

@@ -24,11 +24,13 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 
 import team2beat.com.src.Controllers.BookingController;
+import team2beat.com.src.DataObjects.Staff;
 
 public class QrDisplayActivity extends AppCompatActivity {
 
 
     BookingController bookingController;
+    static Staff staffDetails;
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -51,10 +53,10 @@ public class QrDisplayActivity extends AppCompatActivity {
 
         // create a booking and return the id of the attendance list
         bookingController = new BookingController();
-        String [] listID = bookingController.createNewBooking();
+        bookingController.theBookingID = bookingController.createNewBooking("Create", staffDetails);
 
         // create a QR Code, representing the attendance list ID
-        generateQRCode(listID[1]);
+        generateQRCode(bookingController.theBookingID);
 
         // find the label to display the class id on and display the text
         TextView text = (TextView) findViewById(R.id.lblLoggedInAs);
@@ -70,10 +72,12 @@ public class QrDisplayActivity extends AppCompatActivity {
         QrDisplayActivity.this.startActivity(i);
     }
 
-
     public void endClass(View v)
     {
-        bookingController.endClass(bookingController.theBookingID);
+        bookingController.endClass();
+        Intent i = new Intent(getBaseContext(), StaffMainActivity.class);
+        i.putExtra("details", staffDetails);
+        QrDisplayActivity.this.startActivity(i);
     }
 
     public void BackToModule(View v)

@@ -19,6 +19,7 @@ import team2beat.com.src.DataObjects.Staff;
 
 public class StaffMainActivity extends AppCompatActivity {
 
+    Staff staffDetails;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         try {
@@ -28,20 +29,33 @@ public class StaffMainActivity extends AppCompatActivity {
             Bundle detailsBundle = getIntent().getExtras();
 
             // get the details which were passed through
-            Staff details = (Staff) detailsBundle.getSerializable("details");
+            staffDetails = (Staff) detailsBundle.getSerializable("details");
 
-            // display the user details on the screen
-            TextView txtName = (TextView) findViewById(R.id.lblLoggedInAs);
-            txtName.setText("Logged In As: " + details.getFirstName() + " " + details.getSurname());
         }catch(Exception e){
 
             e.printStackTrace();
         }
+
+        setLabelText();
+
+    }
+
+    public void setStaffDetails(Staff staff)
+    {
+        staffDetails = staff;
+    }
+
+    public void setLabelText()
+    {
+        // display the user details on the screen
+        TextView txtName = (TextView) findViewById(R.id.lblLoggedInAs);
+        txtName.setText("Logged In As: " + staffDetails.getFirstName() + " " + staffDetails.getSurname());
     }
 
     public void loadQRCode(View v)
     {
         Intent i = new Intent (getBaseContext(), QrDisplayActivity.class);
+        QrDisplayActivity.staffDetails = staffDetails;
         StaffMainActivity.this.startActivity(i);
     }
   public void loadRegister(View v)

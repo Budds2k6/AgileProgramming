@@ -22,9 +22,9 @@ public class Student extends User
 	}
 
 
-	public Student(String studentID, String username, String password, String firstname, String surname)
+	public Student(String studentID, String username, String firstname, String surname)
 	{
-		super(username,password,firstname,surname);
+		super(username,firstname,surname);
 
 		this.studentID = studentID;
 	}

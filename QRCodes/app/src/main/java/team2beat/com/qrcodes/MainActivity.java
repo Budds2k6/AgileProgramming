@@ -32,6 +32,7 @@ import team2beat.com.src.DataObjects.Student;
 public class MainActivity extends AppCompatActivity {
 
     static final String SCANNER_DOWNLOAD_LOCATION = "com.google.zxing.client.android.SCAN";
+    Student studentDetails;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -46,11 +47,11 @@ public class MainActivity extends AppCompatActivity {
             Bundle detailsBundle = getIntent().getExtras();
 
             // extract the details from the Bundle which was passed
-            Student details = (Student) detailsBundle.getSerializable("details");
+            studentDetails = (Student) detailsBundle.getSerializable("details");
 
             // display the user's name on the screen
             TextView txtName = (TextView) findViewById(R.id.lblLoggedInAs);
-            txtName.setText("Logged In As: " + details.getFirstName() + " " + details.getSurname());
+            txtName.setText("Logged In As: " + studentDetails.getFirstName() + " " + studentDetails.getSurname());
 
         }catch(Exception e){
 
@@ -143,7 +144,10 @@ public class MainActivity extends AppCompatActivity {
                     // TODO get actual data to send
                     // LEGIT LEWIS YOU NEED TO DO THIS NEXT
                     // IT'S IMPORTANT
-                    sendAttendanceToDatabase(bookingContent, "12345678");
+
+                    PresentRecord pr = new PresentRecord(bookingContent, studentDetails.getUsername());
+
+                    sendAttendanceToDatabase(pr);
 
                     // Display it on the form
                     TextView theText = (TextView) findViewById(R.id.qrOutput);
@@ -172,15 +176,15 @@ public class MainActivity extends AppCompatActivity {
     * THE FUNCTION TO SIGN A STUDENT IN TO A CLASS
     *
     * */
-    public void sendAttendanceToDatabase(int bookingID, String studentID)
+    public void sendAttendanceToDatabase(PresentRecord pr)
     {
-        PresentRecord record = new PresentRecord(bookingID, studentID);
-
         // TODO pass object to controller to write to database
         BookingController bc = new BookingController();
 
-        bc.setAttendance(record);
+        boolean returned = bc.setAttendance(pr);
 
+        Toast toast = Toast.makeText(this, "Did it succeed? " + returned, Toast.LENGTH_LONG);
+        toast.show();
         // TODO get class name from database
 
         // return "Class Name";

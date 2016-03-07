@@ -47,6 +47,11 @@ public class Booking
 		this.staffUsername = staffUsername;
 	}
 
+	public Booking(){
+
+
+	}
+
 	public void addLecture (String classID, String moduleID, Lecture.LectType lType)
 	{
 		lecture = new Lecture (classID, moduleID, lType);

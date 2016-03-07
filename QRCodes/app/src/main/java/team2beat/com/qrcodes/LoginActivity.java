@@ -39,23 +39,23 @@ public class LoginActivity extends AppCompatActivity {
 
             Toast toast;
 
-            if (successDetails[0] != null) {
+            if (successDetails != null && successDetails[0] != null) {
                 if (!successDetails[0].equals("Login Failed")) {
-                    toast = Toast.makeText(this, "Successfully Logged In as " + successDetails[2] + successDetails[3], Toast.LENGTH_LONG);
-                    if (successDetails[0].equals("AECobley")) {
+                    toast = Toast.makeText(this, "Successfully Logged In as " + successDetails[1] + successDetails[2], Toast.LENGTH_LONG);
+                    if (successDetails[4].equals("staff")) {
 
-                        String StaffID = "SSE1325";
-                        String JobID = "2751";
+                        String staffID = successDetails[3];
+                        //String JobID = "2751";
 
-                        Staff theStaff = new Staff(StaffID, JobID, successDetails[0], successDetails[1], successDetails[2], successDetails[3]);
+                        Staff theStaff = new Staff(staffID, successDetails[0], successDetails[1], successDetails[2]);
 
 
                         dummyLogin(v, theStaff);
-                    } else if (successDetails[0].equals("FClyne")) {      // password = "pass"
+                    } else if (successDetails[4].equals("student")) {      // password = "pass"
 
-                        String StudentID = "120005432";
+                        String studentID = successDetails[3];
 
-                        Student theStudent = new Student(StudentID, successDetails[0], successDetails[1], successDetails[2], successDetails[3]);
+                        Student theStudent = new Student(studentID, successDetails[0], successDetails[1], successDetails[2]);
 
                         dummyLoginStudent(v, theStudent);
 
