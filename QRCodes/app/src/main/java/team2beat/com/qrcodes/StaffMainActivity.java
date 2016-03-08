@@ -31,6 +31,9 @@ public class StaffMainActivity extends AppCompatActivity {
             // get the details which were passed through
             staffDetails = (Staff) detailsBundle.getSerializable("details");
 
+            // change this to store the values
+            loadRegister(staffDetails.getStaffID());
+
         }catch(Exception e){
 
             e.printStackTrace();
@@ -58,9 +61,23 @@ public class StaffMainActivity extends AppCompatActivity {
         QrDisplayActivity.staffDetails = staffDetails;
         StaffMainActivity.this.startActivity(i);
     }
-  public void loadRegister(View v)
-    {
 
+
+
+    // change the return type to a list / array of the classes
+    public void loadRegister(String staffData)
+    {
+        // call the controller to fetch the data
+        // (store the data in a list / array)
+
+        // return the list
+    }
+
+
+    // need to pass a parameter in - the list / array
+    public void createClassLabels()
+    {
+        // create and add labels to the form/activity
     }
 
 }
