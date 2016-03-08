@@ -25,7 +25,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 /**
- * Created by Matt on 02/03/2016.
+ * Created by Matt on his laptop.
  */
 public class EndClassAsync   extends ActionBarActivity {
 
@@ -46,12 +46,7 @@ public class EndClassAsync   extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView();
         new PostClass().execute(booking_id,theFlag);
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        //client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
 
@@ -59,6 +54,7 @@ public class EndClassAsync   extends ActionBarActivity {
 
         protected Void doInBackground(String... params) {
 
+            // the url of the java servlet that does the operation
             String url = "http://silva.computing.dundee.ac.uk/2015-agileteam2/CreateBooking";
 
             // resource: http://hayageek.com/android-http-post-get/
@@ -68,40 +64,27 @@ public class EndClassAsync   extends ActionBarActivity {
 
             // the parameters to send through
             List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-
             nameValuePairs.add(new BasicNameValuePair("book",params[0]));       // booking id
             nameValuePairs.add(new BasicNameValuePair("flag", params[1]));      // Create or Update
 
+            // attach the parameters to the request
             try {
-
                 httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
+            // execute the request
             try {
-
-                // get the response from the command
-                HttpResponse response = httpClient.execute(httpPost);
-
-
+                httpClient.execute(httpPost);
             }
             catch (Exception e) {
                 e.printStackTrace();
             }
 
-            //return false;
-
+            // end the function
             return null;
-
         }
-
-
-
     }
-/**
-
-* */
-
 }

@@ -61,7 +61,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import javax.net.ssl.HttpsURLConnection;
 
 /**
- * Created by Matt on .
+ * Created by Matt on his laptop.
  */
 public class LoginAsync  extends ActionBarActivity{
 
@@ -78,16 +78,11 @@ public class LoginAsync  extends ActionBarActivity{
         new PostClass().execute(username, password);
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView();
         new PostClass().execute(username, password);
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        //client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
 
@@ -95,58 +90,57 @@ public class LoginAsync  extends ActionBarActivity{
 
         protected Void doInBackground(String... params) {
 
+            // the url of the java servlet that carries out the operations
             String url = "http://silva.computing.dundee.ac.uk/2015-agileteam2/Login";
 
-            //http://silva.computing.dundee.ac.uk/2015-agileteam2/
-
-
+            // resource: http://hayageek.com/android-http-post-get/
             HttpClient httpClient = new DefaultHttpClient();
 
             HttpPost httpPost = new HttpPost(url);
 
+            // create the parameters - requires a string for the name of the parameter and the actual value
             List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-
             nameValuePairs.add(new BasicNameValuePair("username", params[0]));
             nameValuePairs.add(new BasicNameValuePair("password", params[1]));
 
+            // attach the parameters to the request
             try {
-
                 httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
+            // get the response after executing the request
             try {
-
                 HttpResponse response = httpClient.execute(httpPost);
-
 
                 String responseStr = EntityUtils.toString(response.getEntity());
 
-
-                System.out.println("RESPONSE: " + response.toString());
-
-
+                // this small piece of code was taken from:	----------------------------------------
+                //http://www.tutorialspoint.com/java_xml/java_dom_create_document.htm
                 DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
                 DocumentBuilder builder = factory.newDocumentBuilder();
                 Document document = builder.parse(new InputSource(new StringReader(responseStr)));
                 Element rootElement = document.getDocumentElement();
+                // up to here ----------------------------------------------------------------------
 
-
+                // get the first type of user from the XML - either Staff or Student
                 String userType = rootElement.getTagName();
 
-
+                // try to get the username
                 toReturn = new String [5];
-
-
                 toReturn[0] = getElementFromTag("username", rootElement);
 
+                // if the username is not "Login Failed" - i.e. the Login succeeded...
                 if (!toReturn[0].equals("Login Failed"))
                 {
+
+                    // get the other details
                     toReturn[1] = getElementFromTag("firstname", rootElement);
                     toReturn[2] = getElementFromTag("surname", rootElement);
 
+                    // depending on whether the user is Staff or Student, get the ID number
                     if(userType.equals("staff"))
                     {
                         toReturn[3] = getElementFromTag("staff_id", rootElement);
@@ -156,26 +150,29 @@ public class LoginAsync  extends ActionBarActivity{
                         toReturn[3] = getElementFromTag("student_id", rootElement);
                     }
 
+                    // keep getting details
                     toReturn[4] = userType;
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-                System.out.println("PINEAPPLE");
             }
 
-            //return false;
-
+            // end the function
             return null;
-
         }
-
-
-
     }
 
+
+    // function adapted from: http://stackoverflow.com/questions/4076910/how-to-retrieve-element-value-of-xml-using-java
     protected String getElementFromTag(String tagName, Element element) {
+
+        // get all of the elements in the XML that match the tag
         NodeList list = element.getElementsByTagName(tagName);
+
+        // if the list contains at least 1 element...
         if (list != null && list.getLength() > 0) {
+
+            // get the first one and return it
             NodeList subList = list.item(0).getChildNodes();
 
             if (subList != null && subList.getLength() > 0) {
@@ -183,6 +180,7 @@ public class LoginAsync  extends ActionBarActivity{
             }
         }
 
+        // return null if something goes wrong
         return null;
     }
 }

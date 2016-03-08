@@ -25,10 +25,9 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 /**
- * Created by Matt on .
+ * Created by Matt on his laptop.
  */
 public class BookingAsync  extends ActionBarActivity {
-
 
     String lec_id;
     String loc_id;
@@ -36,15 +35,15 @@ public class BookingAsync  extends ActionBarActivity {
     String theFlag;
     public String [] returnedId;
 
-    public BookingAsync (String le,String lo, String sid, String fl){
-
+    // Constructor
+    public BookingAsync (String le,String lo, String sid, String fl)
+    {
         this.lec_id = String.valueOf(le);
         this.loc_id = String.valueOf(lo);
         this.staff_id = sid;
         this.theFlag = fl;
 
         new PostClass().execute(lec_id,loc_id,staff_id,theFlag);
-
     }
 
     @Override
@@ -52,10 +51,6 @@ public class BookingAsync  extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         //setContentView();
         new PostClass().execute(lec_id, loc_id, staff_id, theFlag);
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        //client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
 
@@ -63,6 +58,7 @@ public class BookingAsync  extends ActionBarActivity {
 
         protected Void doInBackground(String... params) {
 
+            // this is the url of the Java Servlet that carrries out the action
             String url = "http://silva.computing.dundee.ac.uk/2015-agileteam2/CreateBooking";
 
             // resource: http://hayageek.com/android-http-post-get/
@@ -70,30 +66,29 @@ public class BookingAsync  extends ActionBarActivity {
 
             HttpPost httpPost = new HttpPost(url);
 
+            // set up the parameters to pass to the servlet - require a name for the parameter along with the actual value
             List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-
             nameValuePairs.add(new BasicNameValuePair("lec_id", params[0]));
             nameValuePairs.add(new BasicNameValuePair("loc_id", params[1]));
             nameValuePairs.add(new BasicNameValuePair("staff_id", params[2]));
             nameValuePairs.add(new BasicNameValuePair("flag", params[3]));
 
+            // attach the parameters to the request
             try {
-
                 httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
+            // get the response from the request
             try {
 
                 HttpResponse response = httpClient.execute(httpPost);
 
                 String responseStr = EntityUtils.toString(response.getEntity());
 
-                System.out.println("RESPONSE: " + response.toString());
-
-                // this small chunk was taken from:	------------------------------------------------
+                // this small piece of code was taken from:	----------------------------------------
                 //http://www.tutorialspoint.com/java_xml/java_dom_create_document.htm
 
                 // build an XML file from the returned code
@@ -101,10 +96,9 @@ public class BookingAsync  extends ActionBarActivity {
                 DocumentBuilder builder = factory.newDocumentBuilder();
                 Document document = builder.parse(new InputSource(new StringReader(responseStr)));
                 Element rootElement = document.getDocumentElement();
-
                 // up to here ----------------------------------------------------------------------
 
-                // return the attendanceList id and the booking id
+                // extract the attendanceList id and the booking id from the returned XML file
                 String[] returned = new String[2];
 
                 returned[0] = getElementFromTag("AttListID", rootElement);
@@ -115,21 +109,24 @@ public class BookingAsync  extends ActionBarActivity {
 
             } catch (Exception e) {
                 e.printStackTrace();
-                System.out.println("PINEAPPLE");
             }
 
-            //return false;
-
+            // end the procedure
             return null;
 
         }
-
-
     }
 
+    // function adapted from: http://stackoverflow.com/questions/4076910/how-to-retrieve-element-value-of-xml-using-java
     protected String getElementFromTag(String tagName, Element element) {
+
+        // get all of the elements in the XML that match the tag
         NodeList list = element.getElementsByTagName(tagName);
+
+        // if the list contains at least 1 element...
         if (list != null && list.getLength() > 0) {
+
+            // get the first one and return it
             NodeList subList = list.item(0).getChildNodes();
 
             if (subList != null && subList.getLength() > 0) {
@@ -137,6 +134,7 @@ public class BookingAsync  extends ActionBarActivity {
             }
         }
 
+        // return null if something goes wrong
         return null;
     }
 
