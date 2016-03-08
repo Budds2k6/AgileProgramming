@@ -23,7 +23,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add New Student"
+        android:text="Add by Student ID"
         android:id="@+id/button5"
         android:layout_above="@+id/BackToQR"
         android:layout_alignRight="@+id/BackToQR"
@@ -34,7 +34,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Back to QR View"
+        android:text="Back"
         android:id="@+id/BackToQR"
         android:onClick="BackToQR"
         android:layout_alignParentBottom="true"

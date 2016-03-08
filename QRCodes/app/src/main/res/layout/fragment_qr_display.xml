@@ -11,26 +11,27 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Back to List of Modules"
-        android:id="@+id/BackToModule"
-        android:onClick="BackToModule"
-        android:layout_alignParentBottom="true"
+        android:text="Back"
+        android:id="@+id/BackToBooking"
+        android:onClick="BackToBooking"
+        android:layout_above="@+id/EndClassBTN"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignRight="@+id/EndClassBTN"
+        android:layout_alignEnd="@+id/EndClassBTN" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="To Register"
+        android:text="Attendence List"
         android:id="@+id/BackToRegister"
         android:onClick="BackToRegister"
-        android:layout_above="@+id/BackToModule"
-        android:layout_alignRight="@+id/BackToModule"
-        android:layout_alignEnd="@+id/BackToModule"
+        android:layout_below="@+id/qrCode"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp" />
 
     <ImageView
         android:layout_width="295dp"
@@ -40,9 +41,10 @@
         android:layout_span="2"
         android:contentDescription="Generated QR code"
         android:foreground="#8e8e8e"
-        android:layout_alignParentTop="true"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_alignTop="@+id/lblClassID"
         android:layout_centerHorizontal="true"
-        android:layout_gravity="center_horizontal|top" />
+        android:layout_marginTop="40dp" />
 
     <TextView
         android:layout_width="299dp"
@@ -51,7 +53,8 @@
         android:text="ATTENDANCE LIST ID"
         android:id="@+id/lblClassID"
         android:layout_gravity="center_horizontal|bottom"
-        android:layout_alignParentBottom="true"
+        android:textAlignment="center"
+        android:layout_alignParentTop="true"
         android:layout_alignRight="@+id/qrCode"
         android:layout_alignEnd="@+id/qrCode" />
 
@@ -61,11 +64,11 @@
         android:text="End Class"
         android:onClick = "endClass"
         android:id="@+id/EndClassBTN"
-        android:layout_above="@+id/BackToRegister"
-        android:layout_alignRight="@+id/BackToRegister"
-        android:layout_alignEnd="@+id/BackToRegister"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 
 </RelativeLayout>

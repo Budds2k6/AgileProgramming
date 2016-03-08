@@ -80,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void dummyLogin(View v, Staff theStaff) {
-        Intent i = new Intent(getBaseContext(), StaffMainActivity.class);
+        Intent i = new Intent(getBaseContext(), Staff_Bookings.class);
 
         // the staff members details need to be passed
         i.putExtra("details", theStaff);
