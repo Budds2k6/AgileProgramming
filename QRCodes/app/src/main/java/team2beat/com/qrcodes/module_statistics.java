@@ -18,7 +18,7 @@ public class module_statistics extends AppCompatActivity {
         String moduleSelected = i.getStringExtra("moduleSelected");
         TextView moduleText = (TextView) findViewById(R.id.textView3);
         moduleText.setText(moduleSelected);
-        
+
     }
 
 
