@@ -8,6 +8,6 @@ public class ModuleStatistics extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_module_statistics);
+        setContentView(R.layout.activity_module_statistics);
     }
 }
