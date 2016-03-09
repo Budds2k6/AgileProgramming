@@ -10,14 +10,14 @@ public class module_statistics extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_module_statistics);
+        //setContentView(R.layout.activity_module_statistics);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_module_statistics, menu);
+        //getMenuInflater().inflate(R.menu.menu_module_statistics, menu);
         return true;
     }
 
