@@ -9,14 +9,20 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import team2beat.com.src.Controllers.BookingController;
+import team2beat.com.src.DataObjects.Booking;
 import team2beat.com.src.DataObjects.Staff;
 
 public class StaffMainActivity extends AppCompatActivity {
@@ -34,10 +40,9 @@ public class StaffMainActivity extends AppCompatActivity {
             staffDetails = (Staff) detailsBundle.getSerializable("details");
 
             // change this to store the values
-            //List<Class> classes = ...
-            loadModules(staffDetails.getStaffID());
+            ArrayList<Booking> classes = loadModules();
 
-            createClassLabels(); // classes
+            createClassLabels(classes);
 
             setLabelText();
 
@@ -68,19 +73,23 @@ public class StaffMainActivity extends AppCompatActivity {
 
 
     // change the return type to a list / array of the classes
-    public void loadModules(String staffData)
+    public ArrayList<Booking> loadModules()
     {
         // call the controller to fetch the data
         // (store the data in a list / array)
+        BookingController bc = new BookingController();
+        ArrayList<Booking> classes = bc.getTodaysClasses(staffDetails.getStaffID());
 
         // return the list
+        return classes;
     }
 
 
     // need to pass a parameter in - the list / array
-    public void createClassLabels() // List<Class> classes
+    public void createClassLabels(List<Booking> classes)
     {
-        // create and add labels to the form/activity
+        final ListView moduleList = (ListView) findViewById(R.id.listView);
+        final ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, classes);
     }
 
     public void loadStaffModules(View v)
