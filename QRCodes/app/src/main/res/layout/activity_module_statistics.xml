@@ -1,0 +1,81 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:layout_above="@+id/fragment"
+        android:layout_alignParentTop="true"
+        android:id="@+id/ModuleStatFrame">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="74dp"
+            android:text="Agile Programming"
+            android:id="@+id/textView3"
+            android:layout_gravity="center_horizontal|top"
+            android:textStyle="bold"
+            android:gravity="top|center"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="%15"
+            android:id="@+id/textView4"
+            android:layout_gravity="center"
+            android:textSize="45dp"
+            android:textColor="#ffffff"/>
+
+        <Button
+            android:layout_width="185dp"
+            android:layout_height="wrap_content"
+            android:text="@string/buttonFoldClasses"
+            android:id="@+id/buttonClasses"
+            android:layout_toLeftOf="@+id/fragment"
+            android:layout_toStartOf="@+id/fragment"
+            android:layout_marginRight="40dp"
+            android:layout_marginEnd="40dp"
+            android:layout_gravity="left|bottom" />
+
+        <Button
+            android:layout_width="185dp"
+            android:layout_height="wrap_content"
+            android:text="@string/buttonFoldStudents"
+            android:id="@+id/buttonStudents"
+            android:layout_below="@+id/ModuleStatFrame"
+            android:layout_toRightOf="@+id/student_fragmentfragment"
+            android:layout_toEndOf="@+id/student_fragmentfragment"
+            android:layout_marginLeft="32dp"
+            android:layout_marginStart="32dp"
+            android:layout_gravity="right|bottom" />
+    </FrameLayout>
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:id="@+id/fragment"
+    android:name="team2beat.com.qrcodes.module_statisticsFragment"
+    tools:layout="@layout/fragment_module_statistics" android:layout_width="fill_parent"
+    android:layout_height="250dp"
+    android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools" android:id="@+id/student_fragmentfragment"
+android:name="team2beat.com.qrcodes.module_statistics_student"
+tools:layout="@layout/fragment_module_statistics" android:layout_width="wrap_content"
+android:layout_height="250dp"
+    android:layout_gravity="bottom"
+        android:layout_below="@+id/ModuleStatFrame"
+        android:layout_alignRight="@+id/fragment"
+        android:layout_alignEnd="@+id/fragment"
+        android:layout_toRightOf="@+id/fragment"
+        android:layout_toEndOf="@+id/fragment" />
+
+</RelativeLayout>
