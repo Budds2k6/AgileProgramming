@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="connector">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/app/src/main/java/team2beat/com/src/libs/connector.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
