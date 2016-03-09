@@ -15,6 +15,8 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 
+import java.util.List;
+
 import team2beat.com.src.DataObjects.Staff;
 
 public class StaffMainActivity extends AppCompatActivity {
@@ -32,15 +34,17 @@ public class StaffMainActivity extends AppCompatActivity {
             staffDetails = (Staff) detailsBundle.getSerializable("details");
 
             // change this to store the values
-            loadRegister(staffDetails.getStaffID());
+            //List<Class> classes = ...
+            loadModules(staffDetails.getStaffID());
+
+            createClassLabels(); // classes
+
+            setLabelText();
 
         }catch(Exception e){
 
             e.printStackTrace();
         }
-
-        setLabelText();
-
     }
 
     public void setStaffDetails(Staff staff)
@@ -63,9 +67,8 @@ public class StaffMainActivity extends AppCompatActivity {
     }
 
 
-
     // change the return type to a list / array of the classes
-    public void loadRegister(String staffData)
+    public void loadModules(String staffData)
     {
         // call the controller to fetch the data
         // (store the data in a list / array)
@@ -75,7 +78,7 @@ public class StaffMainActivity extends AppCompatActivity {
 
 
     // need to pass a parameter in - the list / array
-    public void createClassLabels()
+    public void createClassLabels() // List<Class> classes
     {
         // create and add labels to the form/activity
     }

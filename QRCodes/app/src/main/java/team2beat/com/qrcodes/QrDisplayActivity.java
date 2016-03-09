@@ -82,7 +82,7 @@ public class QrDisplayActivity extends AppCompatActivity {
 
     public void BackToBooking(View v)
     {
-        Intent i = new Intent(getBaseContext(), Staff_Bookings.class);
+        Intent i = new Intent(getBaseContext(), staff_modules.class);
         QrDisplayActivity.this.startActivity(i);
     }
 
