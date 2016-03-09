@@ -72,10 +72,9 @@ public class StaffMainActivity extends AppCompatActivity {
     }
 
 
-    // change the return type to a list / array of the classes
     public ArrayList<Booking> loadModules()
     {
-        // call the controller to fetch the data
+        // call the controller to fetch the dat
         // (store the data in a list / array)
         BookingController bc = new BookingController();
         ArrayList<Booking> classes = bc.getTodaysClasses(staffDetails.getStaffID());

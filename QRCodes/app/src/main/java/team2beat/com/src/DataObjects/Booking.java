@@ -8,43 +8,53 @@ import java.sql.Time;
 
 public class Booking
 {
+	private String moduleID;
 	// Booking details
 	private String bookingID;
 	private String classID;
-	private Time start;
-	private Time end;
-	private Date theDate;
+	private Date start;
+	private Date end;
+	//private Date theDate;
 	private String attListID;
 	private String locationID;
-	private String staffUsername;
+	private String staffID;
+	private String className;
+	private String classType;
+	private String roomNumber;
+	private String building;
 
 	private Lecture lecture;
 	private Location location;
 	private Module module;
 
 	// Constructor
-	public Booking (String bookingID, String classID, Time start, Time end, Date theDate, String attListID, String locationID, String staffUsername)
+	public Booking (String bookingID, String classID, Date start, Date end, String locationID, String staffID, String attListID, String moduleID, String className, String classType, String roomNum, String building)
 	{
 		this.bookingID = bookingID;
 		this.classID = classID;
 		this.start = start;
 		this.end = end;
-		this.theDate = theDate;
-		this.attListID = attListID;
 		this.locationID = locationID;
-		this.staffUsername = staffUsername;
+		this.staffID = staffID;
+		this.attListID = attListID;
+		this.moduleID = moduleID;
+		this.className = className;
+		this.classType = classType;
+		this.roomNumber = roomNum;
+		this.building = building;
+
 	}
 
 	// Booking Constructor
-	public Booking(Time start, Time end, Date theDate, String attListID, Location location, Module module, Lecture lecture)
+	public Booking(Date start, Date end, Date theDate, String attListID, Location location, Module module, Lecture lecture)
 	{
 		this.start = start;
 		this.end = end;
-		this.theDate = theDate;
+		//this.theDate = theDate;
 		this.attListID = attListID;
 
 		this.locationID = locationID;
-		this.staffUsername = staffUsername;
+		this.staffID = staffID;
 	}
 
 	public Booking(){
