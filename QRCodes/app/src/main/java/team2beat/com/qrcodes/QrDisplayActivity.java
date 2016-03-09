@@ -72,12 +72,17 @@ public class QrDisplayActivity extends AppCompatActivity {
         QrDisplayActivity.this.startActivity(i);
     }
 
-    public void endClass(View v)
+    public void backToStaffMenu(View v)
     {
-        bookingController.endClass();
         Intent i = new Intent(getBaseContext(), StaffMainActivity.class);
         i.putExtra("details", staffDetails);
         QrDisplayActivity.this.startActivity(i);
+    }
+
+    public void endClass(View v)
+    {
+        bookingController.endClass();
+        backToStaffMenu(v);
     }
 
     public void BackToBooking(View v)
