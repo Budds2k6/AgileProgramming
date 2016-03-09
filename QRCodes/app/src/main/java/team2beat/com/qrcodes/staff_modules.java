@@ -28,7 +28,7 @@ public class staff_modules extends AppCompatActivity {
 
         }
 
-        final ListAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
+        final ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
 
         moduleList.setAdapter(adapter);
     }
