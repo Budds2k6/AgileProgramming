@@ -83,4 +83,10 @@ public class StaffMainActivity extends AppCompatActivity {
         // create and add labels to the form/activity
     }
 
+    public void loadStaffModules(View v)
+    {
+        Intent i = new Intent (getBaseContext(), staff_modules.class);
+        StaffMainActivity.this.startActivity(i);
+    }
+
 }
