@@ -7,4 +7,6 @@
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_qr_display">QrDisplayActivity</string>
     <string name="title_activity_register_view">RegisterView</string>
+    <string name="title_activity_module_statistics">module_statistics</string>
+    <string name="hello_world">Hello world!</string>
 </resources>

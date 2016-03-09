@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="team2beat.com.qrcodes">
+    package="team2beat.com.qrcodes" >
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -9,7 +9,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/UoDqrRegister">
+        android:theme="@style/UoDqrRegister" >
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -27,7 +27,7 @@
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -39,7 +39,7 @@
             android:label="@string/title_activity_staff_main"
             android:parentActivityName=".LoginActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="team2beat.com.qrcodes.LoginActivity" />
@@ -49,7 +49,7 @@
             android:label="@string/title_activity_qr_and__register_"
             android:parentActivityName=".StaffMainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="team2beat.com.qrcodes.StaffMainActivity" />
@@ -59,7 +59,7 @@
             android:label="@string/title_activity_qr_display"
             android:parentActivityName=".QR_and_Register_Activity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="team2beat.com.qrcodes.QR_and_Register_Activity" />
@@ -69,21 +69,19 @@
             android:label="@string/title_activity_register_view"
             android:parentActivityName=".QR_and_Register_Activity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="team2beat.com.qrcodes.QR_and_Register_Activity" />
         </activity>
-
-        <activity android:name=".Staff_Bookings"
-            android:theme="@style/AppTheme.NoActionBar" />
-
-        <activity android:name=".ModuleStatistics"
+        <activity
+            android:name=".ModuleStatistics"
             android:theme="@style/AppTheme.NoActionBar" >
-
         </activity>
-
-
+        <activity
+            android:name=".module_statistics"
+            android:label="@string/title_activity_module_statistics" >
+        </activity>
     </application>
 
 </manifest>

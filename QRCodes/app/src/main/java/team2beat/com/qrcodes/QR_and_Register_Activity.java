@@ -36,7 +36,7 @@ public class QR_and_Register_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_qr_and__register_);
+        setContentView(R.layout.activity_register_view);
     }
 
     public void BackToStaff(View v)
@@ -95,7 +95,7 @@ public class QR_and_Register_Activity extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_qr_and_register, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_register_view, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
             textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;
