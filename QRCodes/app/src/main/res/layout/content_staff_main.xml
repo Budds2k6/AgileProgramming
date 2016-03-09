@@ -63,6 +63,7 @@
         android:layout_height="wrap_content"
         android:text="View all modules"
         android:id="@+id/button3"
+        android:onClick="loadStaffModules"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"

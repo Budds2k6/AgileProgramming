@@ -27,6 +27,7 @@
 /local.properties
 /.idea/workspace.xml
 /.idea/libraries
+/QRCodes/.idea/*
 
 # Built application files
 *.apk
