@@ -12,9 +12,9 @@ public class Booking
 	// Booking details
 	private String bookingID;
 	private String classID;
-	private Date start;
-	private Date end;
-	//private Date theDate;
+	private Time start;
+	private Time end;
+	private Date theDate;
 	private String attListID;
 	private String locationID;
 	private String staffID;
@@ -28,12 +28,13 @@ public class Booking
 	private Module module;
 
 	// Constructor
-	public Booking (String bookingID, String classID, Date start, Date end, String locationID, String staffID, String attListID, String moduleID, String className, String classType, String roomNum, String building)
+	public Booking (String bookingID, String classID, Time start, Time end,Date theDate, String locationID, String staffID, String attListID, String moduleID, String className, String classType, String roomNum, String building)
 	{
 		this.bookingID = bookingID;
 		this.classID = classID;
 		this.start = start;
 		this.end = end;
+		this.theDate = theDate;
 		this.locationID = locationID;
 		this.staffID = staffID;
 		this.attListID = attListID;
@@ -46,7 +47,7 @@ public class Booking
 	}
 
 	// Booking Constructor
-	public Booking(Date start, Date end, Date theDate, String attListID, Location location, Module module, Lecture lecture)
+	public Booking(Time start, Time end, Date theDate, String attListID, Location location, Module module, Lecture lecture)
 	{
 		this.start = start;
 		this.end = end;
@@ -57,10 +58,13 @@ public class Booking
 		this.staffID = staffID;
 	}
 
-	public Booking(){
+	public Booking(){}
 
-
-	}
+	public String getBuilding() { return this.building; }
+	public String getRoomNumber() { return this.roomNumber; }
+	public Time getStartTime() { return this.start; }
+	public String getClassType() { return this.classType; }
+	public String getBookingID() { return this.bookingID; }
 
 	public void addLecture (String classID, String moduleID, Lecture.LectType lType)
 	{

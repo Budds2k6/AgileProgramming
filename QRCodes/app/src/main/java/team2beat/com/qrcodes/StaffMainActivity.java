@@ -18,6 +18,8 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 
+import java.sql.Date;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -88,7 +90,22 @@ public class StaffMainActivity extends AppCompatActivity {
     public void createClassLabels(List<Booking> classes)
     {
         final ListView moduleList = (ListView) findViewById(R.id.listView);
-        final ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, classes);
+
+        ArrayList<String> classDetails = new ArrayList<String>();
+
+        for(int i = 0; i < classes.size(); i++)
+        {
+            String building = classes.get(i).getBuilding();
+            Time startTime = classes.get(i).getStartTime();
+            String roomNumber = classes.get(i).getRoomNumber();
+            String classType = classes.get(i).getClassType();
+
+            classDetails.add(building + " (" + roomNumber +")\n" + startTime + "---> " + classType + "--- BOOKING ID = " + classes.get(i).getBookingID());
+        }
+
+        final ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, classDetails);
+
+        moduleList.setAdapter(adapter);
     }
 
     public void loadStaffModules(View v)

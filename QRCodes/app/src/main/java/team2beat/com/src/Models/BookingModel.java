@@ -2,6 +2,7 @@ package team2beat.com.src.Models;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
 
 import org.apache.http.HttpResponse;
@@ -95,23 +96,27 @@ public class BookingModel
 				start = (java.util.Date) myFormat.parse(current[2]);
 
 				java.util.Date end;
-				Date theEnd;
+				Time theEnd;
 				if(!current[3].equals("null")) {
 					end = (java.util.Date) myFormat.parse(current[3]);
-					theEnd = new Date(end.getTime());
+					theEnd = new Time(end.getTime());
  				}else{
 
 					theEnd = null;
 				}
 
-				Date theStart = new Date(start.getTime());
+
+				java.util.Date utilDate = new java.util.Date();
+				java.sql.Date theDate = new java.sql.Date(utilDate.getTime());
+				Time theStart = new Time(start.getTime());
 
 
-				Booking newBooking = new Booking(current[0], current[1], theStart, theEnd, current[4], current[5], current[6], current[7], current[8], current[9], current[10], current[11]);
+				Booking newBooking = new Booking(current[0], current[1], theStart, theEnd,theDate, current[4], current[5], current[6], current[7], current[8], current[9], current[10], current[11]);
 
 				todaysBookings.add(newBooking);
 			}
 
+			System.out.print("PLACEHOLDER");
 
 			return todaysBookings;
 		}catch(Exception e){
