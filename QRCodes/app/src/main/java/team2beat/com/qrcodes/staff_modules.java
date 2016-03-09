@@ -4,6 +4,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import java.util.ArrayList;
 
 public class staff_modules extends AppCompatActivity {
 
@@ -11,6 +15,22 @@ public class staff_modules extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_staff_modules);
+
+        final ListView moduleList = (ListView) findViewById(R.id.moduleList);
+
+        String[] modules = new String[]{"Theory of Computation", "Agile Programming"};
+
+
+        final ArrayList<String> list = new ArrayList<String>();
+        for(int i = 0; i < modules.length; i++ )
+        {
+            list.add(modules[i]);
+
+        }
+
+        final ListAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
+
+        moduleList.setAdapter(adapter);
     }
 
     @Override
@@ -34,4 +54,9 @@ public class staff_modules extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
+
+
+
 }
