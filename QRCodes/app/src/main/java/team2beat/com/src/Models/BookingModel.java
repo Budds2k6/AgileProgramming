@@ -24,6 +24,7 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -33,6 +34,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import team2beat.com.src.AsyncClasses.BookingAsync;
 import team2beat.com.src.AsyncClasses.EndClassAsync;
 import team2beat.com.src.AsyncClasses.RegisterAsync;
+import team2beat.com.src.AsyncClasses.TodaysClassesAsync;
 import team2beat.com.src.DataObjects.Booking;
 import team2beat.com.src.DataObjects.Lecture;
 import team2beat.com.src.DataObjects.Location;
@@ -49,6 +51,7 @@ public class BookingModel
 	String theFlag;
 	public String [] returnedId;
 	public String [] registerSuccess;
+	public ArrayList<String[]> returnedClasses;
 
 	// Constructor
 	public BookingModel(int lec,int loc, String sid, String flag)
@@ -71,6 +74,52 @@ public class BookingModel
 
 	// Creates a new booking
 	//public int createBooking (Booking thisBooking)
+
+	public ArrayList<Booking> todaysClasses(String staffID)
+	{
+		try {
+			ArrayList<Booking> todaysBookings = new ArrayList<Booking>();
+			TodaysClassesAsync tca = new TodaysClassesAsync(staffID);
+			while (!tca.complete) {
+				returnedClasses = tca.toReturn;
+
+			}
+
+			SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
+
+			for (int i = 0; i < returnedClasses.size(); i++) {
+				String[] current = returnedClasses.get(i);
+
+
+				java.util.Date start;
+				start = (java.util.Date) myFormat.parse(current[2]);
+
+				java.util.Date end;
+				Date theEnd;
+				if(!current[3].equals("null")) {
+					end = (java.util.Date) myFormat.parse(current[3]);
+					theEnd = new Date(end.getTime());
+ 				}else{
+
+					theEnd = null;
+				}
+
+				Date theStart = new Date(start.getTime());
+
+
+				Booking newBooking = new Booking(current[0], current[1], theStart, theEnd, current[4], current[5], current[6], current[7], current[8], current[9], current[10], current[11]);
+
+				todaysBookings.add(newBooking);
+			}
+
+
+			return todaysBookings;
+		}catch(Exception e){
+				e.printStackTrace();
+				return null;
+		}
+	}
+
 
 	public String createBooking ()
 	{
@@ -182,9 +231,12 @@ public class BookingModel
 				Module thisModule = new Module (moduleID, moduleName);
 				Lecture thisLecture = new Lecture (lectureID, moduleID, Lecture.LectType.valueOf(lectType));
 
-				Booking thisBooking = new Booking (start, end, theDate, attListID, thisLocation, thisModule, thisLecture);
 
-				bookingList.add(thisBooking);
+				//Commented out cos it broke things
+
+				//Booking thisBooking = new Booking (start, end, theDate, attListID, thisLocation, thisModule, thisLecture);
+
+				//bookingList.add(thisBooking);
 			}
 
 			temp.close();

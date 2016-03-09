@@ -9,6 +9,7 @@ import team2beat.com.src.Models.*;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.List;
 
 import team2beat.com.qrcodes.PresentRecord;
@@ -102,5 +103,13 @@ public class BookingController {
         //List<Booking> bookingList = bookingModel.getBookingList (staffID);
 
         // TODO: Redirect to booking view with list
+    }
+
+    public ArrayList<Booking> getTodaysClasses(String staffID)
+    {
+        BookingModel bookingModel = new BookingModel();
+        return bookingModel.todaysClasses(staffID);
+
+
     }
 }

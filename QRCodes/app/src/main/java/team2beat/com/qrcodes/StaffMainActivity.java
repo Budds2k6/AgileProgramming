@@ -17,6 +17,7 @@ import com.google.zxing.qrcode.QRCodeWriter;
 
 import java.util.List;
 
+import team2beat.com.src.Controllers.BookingController;
 import team2beat.com.src.DataObjects.Staff;
 
 public class StaffMainActivity extends AppCompatActivity {
@@ -35,7 +36,7 @@ public class StaffMainActivity extends AppCompatActivity {
 
             // change this to store the values
             //List<Class> classes = ...
-            loadModules(staffDetails.getStaffID());
+            loadModules();
 
             createClassLabels(); // classes
 
@@ -68,10 +69,12 @@ public class StaffMainActivity extends AppCompatActivity {
 
 
     // change the return type to a list / array of the classes
-    public void loadModules(String staffData)
+    public void loadModules()
     {
-        // call the controller to fetch the data
+        // call the controller to fetch the dat
         // (store the data in a list / array)
+        BookingController bc = new BookingController();
+        bc.getTodaysClasses(staffDetails.getStaffID());
 
         // return the list
     }
