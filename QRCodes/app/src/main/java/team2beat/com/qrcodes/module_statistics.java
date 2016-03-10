@@ -26,7 +26,9 @@ public class module_statistics extends AppCompatActivity {
 
         Intent _intent = getIntent();
         Bundle bundleModuleSelected = _intent.getExtras();
-        String moduleSelected = bundleModuleSelected.getString("0");
+
+        String moduleSelected = bundleModuleSelected.getString("moduleSelected");
+
         TextView moduleText = (TextView) findViewById(R.id.textView3);
         moduleText.setText(moduleSelected);
 
