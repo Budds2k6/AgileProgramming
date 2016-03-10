@@ -37,6 +37,7 @@ public class ViewRegisterAsync extends ActionBarActivity {
     public ViewRegisterAsync(int attID)
     {
         this.attendanceListID = attID;
+        new PostClass().execute(String.valueOf(attendanceListID));
     }
 
     @Override
@@ -98,11 +99,11 @@ public class ViewRegisterAsync extends ActionBarActivity {
                     //if (!toReturn[0].equals("Login Failed")) {
 
                     // get the other details
-                    temp[3] = getElementFromTag("firstname", curr);
-                    temp[4] = getElementFromTag("surname", curr);
-                    temp[0] = getElementFromTag("student_id", curr);
-                    temp[2] = getElementFromTag("exception", curr);
-                    temp[1] = getElementFromTag("present", curr);
+                    temp[0] = getElementFromTag("firstname", curr);
+                    temp[1] = getElementFromTag("surname", curr);
+                    temp[2] = getElementFromTag("student_id", curr);
+                    temp[3] = getElementFromTag("exception", curr);
+                    temp[4] = getElementFromTag("present", curr);
 
                     toReturn.add(temp);
                 }
