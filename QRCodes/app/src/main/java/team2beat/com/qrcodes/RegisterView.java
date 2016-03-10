@@ -17,7 +17,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import java.sql.Time;
+import java.util.ArrayList;
+
+import team2beat.com.src.Controllers.AttendeeListController;
+import team2beat.com.src.DataObjects.Attendee;
 
 public class RegisterView extends AppCompatActivity {
 
@@ -40,8 +50,38 @@ public class RegisterView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_view);
+
+        Intent i = getIntent();
+
+        Bundle detailBundle = i.getExtras();
+
+        int attendanceListID = Integer.valueOf(detailBundle.getString("attendanceID"));
+
+        AttendeeListController alc = new AttendeeListController();
+        ArrayList<Attendee> attendees = alc.getAttendanceListByID(attendanceListID);
+
+        createStudentLabels(attendees);
+
     }
 
+    public void createStudentLabels(ArrayList<Attendee> attendees)
+    {
+        final ListView moduleList = (ListView) findViewById(R.id.listView);
+
+        ArrayList<String> studentDetails = new ArrayList<String>();
+
+        for(int i = 0; i < attendees.size(); i++)
+        {
+            String name = attendees.get(i).getStudentName();
+
+            studentDetails.add(name);
+        }
+
+        final ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, studentDetails);
+
+        moduleList.setAdapter(adapter);
+
+    }
 
     public void BackToQR(View v)
     {

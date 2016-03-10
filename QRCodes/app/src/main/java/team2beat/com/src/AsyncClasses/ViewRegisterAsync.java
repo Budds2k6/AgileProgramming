@@ -29,25 +29,90 @@ import javax.xml.parsers.DocumentBuilderFactory;
  */
 public class ViewRegisterAsync extends ActionBarActivity {
 
-    public String [] returnedId;
+    int attendanceListID;
+    public ArrayList<String[]> toReturn;
+    public boolean complete = false;
 
     // Constructor
-    public ViewRegisterAsync(String le, String lo, String sid, String fl)
+    public ViewRegisterAsync(int attID)
     {
-
+        this.attendanceListID = attID;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView();
-        //new PostClass().execute(lec_id, loc_id, staff_id, theFlag);
+        new PostClass().execute(String.valueOf(attendanceListID));
     }
 
 
     private class PostClass extends AsyncTask<String, Void, Void> {
 
         protected Void doInBackground(String... params) {
+
+            // the url of the java servlet that carries out the operations
+            String url = "http://silva.computing.dundee.ac.uk/2015-agileteam2/AttendanceList";
+
+            // resource: http://hayageek.com/android-http-post-get/
+            HttpClient httpClient = new DefaultHttpClient();
+
+            HttpPost httpPost = new HttpPost(url);
+
+            // create the parameters - requires a string for the name of the parameter and the actual value
+            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+            nameValuePairs.add(new BasicNameValuePair("attendance_list_id", params[0]));
+
+            // attach the parameters to the request
+            try {
+                httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            // get the response after executing the request
+            try {
+                HttpResponse response = httpClient.execute(httpPost);
+
+                String responseStr = EntityUtils.toString(response.getEntity());
+
+                // this small piece of code was taken from:	----------------------------------------
+                //http://www.tutorialspoint.com/java_xml/java_dom_create_document.htm
+                DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+                DocumentBuilder builder = factory.newDocumentBuilder();
+                Document document = builder.parse(new InputSource(new StringReader(responseStr)));
+                Element rootElement = document.getDocumentElement();
+                // up to here ----------------------------------------------------------------------
+
+                NodeList listChildren = rootElement.getChildNodes();
+
+                toReturn = new ArrayList<String[]>();
+
+                for(int i = 0; i < listChildren.getLength();i++) {
+                    String[] temp = new String[5];
+
+                    Element curr = (Element) listChildren.item(i);
+
+                    // if the username is not "Login Failed" - i.e. the Login succeeded...
+                    //if (!toReturn[0].equals("Login Failed")) {
+
+                    // get the other details
+                    temp[3] = getElementFromTag("firstname", curr);
+                    temp[4] = getElementFromTag("surname", curr);
+                    temp[0] = getElementFromTag("student_id", curr);
+                    temp[2] = getElementFromTag("exception", curr);
+                    temp[1] = getElementFromTag("present", curr);
+
+                    toReturn.add(temp);
+                }
+
+                complete = true;
+                System.out.println("");
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
             return null;
         }

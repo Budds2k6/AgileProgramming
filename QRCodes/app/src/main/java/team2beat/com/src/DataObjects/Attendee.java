@@ -9,7 +9,7 @@ public class Attendee
 	boolean attended;
 	
 	// Constructor
-	Attendee (String student, String uID, String attID, String r, boolean att)
+	public Attendee (String student, String uID, String attID, String r, boolean att)
 	{
 		this.studentName = student;
 		this.userID = uID;
@@ -17,4 +17,6 @@ public class Attendee
 		this.reason = r;
 		this.attended = att;
 	}
+
+	public String getStudentName() { return studentName; }
 }

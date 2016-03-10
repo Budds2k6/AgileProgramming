@@ -120,6 +120,7 @@ public class QrDisplayActivity extends AppCompatActivity {
     public void BackToRegister(View v)
     {
         Intent i = new Intent(getBaseContext(), RegisterView.class);
+        i.putExtra("attendanceID", theBooking.getAttListID());
         QrDisplayActivity.this.startActivity(i);
     }
 
