@@ -53,5 +53,11 @@ public class AttendeeListController
 		else
 		{ return false; }
 	}
+
+	public void getAttendanceListByID(int attendanceListID)
+	{
+
+	}
+
 }
 

@@ -8,8 +8,6 @@ public class Student extends User
 {
 	private String studentID;
 
-
-
 	//Accessor methods
 	public String getStudentID()
 	{
