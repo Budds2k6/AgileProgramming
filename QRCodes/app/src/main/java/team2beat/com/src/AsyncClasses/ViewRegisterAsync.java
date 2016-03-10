@@ -62,7 +62,7 @@ public class ViewRegisterAsync extends ActionBarActivity {
 
             // create the parameters - requires a string for the name of the parameter and the actual value
             List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-            nameValuePairs.add(new BasicNameValuePair("attendance_list_id", params[0]));
+            nameValuePairs.add(new BasicNameValuePair("AttList_ID", params[0]));
 
             // attach the parameters to the request
             try {

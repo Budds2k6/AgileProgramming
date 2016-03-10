@@ -36,7 +36,7 @@ public class AttendanceListModel {
                 String studentID = current[2];
                 String present = current[4];
                 String exception = current[3];
-                String name = current[0] + current[1];
+                String name = current[0] + " " + current[1];
 
 
                 Attendee attendee = new Attendee(name, studentID, String.valueOf(attendanceID), exception, Boolean.valueOf(present));

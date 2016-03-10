@@ -16,9 +16,10 @@
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/listView3"
+        android:id="@+id/listStudents"
         android:layout_above="@+id/button5"
-        android:layout_marginTop="30dp" />
+        android:layout_marginTop="30dp"
+        android:headerDividersEnabled="false" />
 
     <Button
         android:layout_width="wrap_content"

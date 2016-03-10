@@ -73,7 +73,7 @@ public class EndClass  extends ActionBarActivity
 
         protected Void doInBackground(String... params) {
 
-            String url = "http://silva.computing.dundee.ac.uk/2015-agileteam2/CreateBooking";
+            String url = "http://silva.computing.ic_dundee1111.ac.uk/2015-agileteam2/CreateBooking";
 
             // resource: http://hayageek.com/android-http-post-get/
             HttpClient httpClient = new DefaultHttpClient();

@@ -66,7 +66,7 @@ public class RegisterView extends AppCompatActivity {
 
     public void createStudentLabels(ArrayList<Attendee> attendees)
     {
-        final ListView moduleList = (ListView) findViewById(R.id.listView);
+        final ListView moduleList = (ListView) findViewById(R.id.listStudents);
 
         ArrayList<String> studentDetails = new ArrayList<String>();
 

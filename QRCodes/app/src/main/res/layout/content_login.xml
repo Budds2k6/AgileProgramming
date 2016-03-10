@@ -27,7 +27,6 @@
                 android:layout_height="match_parent"
                 android:id="@+id/imageView"
                 android:layout_gravity="center"
-                android:src="@drawable/dundee"
                 android:scaleType="fitXY" />
         </FrameLayout>
 
