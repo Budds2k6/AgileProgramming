@@ -25,6 +25,7 @@ import com.google.zxing.qrcode.QRCodeWriter;
 
 import team2beat.com.src.Controllers.BookingController;
 import team2beat.com.src.DataObjects.Booking;
+import team2beat.com.src.DataObjects.Module;
 import team2beat.com.src.DataObjects.Staff;
 
 public class QrDisplayActivity extends AppCompatActivity {
@@ -90,6 +91,32 @@ public class QrDisplayActivity extends AppCompatActivity {
 
     }
 
+
+    public void setClassLabels()
+    {
+        // display details on QR screen
+        TextView txtModID = (TextView) findViewById(R.id.lblClassID);
+        txtModID.setText("Module: " + theBooking.getClass());
+
+        TextView txtModName = (TextView) findViewById(R.id.lblClassName);
+        txtModName.setText(theBooking.getModuleName());
+
+        TextView txtClassType = (TextView) findViewById(R.id.lblClassType);
+        txtClassType.setText(theBooking.getClassType());
+
+        TextView txtBuildingName = (TextView) findViewById(R.id.lblBuldingName);
+        txtBuildingName.setText(theBooking.getBuilding());
+
+        TextView txtRoomName = (TextView) findViewById(R.id.lblRoomNum);
+        txtRoomName.setText("Room: " + theBooking.getRoomNumber());
+
+
+        TextView txtStartTime = (TextView) findViewById(R.id.lblStartTime);
+        txtStartTime.setText((CharSequence) theBooking.getStartTime());
+
+
+    }
+
     public void BackToRegister(View v)
     {
         Intent i = new Intent(getBaseContext(), RegisterView.class);
@@ -109,11 +136,11 @@ public class QrDisplayActivity extends AppCompatActivity {
         backToStaffMenu(v);
     }
 
-    public void BackToBooking(View v)
+    /*public void BackToBooking(View v)
     {
         Intent i = new Intent(getBaseContext(), staff_modules.class);
         QrDisplayActivity.this.startActivity(i);
-    }
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

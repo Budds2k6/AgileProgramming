@@ -101,6 +101,7 @@ public class StaffMainActivity extends AppCompatActivity {
             Time startTime = classes.get(i).getStartTime();
             String roomNumber = classes.get(i).getRoomNumber();
             String classType = classes.get(i).getClassType();
+            String moduleName = classes.get(i).getModuleName();
 
             classDetails.add(building + " (" + roomNumber +")\n" + startTime + "---> " + classType + "--- BOOKING ID = " + classes.get(i).getBookingID());
         }
