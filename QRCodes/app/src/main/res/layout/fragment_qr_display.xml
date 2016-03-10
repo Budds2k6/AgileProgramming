@@ -61,7 +61,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="lblModuleID"
-        android:id="@+id/ClassID"
+        android:id="@+id/lblModuleID"
         android:layout_alignParentTop="true"
         android:layout_alignLeft="@+id/qrCode"
         android:layout_alignStart="@+id/qrCode" />
