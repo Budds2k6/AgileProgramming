@@ -39,7 +39,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Room No. "
             android:id="@+id/textRoom"
-            android:style="@style/classDetail"/>
+            android:theme="@style/classDetail"/>
 
         <TextView
             android:layout_width="wrap_content"

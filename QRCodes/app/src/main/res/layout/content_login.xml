@@ -13,60 +13,92 @@
     tools:showIn="@layout/activity_login"
     android:id="@+id/rlRelativeLayout">
 
-    <EditText
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/editText"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        android:inputType="text"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/txtPassword"
-        android:layout_toEndOf="@+id/txtPassword" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="223dp">
 
-    <EditText
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/editText2"
-        android:layout_marginTop="29dp"
-        android:layout_below="@+id/editText"
-        android:layout_alignLeft="@+id/editText"
-        android:layout_alignStart="@+id/editText" />
+            <ImageView
+                android:layout_width="253dp"
+                android:layout_height="match_parent"
+                android:id="@+id/imageView"
+                android:layout_gravity="center"
+                android:src="@drawable/dundee"
+                android:scaleType="fitXY" />
+        </FrameLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Login:"
-        android:id="@+id/txtLogin"
-        android:layout_above="@+id/editText2"
-        android:layout_toLeftOf="@+id/editText"
-        android:textStyle="bold"
-        android:textAlignment="center" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="307dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Password:"
-        android:id="@+id/txtPassword"
-        android:layout_alignBottom="@+id/editText2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:textAlignment="center"
-        android:textStyle="bold" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="LOGIN"
-        android:id="@+id/loginMusic"
-        android:onClick="submitLogin"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/editText2"
-        android:layout_alignEnd="@+id/editText2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Password:"
+                    android:id="@+id/txtPassword"
+                    android:layout_alignBottom="@+id/editText2"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:textAlignment="center"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/editText"
+
+                    android:inputType="text"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/txtPassword"
+                    android:layout_toEndOf="@+id/txtPassword"
+                    android:theme="@style/classDetail"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Login:"
+                    android:id="@+id/txtLogin"
+                    android:layout_above="@+id/editText2"
+                    android:layout_toLeftOf="@+id/editText"
+                    android:textStyle="bold"
+                    android:textAlignment="center" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:ems="10"
+                    android:id="@+id/editText2"
+                    android:layout_below="@+id/editText"
+                    android:layout_alignLeft="@+id/editText"
+                    android:layout_alignStart="@+id/editText"
+                    android:theme="@style/classDetail"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="LOGIN"
+                    android:id="@+id/loginMusic"
+                    android:onClick="submitLogin"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignRight="@+id/editText2"
+                    android:layout_alignEnd="@+id/editText2"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_gravity="center_horizontal" />
+            </LinearLayout>
+        </FrameLayout>
+    </LinearLayout>
 
 </RelativeLayout>
