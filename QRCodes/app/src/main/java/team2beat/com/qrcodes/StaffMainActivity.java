@@ -111,8 +111,8 @@ public class StaffMainActivity extends AppCompatActivity {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Intent i = new Intent(getBaseContext(), QrDisplayActivity.class);
-            i.putExtra("bookingSelected", classes.get(position));
             QrDisplayActivity.staffDetails = staffDetails;
+            QrDisplayActivity.theBooking = classes.get(position);
             StaffMainActivity.this.startActivity(i);
         }
     });

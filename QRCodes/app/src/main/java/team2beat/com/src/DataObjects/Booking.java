@@ -88,6 +88,15 @@ public class Booking implements Parcelable
 	public void writeToParcel(Parcel out, int flags) {
 		out.writeInt(0);
 	}
+	// this is used to regenerate your object. All Parcelables must have a CREATOR that implements these two methods
+	public static final Parcelable.Creator<Booking> CREATOR = new Parcelable.Creator<Booking>() {
+		public Booking createFromParcel(Parcel in) {
+			return new Booking();
+		}
 
+		public Booking[] newArray(int size) {
+			return new Booking[size];
+		}
+	};
 
 }

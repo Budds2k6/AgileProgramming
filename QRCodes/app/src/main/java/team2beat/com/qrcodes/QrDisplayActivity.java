@@ -32,7 +32,7 @@ public class QrDisplayActivity extends AppCompatActivity {
 
     BookingController bookingController;
     static Staff staffDetails;
-    Booking theBooking;
+    static Booking theBooking;
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -58,11 +58,26 @@ public class QrDisplayActivity extends AppCompatActivity {
         //bookingController = new BookingController();
         //bookingController.theBookingID = bookingController.createNewBooking("Create", staffDetails);
 
-        Bundle detailsBundle = getIntent().getExtras();
+        
+        
+        
+        //// TODO: 10/03/2016  
+        // this line 
+        Intent i = getIntent();
 
-        // get the details which were passed through
-        theBooking = (Booking) detailsBundle.getSerializable("bookingSelected");
+        Bundle detailsBundle = i.getExtras();
 
+        try {
+
+            // get the details which were passed through
+            //theBooking = (Booking) detailsBundle.getSerializable("bookingSelected");
+            //theBooking = (Booking) detailsBundle.getParcelable("bookingSelected");
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            e.printStackTrace();
+
+        }
 
         // create a QR Code, representing the attendance list ID
         generateQRCode(theBooking.getBookingID());
