@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -25,6 +26,7 @@ public class module_statistics extends AppCompatActivity {
 
         Intent _intent = getIntent();
         Bundle bundleModuleSelected = _intent.getExtras();
+
         String moduleSelected = bundleModuleSelected.getString("moduleSelected");
 
         TextView moduleText = (TextView) findViewById(R.id.textView3);
@@ -61,6 +63,15 @@ public class module_statistics extends AppCompatActivity {
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
 
         classList.setAdapter(adapter);
+
+        classList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(getBaseContext(), ClassDetails.class);
+                i.putExtra("classSelected", ((TextView) view).getText());
+                module_statistics.this.startActivity(i);
+            }
+        });
 
     }
     public void displayStudentFold(View view){
