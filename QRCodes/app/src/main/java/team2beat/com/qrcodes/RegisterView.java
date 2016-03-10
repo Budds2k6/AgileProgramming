@@ -19,6 +19,11 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
+import team2beat.com.src.Controllers.AttendeeListController;
+import team2beat.com.src.DataObjects.Attendee;
+
 public class RegisterView extends AppCompatActivity {
 
     /**
@@ -40,6 +45,16 @@ public class RegisterView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_view);
+
+        Intent i = getIntent();
+
+        Bundle detailBundle = i.getExtras();
+
+        int attendanceListID = Integer.valueOf(detailBundle.getString("attendanceID"));
+
+        AttendeeListController alc = new AttendeeListController();
+        ArrayList<Attendee> attendees = alc.getAttendanceListByID(attendanceListID);
+
     }
 
 
