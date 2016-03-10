@@ -83,8 +83,9 @@ public class BookingModel
 			TodaysClassesAsync tca = new TodaysClassesAsync(staffID);
 			while (!tca.complete) {
 				returnedClasses = tca.toReturn;
-
 			}
+
+
 
 			SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
 
@@ -116,7 +117,6 @@ public class BookingModel
 				todaysBookings.add(newBooking);
 			}
 
-			System.out.print("PLACEHOLDER");
 
 			return todaysBookings;
 		}catch(Exception e){
