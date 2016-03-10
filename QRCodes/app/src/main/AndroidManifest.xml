@@ -86,6 +86,10 @@
             android:name=".staff_modules"
             android:label="@string/title_activity_staff_modules" >
         </activity>
+        <activity
+            android:name=".ClassDetails"
+            android:label="@string/title_activity_class_details" >
+        </activity>
     </application>
 
 </manifest>
