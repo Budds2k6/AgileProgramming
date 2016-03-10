@@ -67,14 +67,6 @@ public class MainActivity extends AppCompatActivity {
     public void ScanQR(View v) {
         try {
 
-            Vibrator vibrate;
-            long[] once = { 0, 100 };
-            vibrate = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-
-            if (vibrate != null) {
-                vibrate.vibrate(once, -1);
-            }
-
 
             // Create a new 'Intent to scan'
             Intent intent = new Intent(SCANNER_DOWNLOAD_LOCATION);
@@ -143,6 +135,14 @@ public class MainActivity extends AppCompatActivity {
         // if the scan was successful - i.e. it found a QR Code
         if (requestCode == 0) {
             if (resultCode == RESULT_OK) {
+
+                Vibrator vibrate;
+                long[] once = { 0, 100 };
+                vibrate = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+
+                if (vibrate != null) {
+                    vibrate.vibrate(once, -1);
+                }
 
                 // called when activity exists. Gives the result it found - with any additional data
                 String contents = intent.getStringExtra("SCAN_RESULT");
