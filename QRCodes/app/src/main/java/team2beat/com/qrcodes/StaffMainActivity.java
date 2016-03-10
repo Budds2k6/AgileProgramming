@@ -9,6 +9,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -30,6 +31,8 @@ import team2beat.com.src.DataObjects.Staff;
 public class StaffMainActivity extends AppCompatActivity {
 
     Staff staffDetails;
+    ArrayList<Booking> classes;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         try {
@@ -42,9 +45,9 @@ public class StaffMainActivity extends AppCompatActivity {
             staffDetails = (Staff) detailsBundle.getSerializable("details");
 
             // change this to store the values
-            ArrayList<Booking> classes = loadModules();
+            loadModules();
 
-            createClassLabels(classes);
+            createClassLabels();
 
             setLabelText();
 
@@ -70,24 +73,23 @@ public class StaffMainActivity extends AppCompatActivity {
     {
         Intent i = new Intent (getBaseContext(), QrDisplayActivity.class);
         QrDisplayActivity.staffDetails = staffDetails;
+        i.putExtra("bookingSelected", 1000);
         StaffMainActivity.this.startActivity(i);
     }
 
 
-    public ArrayList<Booking> loadModules()
+    public void loadModules()
     {
         // call the controller to fetch the dat
         // (store the data in a list / array)
         BookingController bc = new BookingController();
-        ArrayList<Booking> classes = bc.getTodaysClasses(staffDetails.getStaffID());
+        classes = bc.getTodaysClasses(staffDetails.getStaffID());
 
-        // return the list
-        return classes;
     }
 
 
     // need to pass a parameter in - the list / array
-    public void createClassLabels(List<Booking> classes)
+    public void createClassLabels()
     {
         final ListView moduleList = (ListView) findViewById(R.id.listView);
 
@@ -105,7 +107,15 @@ public class StaffMainActivity extends AppCompatActivity {
 
         final ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, classDetails);
 
-        moduleList.setAdapter(adapter);
+        moduleList.setAdapter(adapter); moduleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Intent i = new Intent(getBaseContext(), QrDisplayActivity.class);
+            i.putExtra("bookingSelected", classes.get(position));
+            QrDisplayActivity.staffDetails = staffDetails;
+            StaffMainActivity.this.startActivity(i);
+        }
+    });
     }
 
     public void loadStaffModules(View v)
