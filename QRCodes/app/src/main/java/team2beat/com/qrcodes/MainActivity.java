@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -65,6 +66,16 @@ public class MainActivity extends AppCompatActivity {
     // http://examples.javacodegeeks.com/android/android-barcode-and-qr-scanner-example/
     public void ScanQR(View v) {
         try {
+
+            Vibrator vibrate;
+            long[] once = { 0, 100 };
+            vibrate = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+
+            if (vibrate != null) {
+                vibrate.vibrate(once, -1);
+            }
+
+
             // Create a new 'Intent to scan'
             Intent intent = new Intent(SCANNER_DOWNLOAD_LOCATION);
 
