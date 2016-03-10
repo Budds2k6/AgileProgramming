@@ -17,4 +17,6 @@ public class Attendee
 		this.reason = r;
 		this.attended = att;
 	}
+
+	public String getStudentName() { return studentName; }
 }
