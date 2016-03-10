@@ -69,6 +69,7 @@ public class Booking implements Parcelable
 	public String getClassType() { return this.classType; }
 	public String getBookingID() { return this.bookingID; }
 	public String getAttListID() { return attListID; }
+	public String getModuleName() {return this.className;}
 
 	public void addLecture (String classID, String moduleID, Lecture.LectType lType)
 	{
