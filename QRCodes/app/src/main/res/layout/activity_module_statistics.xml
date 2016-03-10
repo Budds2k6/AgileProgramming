@@ -8,50 +8,73 @@
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:id="@+id/ModuleStatFrame"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentTop="true">
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true">
 
-        <TextView
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="74dp"
-            android:text="Agile Programming"
-            android:id="@+id/textView3"
-            android:layout_gravity="center_horizontal|top"
-            android:textStyle="bold"
-            android:gravity="top|center"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+            android:layout_height="250dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="%15"
-            android:id="@+id/textView4"
-            android:layout_gravity="center"
-            android:textSize="45dp"
-            android:textColor="#ffffff"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="74dp"
+                android:text="Agile Programming"
+                android:id="@+id/textView3"
+                android:layout_gravity="center_horizontal|top"
+                android:textStyle="bold"
+                android:gravity="top|center"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
-        <Button
-            android:layout_width="185dp"
-            android:layout_height="wrap_content"
-            android:text="@string/buttonFoldClasses"
-            android:id="@+id/buttonClasses"
-            android:layout_toLeftOf="@+id/fragment"
-            android:layout_toStartOf="@+id/fragment"
-            android:layout_marginRight="40dp"
-            android:layout_marginEnd="40dp"
-            android:layout_gravity="left|bottom" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="%15"
+                android:id="@+id/textView4"
+                android:layout_gravity="center"
+                android:textSize="45dp"
+                android:textColor="#ffffff"/>
+        </LinearLayout>
 
-        <Button
-            android:layout_width="185dp"
-            android:layout_height="wrap_content"
-            android:text="@string/buttonFoldStudents"
-            android:id="@+id/buttonStudents"
-            android:layout_below="@+id/ModuleStatFrame"
-            android:layout_toRightOf="@+id/student_fragment"
-            android:layout_toEndOf="@+id/student_fragment"
-            android:layout_marginLeft="32dp"
-            android:layout_marginStart="32dp"
-            android:layout_gravity="right|bottom" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="329dp"
+            android:layout_gravity="center_horizontal|bottom">
+
+            <Button
+                android:layout_width="185dp"
+                android:layout_height="wrap_content"
+                android:text="@string/buttonFoldClasses"
+                android:id="@+id/buttonClasses"
+                android:layout_gravity="left|bottom"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+            <Button
+                android:layout_width="185dp"
+                android:layout_height="wrap_content"
+                android:text="@string/buttonFoldStudents"
+                android:id="@+id/buttonStudents"
+                android:layout_gravity="right|bottom"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/buttonClasses"
+                android:id="@+id/frameFold">
+
+                <ListView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/foldList"
+                    android:layout_gravity="center" />
+            </FrameLayout>
+        </RelativeLayout>
+
     </FrameLayout>
 
 </RelativeLayout>

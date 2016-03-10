@@ -15,7 +15,8 @@ public class module_statistics extends AppCompatActivity {
         setContentView(R.layout.activity_module_statistics);
 
         Intent i = getIntent();
-        String moduleSelected = i.getStringExtra("moduleSelected");
+        Bundle bundleModuleSelected = i.getBundleExtra("moduleSelected");
+        String moduleSelected = bundleModuleSelected.getString("moduleSelected");
         TextView moduleText = (TextView) findViewById(R.id.textView3);
         moduleText.setText(moduleSelected);
 

@@ -41,7 +41,7 @@ public class staff_modules extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i = new Intent (getBaseContext(), module_statistics.class);
-                i.putExtra("moduleSelected", (view).toString());
+                i.putExtra("moduleSelected",  ((TextView) view).getText());
                 staff_modules.this.startActivity(i);
             }
         });
