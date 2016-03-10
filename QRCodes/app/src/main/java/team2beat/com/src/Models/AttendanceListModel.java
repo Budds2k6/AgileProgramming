@@ -7,4 +7,9 @@ public class AttendanceListModel
 	// Class Constructor
 	public AttendanceListModel()
 	{}
+
+	public void getRegisterByID(int attendanceID)
+	{
+
+	}
 }
