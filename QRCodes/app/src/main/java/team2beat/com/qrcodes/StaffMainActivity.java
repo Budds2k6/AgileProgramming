@@ -103,7 +103,7 @@ public class StaffMainActivity extends AppCompatActivity {
             String classType = classes.get(i).getClassType();
             String moduleName = classes.get(i).getModuleName();
 
-            classDetails.add(building + " (" + roomNumber +")\n" + startTime + "---> " + classType + "--- BOOKING ID = " + classes.get(i).getBookingID());
+            classDetails.add(building + " (" + roomNumber +")\n" + startTime + "---> " + classType + "--- Booking ID = " + classes.get(i).getBookingID());
         }
 
         final ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, classDetails);

@@ -26,9 +26,9 @@
         android:text="Attendence List"
         android:id="@+id/BackToRegister"
         android:onClick="BackToRegister"
-        android:layout_below="@+id/lblBuldingName"
-        android:layout_alignRight="@+id/BackToBooking"
-        android:layout_alignEnd="@+id/BackToBooking"
+        android:layout_above="@+id/BackToBooking"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -110,7 +110,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="StartTime"
         android:id="@+id/lblStartTime"
-        android:layout_below="@+id/BackToRegister"
+        android:layout_below="@+id/lblBuldingName"
         android:layout_centerHorizontal="true" />
 
 

@@ -69,7 +69,7 @@ public class QrDisplayActivity extends AppCompatActivity {
         Bundle detailsBundle = i.getExtras();
 
         try {
-
+            setClassLabels();
             // get the details which were passed through
             //theBooking = (Booking) detailsBundle.getSerializable("bookingSelected");
             //theBooking = (Booking) detailsBundle.getParcelable("bookingSelected");
