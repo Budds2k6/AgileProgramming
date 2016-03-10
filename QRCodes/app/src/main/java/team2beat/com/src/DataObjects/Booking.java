@@ -1,12 +1,15 @@
 package team2beat.com.src.DataObjects;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import team2beat.com.src.DataObjects.Lecture;
 import team2beat.com.src.DataObjects.Location;
 
 import java.sql.Date;
 import java.sql.Time;
 
-public class Booking
+public class Booking implements Parcelable
 {
 	private String moduleID;
 	// Booking details
@@ -75,4 +78,16 @@ public class Booking
 		this.lecture = lecture;
 
 	}
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel out, int flags) {
+		out.writeInt(0);
+	}
+
+
 }
