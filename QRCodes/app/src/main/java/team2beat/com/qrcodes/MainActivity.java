@@ -144,6 +144,8 @@ public class MainActivity extends AppCompatActivity {
                     vibrate.vibrate(once, -1);
                 }
 
+                
+
                 // called when activity exists. Gives the result it found - with any additional data
                 String contents = intent.getStringExtra("SCAN_RESULT");
 
