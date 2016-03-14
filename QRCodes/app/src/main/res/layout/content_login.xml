@@ -27,8 +27,7 @@
                 android:layout_height="match_parent"
                 android:id="@+id/imageView"
                 android:layout_gravity="center"
-                android:scaleType="fitCenter"
-                android:src="@drawable/university_of_dundee_crest" />
+                android:scaleType="fitCenter" />
         </FrameLayout>
 
         <FrameLayout
