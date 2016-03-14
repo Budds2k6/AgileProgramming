@@ -30,7 +30,7 @@ import team2beat.com.src.DataObjects.Staff;
 
 public class StaffMainActivity extends AppCompatActivity {
 
-    Staff staffDetails;
+    public static Staff staffDetails;
     ArrayList<Booking> classes;
 
     @Override
@@ -40,9 +40,6 @@ public class StaffMainActivity extends AppCompatActivity {
             setContentView(R.layout.activity_staff_main);
 
             Bundle detailsBundle = getIntent().getExtras();
-
-            // get the details which were passed through
-            staffDetails = (Staff) detailsBundle.getSerializable("details");
 
             // change this to store the values
             loadModules();
@@ -57,10 +54,12 @@ public class StaffMainActivity extends AppCompatActivity {
         }
     }
 
-    public void setStaffDetails(Staff staff)
-    {
-        staffDetails = staff;
-    }
+    /*
+        public void setStaffDetails(Staff staff)
+        {
+            staffDetails = staff;
+        }
+    */
 
     public void setLabelText()
     {

@@ -10,6 +10,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+
+import team2beat.com.src.AsyncClasses.ConnectionCheck;
 import team2beat.com.src.Controllers.LoginController;
 import team2beat.com.src.DataObjects.Staff;
 import team2beat.com.src.DataObjects.Student;
@@ -24,58 +29,65 @@ public class LoginActivity extends AppCompatActivity {
 
     public void submitLogin(View v) {
 
-        try {
+        if (isConnectionAvailable()) {
 
-            // extract the username and password from the UI
-            EditText usernameBox = (EditText) findViewById(R.id.editText);
-            String username = usernameBox.getText().toString();
+            try {
 
-            EditText passwordBox = (EditText) findViewById(R.id.editText2);
-            String password = passwordBox.getText().toString();
+                // extract the username and password from the UI
+                EditText usernameBox = (EditText) findViewById(R.id.editText);
+                String username = usernameBox.getText().toString();
 
-            // attempt to log in
-            LoginController lc = new LoginController(username, password);
-            String[] successDetails = lc.doLogin();
+                EditText passwordBox = (EditText) findViewById(R.id.editText2);
+                String password = passwordBox.getText().toString();
 
-            Toast toast;
+                // attempt to log in
+                LoginController lc = new LoginController(username, password);
+                String[] successDetails = lc.doLogin();
 
-            if (successDetails != null && successDetails[0] != null) {
-                if (!successDetails[0].equals("Login Failed")) {
-                    toast = Toast.makeText(this, "Successfully Logged In as " + successDetails[1] + successDetails[2], Toast.LENGTH_LONG);
-                    if (successDetails[4].equals("staff")) {
+                Toast toast;
 
-                        String staffID = successDetails[3];
-                        //String JobID = "2751";
+                if (successDetails != null && successDetails[0] != null) {
+                    if (!successDetails[0].equals("Login Failed")) {
+                        toast = Toast.makeText(this, "Successfully Logged In as " + successDetails[1] + successDetails[2], Toast.LENGTH_LONG);
+                        if (successDetails[4].equals("staff")) {
 
-                        Staff theStaff = new Staff(staffID, successDetails[0], successDetails[1], successDetails[2]);
+                            String staffID = successDetails[3];
+                            //String JobID = "2751";
+
+                            Staff theStaff = new Staff(staffID, successDetails[0], successDetails[1], successDetails[2]);
 
 
-                        dummyLogin(v, theStaff);
-                    } else if (successDetails[4].equals("student")) {      // password = "pass"
+                            dummyLogin(v, theStaff);
+                        } else if (successDetails[4].equals("student")) {      // password = "pass"
 
-                        String studentID = successDetails[3];
+                            String studentID = successDetails[3];
 
-                        Student theStudent = new Student(studentID, successDetails[0], successDetails[1], successDetails[2]);
+                            Student theStudent = new Student(studentID, successDetails[0], successDetails[1], successDetails[2]);
 
-                        dummyLoginStudent(v, theStudent);
+                            dummyLoginStudent(v, theStudent);
 
+                        }
+                    } else {
+                        toast = Toast.makeText(this, "LOGIN FAILED...", Toast.LENGTH_LONG);
                     }
+
                 } else {
                     toast = Toast.makeText(this, "LOGIN FAILED...", Toast.LENGTH_LONG);
                 }
 
-            } else {
-                toast = Toast.makeText(this, "LOGIN FAILED...", Toast.LENGTH_LONG);
+                toast.show();
+            } catch (Exception e) {
+
+                // pop up message - pop up... toast... get it? Clever Android...
+                Toast toast = Toast.makeText(this, "LOGIN FAILED...", Toast.LENGTH_LONG);
+                toast.show();
+                e.printStackTrace();
             }
-
+        }else
+        {
+            // No connection available
+            Toast toast = Toast.makeText(this, "No Connection available", Toast.LENGTH_LONG);
             toast.show();
-        } catch (Exception e) {
-
-            // pop up message - pop up... toast... get it? Clever Android...
-            Toast toast = Toast.makeText(this, "LOGIN FAILED...", Toast.LENGTH_LONG);
-            toast.show();
-            e.printStackTrace();
-
         }
     }
 
@@ -83,15 +95,38 @@ public class LoginActivity extends AppCompatActivity {
         Intent i = new Intent(getBaseContext(), StaffMainActivity.class);
 
         // the staff members details need to be passed
-        i.putExtra("details", theStaff);
+        //i.putExtra("details", theStaff);
+        StaffMainActivity.staffDetails = theStaff;
         LoginActivity.this.startActivity(i);
     }
 
     public void dummyLoginStudent(View v, Student theStudent) {
         Intent i = new Intent(getBaseContext(), MainActivity.class);
-        // the students details need to be passed
-        i.putExtra("details", theStudent);
+        // static variable to store the staff details
+        MainActivity.studentDetails = theStudent;
         LoginActivity.this.startActivity(i);
+    }
+
+    public boolean isConnectionAvailable()
+    {
+        // create an instance of the class to check if a connection is available
+        ConnectionCheck cc = new ConnectionCheck();
+
+        // start the checking of the connection in a new thread
+        Thread newThread = new Thread(cc);
+        newThread.start();
+
+        //join to the main thread
+        try {
+            newThread.join();
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+
+        // get whether or not the connection is available
+        return cc.checkConnection();
     }
 
 }

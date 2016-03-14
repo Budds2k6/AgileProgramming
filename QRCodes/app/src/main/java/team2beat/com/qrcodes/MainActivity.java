@@ -33,7 +33,7 @@ import team2beat.com.src.DataObjects.Student;
 public class MainActivity extends AppCompatActivity {
 
     static final String SCANNER_DOWNLOAD_LOCATION = "com.google.zxing.client.android.SCAN";
-    Student studentDetails;
+    public static Student studentDetails;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -45,10 +45,10 @@ public class MainActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_student_main);
 
-            Bundle detailsBundle = getIntent().getExtras();
+            //Bundle detailsBundle = getIntent().getExtras();
 
             // extract the details from the Bundle which was passed
-            studentDetails = (Student) detailsBundle.getSerializable("details");
+            //studentDetails = (Student) detailsBundle.getSerializable("details");
 
             // display the user's name on the screen
             TextView txtName = (TextView) findViewById(R.id.lblLoggedInAs);

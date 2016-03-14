@@ -55,39 +55,8 @@ public class QrDisplayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qr_display);
 
-        // create a booking and return the id of the attendance list
-        //bookingController = new BookingController();
-        //bookingController.theBookingID = bookingController.createNewBooking("Create", staffDetails);
-
-        
-        
-        
-        //// TODO: 10/03/2016  
-        // this line 
-        Intent i = getIntent();
-
-        Bundle detailsBundle = i.getExtras();
-
-        try {
-
-            // get the details which were passed through
-            //theBooking = (Booking) detailsBundle.getSerializable("bookingSelected");
-            //theBooking = (Booking) detailsBundle.getParcelable("bookingSelected");
-        }catch (Exception e)
-        {
-            e.printStackTrace();
-            e.printStackTrace();
-
-        }
-
         // create a QR Code, representing the attendance list ID
         generateQRCode(theBooking.getBookingID());
-
-        // find the label to display the class id on and display the text
-        TextView text = (TextView) findViewById(R.id.lblLoggedInAs);
-        //text.setText("CLASS ID: " + listID);
-
-        // TODO return the string to represent the class name
 
     }
 
