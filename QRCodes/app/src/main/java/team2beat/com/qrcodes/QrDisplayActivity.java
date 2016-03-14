@@ -83,7 +83,7 @@ public class QrDisplayActivity extends AppCompatActivity {
 
 
         TextView txtStartTime = (TextView) findViewById(R.id.lblStartTime);
-        txtStartTime.setText((CharSequence) theBooking.getStartTime());
+        txtStartTime.setText(String.valueOf(theBooking.getStartTime()));
 
 
     }
