@@ -35,8 +35,6 @@ public class ClassDetails extends AppCompatActivity {
         lecture.setText(lectureSelected);
 
 
-        displayToast();
-
     }
 
     @Override
@@ -61,13 +59,5 @@ public class ClassDetails extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void displayToast()
-    {
-        LayoutInflater inflater = getLayoutInflater();
-        View view = inflater.inflate(R.layout.custom_toast,
-                (ViewGroup) findViewById(R.id.relativeLayout1));
-        Toast toast = new Toast(this);
-        toast.setView(view);
-        toast.show();
-    }
+
 }
