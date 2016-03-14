@@ -168,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
                     // LEGIT LEWIS YOU NEED TO DO THIS NEXT
                     // IT'S IMPORTANT
 
-                    PresentRecord pr = new PresentRecord(bookingContent, studentDetails.getUsername());
+                    PresentRecord pr = new PresentRecord(bookingContent, studentDetails.getStudentID());
 
                     sendAttendanceToDatabase(pr);
 
