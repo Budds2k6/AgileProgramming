@@ -55,6 +55,8 @@ public class QrDisplayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qr_display);
 
+		setClassLabels();
+			
         // create a QR Code, representing the attendance list ID
         generateQRCode(theBooking.getBookingID());
 
