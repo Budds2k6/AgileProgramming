@@ -1,5 +1,7 @@
 package team2beat.com.qrcodes;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,6 +13,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,6 +22,7 @@ import android.view.ViewGroup;
 
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -27,6 +31,7 @@ import java.sql.Time;
 import java.util.ArrayList;
 
 import team2beat.com.src.Controllers.AttendeeListController;
+import team2beat.com.src.Controllers.BookingController;
 import team2beat.com.src.DataObjects.Attendee;
 
 public class RegisterView extends AppCompatActivity {
@@ -45,6 +50,7 @@ public class RegisterView extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+    int bookingID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +62,7 @@ public class RegisterView extends AppCompatActivity {
         Bundle detailBundle = i.getExtras();
 
         int attendanceListID = Integer.valueOf(detailBundle.getString("attendanceID"));
+        bookingID = Integer.valueOf(detailBundle.getString("bookingID"));
 
         AttendeeListController alc = new AttendeeListController();
         ArrayList<Attendee> attendees = alc.getAttendanceListByID(attendanceListID);
@@ -89,6 +96,45 @@ public class RegisterView extends AppCompatActivity {
         RegisterView.this.startActivity(i);
     }
 
+
+    String inputID = "";
+    //http://stackoverflow.com/questions/10903754/input-text-dialog-android
+    public void addStudentByID(View v)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Enter Student ID");
+
+        // Set up the input
+        final EditText input = new EditText(this);
+
+        // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        builder.setView(input);
+
+        // Set up the buttons
+        builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                inputID = input.getText().toString();
+
+                // call the controller
+                PresentRecord pr = new PresentRecord(bookingID, inputID);
+
+                BookingController bc = new BookingController();
+                boolean success = bc.setAttendance(pr);
+
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

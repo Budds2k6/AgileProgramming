@@ -30,6 +30,7 @@
         android:layout_alignRight="@+id/BackToQR"
         android:layout_alignEnd="@+id/BackToQR"
         android:layout_toRightOf="@+id/section_label"
+        android:onClick="addStudentByID"
         android:layout_toEndOf="@+id/section_label" />
 
     <Button
