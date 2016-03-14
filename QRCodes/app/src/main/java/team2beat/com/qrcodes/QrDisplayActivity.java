@@ -55,6 +55,8 @@ public class QrDisplayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qr_display);
 
+        bookingController = new BookingController(theBooking.getBookingID());
+
 		setClassLabels();
 			
         // create a QR Code, representing the attendance list ID
@@ -105,6 +107,7 @@ public class QrDisplayActivity extends AppCompatActivity {
     public void endClass(View v)
     {
         bookingController.endClass();
+        StaffMainActivity.staffDetails = staffDetails;
         backToStaffMenu(v);
     }
 

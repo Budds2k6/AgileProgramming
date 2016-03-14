@@ -50,6 +50,13 @@ public class BookingController {
     public BookingController() {
     }
 
+
+    public BookingController(String bID)
+    {
+        theBookingID = bID;
+    }
+
+
     public void endClass() {
         BookingModel bm = new BookingModel();
         bm.endClass(theBookingID);

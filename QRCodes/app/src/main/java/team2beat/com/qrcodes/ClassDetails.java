@@ -1,11 +1,18 @@
 package team2beat.com.qrcodes;
 
 import android.content.Intent;
+import android.os.Debug;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.Console;
 
 public class ClassDetails extends AppCompatActivity {
 
@@ -26,6 +33,10 @@ public class ClassDetails extends AppCompatActivity {
         Bundle bundleModuleSelected = _intent.getExtras();
         String lectureSelected = bundleModuleSelected.getString("classSelected");
         lecture.setText(lectureSelected);
+
+
+        displayToast();
+
     }
 
     @Override
@@ -48,5 +59,15 @@ public class ClassDetails extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void displayToast()
+    {
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.custom_toast,
+                (ViewGroup) findViewById(R.id.relativeLayout11));
+        Toast toast = new Toast(this);
+        toast.setView(view);
+        toast.show();
     }
 }
