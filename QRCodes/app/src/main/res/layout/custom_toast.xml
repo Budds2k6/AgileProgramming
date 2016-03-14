@@ -18,7 +18,7 @@
     <ImageView
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
-        android:src="@drawable/University_of_Dundee_Crest"
+        android:src="@drawable/universityofdundeecrest"
         android:layout_below="@+id/textView1"
         android:layout_margin="5dip"
         android:id="@+id/imageView1">
