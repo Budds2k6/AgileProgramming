@@ -116,8 +116,10 @@ public class LoginActivity extends AppCompatActivity {
         Thread newThread = new Thread(cc);
         newThread.start();
 
+
         //join to the main thread
         try {
+            Thread.sleep(100);
             newThread.join();
         }catch(Exception e)
         {
