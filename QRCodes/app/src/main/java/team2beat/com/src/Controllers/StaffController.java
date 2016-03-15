@@ -10,9 +10,10 @@ import team2beat.com.src.Models.*;
 public class StaffController
 {
 
-	public ArrayList<Module> getAllModules()
+	public ArrayList<Module> getAllModules(String staffID)
 	{
-		return null;
+		StaffModel sm = new StaffModel();
+		return sm.getAllModules(staffID);
 	}
 
 	// Constructor

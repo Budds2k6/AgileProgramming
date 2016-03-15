@@ -4,11 +4,13 @@ package team2beat.com.src.Models;
 import java.util.ArrayList;
 import java.util.List;
 
+import team2beat.com.src.AsyncClasses.StaffAsync;
 import team2beat.com.src.DataObjects.Module;
 
 public class StaffModel
 {
 	private String jobID;
+	private ArrayList<String[]> returnData;
 
 	// Constructor
 	public StaffModel()
@@ -21,9 +23,34 @@ public class StaffModel
 		return null;
 	}
 
-	public ArrayList<Module> getAllModules()
+	public ArrayList<Module> getAllModules(String staffID)
 	{
-		return null;
+		StaffAsync sa = new StaffAsync(staffID);
+
+		while (returnData == null) {
+			returnData = sa.toReturn;
+		}
+
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
+		//create modules out of the data
+		ArrayList<Module> moduleList = new ArrayList<Module>();
+
+		for(int i = 0; i < moduleList.size(); i++)
+		{
+			Module m = new Module(returnData.get(i)[0], returnData.get(i)[1], staffID);
+			moduleList.add(m);
+		}
+
+
+		return moduleList;
+
 	}
 
 }
