@@ -18,13 +18,13 @@
         android:layout_alignParentBottom="true">
 
         <FrameLayout
-            android:layout_width="306dp"
-            android:layout_height="306dp"
-            android:layout_gravity="center_horizontal">
+            android:layout_width="120pt"
+            android:layout_height="120pt"
+            android:layout_gravity="bottom|center_horizontal">
 
             <ImageView
-                android:layout_width="300dp"
-                android:layout_height="300dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:id="@+id/qrCode"
                 android:layout_column="10"
                 android:layout_span="2"
