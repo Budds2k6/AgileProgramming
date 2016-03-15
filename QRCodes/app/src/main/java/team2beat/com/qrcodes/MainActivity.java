@@ -11,7 +11,9 @@ import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -84,7 +86,15 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
+    public void displayToast()
+    {
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.custom_toast,
+                (ViewGroup) findViewById(R.id.toastLayout));
+        Toast toast = new Toast(this);
+        toast.setView(view);
+        toast.show();
+    }
     // code adapted from:
     // http://examples.javacodegeeks.com/android/android-barcode-and-qr-scanner-example/
     private Dialog showDialog(final Activity activity, CharSequence title, CharSequence message, CharSequence Yes, CharSequence No) {
@@ -144,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
                     vibrate.vibrate(once, -1);
                 }
 
-
+                displayToast();
 
                 // called when activity exists. Gives the result it found - with any additional data
                 String contents = intent.getStringExtra("SCAN_RESULT");
@@ -158,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
                     // LEGIT LEWIS YOU NEED TO DO THIS NEXT
                     // IT'S IMPORTANT
 
-                    PresentRecord pr = new PresentRecord(bookingContent, studentDetails.getUsername());
+                    PresentRecord pr = new PresentRecord(bookingContent, studentDetails.getStudentID());
 
                     sendAttendanceToDatabase(pr);
 
