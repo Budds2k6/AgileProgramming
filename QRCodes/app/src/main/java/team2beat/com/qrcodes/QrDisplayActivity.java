@@ -76,7 +76,7 @@ public class QrDisplayActivity extends AppCompatActivity {
         String classID = "Module: " + theBooking.getModuleID();
         txtModID.setText(classID);
 
-        TextView txtModName = (TextView) findViewById(R.id.lblClassName);
+    /*    TextView txtModName = (TextView) findViewById(R.id.lblClassName);
         txtModName.setText(theBooking.getModuleName());
 
         TextView txtClassType = (TextView) findViewById(R.id.lblClassType);
@@ -88,7 +88,7 @@ public class QrDisplayActivity extends AppCompatActivity {
         TextView txtRoomName = (TextView) findViewById(R.id.lblRoomNum);
         txtRoomName.setText("Room: " + theBooking.getRoomNumber());
 
-
+*/
         TextView txtStartTime = (TextView) findViewById(R.id.lblStartTime);
         txtStartTime.setText(String.valueOf(theBooking.getStartTime()));
 

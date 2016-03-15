@@ -18,8 +18,8 @@
         android:layout_alignParentBottom="true">
 
         <FrameLayout
-            android:layout_width="120pt"
-            android:layout_height="120pt"
+            android:layout_width="100pt"
+            android:layout_height="100pt"
             android:layout_gravity="bottom|center_horizontal">
 
             <ImageView
@@ -59,27 +59,6 @@
                     android:layout_alignStart="@+id/qrCode"
                     android:visibility="visible" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Building"
-                    android:id="@+id/lblBuldingName"
-                    android:layout_below="@+id/qrCode"
-                    android:layout_alignLeft="@+id/qrCode"
-                    android:layout_alignStart="@+id/qrCode" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="ClassName"
-                    android:id="@+id/lblClassName"
-                    android:layout_below="@+id/lblModuleID"
-                    android:layout_alignRight="@+id/lblModuleID"
-                    android:layout_alignEnd="@+id/lblModuleID"
-                    android:singleLine="true" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -89,26 +68,6 @@
                 android:layout_gravity="right"
                 android:gravity="center_horizontal"
                 android:layout_weight="0.5">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="ClassType"
-                    android:id="@+id/lblClassType"
-                    android:layout_below="@+id/lblBuldingName"
-                    android:layout_alignLeft="@+id/lblBuldingName"
-                    android:layout_alignStart="@+id/lblBuldingName" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="RoomNum"
-                    android:id="@+id/lblRoomNum"
-                    android:layout_below="@+id/qrCode"
-                    android:layout_alignRight="@+id/qrCode"
-                    android:layout_alignEnd="@+id/qrCode" />
 
                 <TextView
                     android:layout_width="wrap_content"
