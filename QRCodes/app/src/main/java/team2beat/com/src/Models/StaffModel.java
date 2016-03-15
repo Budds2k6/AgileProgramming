@@ -27,7 +27,7 @@ public class StaffModel
 	{
 		StaffAsync sa = new StaffAsync(staffID);
 
-		while (returnData == null) {
+		while (!sa.complete) {
 			returnData = sa.toReturn;
 		}
 
@@ -42,12 +42,11 @@ public class StaffModel
 		//create modules out of the data
 		ArrayList<Module> moduleList = new ArrayList<Module>();
 
-		for(int i = 0; i < moduleList.size(); i++)
+		for(int i = 0; i < returnData.size(); i++)
 		{
 			Module m = new Module(returnData.get(i)[0], returnData.get(i)[1], staffID);
 			moduleList.add(m);
 		}
-
 
 		return moduleList;
 

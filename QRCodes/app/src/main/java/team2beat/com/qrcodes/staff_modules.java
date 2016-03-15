@@ -33,7 +33,7 @@ public class staff_modules extends AppCompatActivity {
 
         final ArrayList<String> list = new ArrayList<String>();
         for (int i = 0; i < modules.size(); i++) {
-            list.add(modules.get(i).getModuleName());
+            list.add(modules.get(i).getModuleName() + " (" + modules.get(i).getModuleCode() + ")");
         }
 
         final ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);

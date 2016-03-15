@@ -83,7 +83,8 @@ public class LoginActivity extends AppCompatActivity {
                 toast.show();
                 e.printStackTrace();
             }
-        }else
+        }
+        else
         {
             // No connection available
             Toast toast = Toast.makeText(this, "No Connection available", Toast.LENGTH_LONG);

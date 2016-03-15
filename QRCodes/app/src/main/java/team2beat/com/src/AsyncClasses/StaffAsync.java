@@ -31,6 +31,7 @@ public class StaffAsync extends ActionBarActivity {
 
     public ArrayList<String []> toReturn;
     String staffID;
+    public boolean complete = false;
 
     // Constructor
     public StaffAsync(String sID)
@@ -62,7 +63,7 @@ public class StaffAsync extends ActionBarActivity {
 
             // set up the parameters to pass to the servlet - require a name for the parameter along with the actual value
             List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-            nameValuePairs.add(new BasicNameValuePair("staffID", params[0]));
+            nameValuePairs.add(new BasicNameValuePair("staff_id", params[0]));
 
             // attach the parameters to the request
             try {
@@ -89,17 +90,30 @@ public class StaffAsync extends ActionBarActivity {
                 Element rootElement = document.getDocumentElement();
                 // up to here ----------------------------------------------------------------------
 
-                // extract the attendanceList id and the booking id from the returned XML file
-                String[] returned = new String[3];
+                toReturn = new ArrayList<String[]>();
 
-                returned[0] = getElementFromTag("idModules", rootElement);
-                returned[1] = getElementFromTag("moduleName", rootElement);
 
-                toReturn.add(returned);
+                NodeList listChildren = rootElement.getChildNodes();
+                for(int i = 0; i < listChildren.getLength();i++) {
+
+                    Element curr = (Element) listChildren.item(i);
+
+                    // extract the attendanceList id and the booking id from the returned XML file
+                    String[] returned = new String[3];
+
+                    returned[0] = getElementFromTag("module_id", curr);
+                    returned[1] = getElementFromTag("name", curr);
+                    returned[2] = getElementFromTag("coordinator", curr);
+
+                    toReturn.add(returned);
+                }
+                complete = true;
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
+
 
             // end the procedure
             return null;

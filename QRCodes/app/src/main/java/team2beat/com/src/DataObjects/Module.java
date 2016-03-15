@@ -22,5 +22,6 @@ public class Module
 	}
 
 	public String getModuleName(){ return this.name; }
+	public String getModuleCode(){ return this.moduleID; }
 
 }
