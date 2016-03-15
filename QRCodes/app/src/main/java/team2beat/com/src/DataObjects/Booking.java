@@ -70,6 +70,7 @@ public class Booking implements Parcelable
 	public String getBookingID() { return this.bookingID; }
 	public String getAttListID() { return attListID; }
 	public String getModuleName() {return this.className;}
+	public String getModuleID() { return this.moduleID; }
 
 	public void addLecture (String classID, String moduleID, Lecture.LectType lType)
 	{

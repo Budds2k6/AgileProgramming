@@ -73,7 +73,8 @@ public class QrDisplayActivity extends AppCompatActivity {
     {
         // display details on QR screen
         TextView txtModID = (TextView) findViewById(R.id.lblModuleID);
-        txtModID.setText("Module: " + theBooking.getClass());
+        String classID = "Module: " + theBooking.getModuleID();
+        txtModID.setText(classID);
 
         TextView txtModName = (TextView) findViewById(R.id.lblClassName);
         txtModName.setText(theBooking.getModuleName());

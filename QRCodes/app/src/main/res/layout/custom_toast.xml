@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-<<<<<<< HEAD
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/relativeLayout11"
-    android:background="@android:color/white">
-=======
-    android:layout_width="300dp"
-    android:layout_height="140dp"
+    android:background="@android:color/white"
     android:layout_gravity="center"
     android:id="@+id/toastLayout">
->>>>>>> 0ed8b07792a5e87bb96ac2de78b24f2b826c38f3
 
     <TextView
         android:textAppearance="?android:attr/textAppearanceLarge"
