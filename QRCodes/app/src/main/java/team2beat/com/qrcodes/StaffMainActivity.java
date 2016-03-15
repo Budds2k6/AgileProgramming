@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import team2beat.com.src.Controllers.BookingController;
+import team2beat.com.src.Controllers.StaffController;
 import team2beat.com.src.DataObjects.Booking;
 import team2beat.com.src.DataObjects.Staff;
 
@@ -102,7 +103,7 @@ public class StaffMainActivity extends AppCompatActivity {
             String classType = classes.get(i).getClassType();
             String moduleName = classes.get(i).getModuleName();
 
-            classDetails.add(building + " (" + roomNumber +")\n" + startTime + "---> " + classType + "--- Booking ID = " + classes.get(i).getBookingID() + " " + moduleName);
+            classDetails.add(building + " (" + roomNumber + ")\n" + startTime + "---> " + classType + "--- Booking ID = " + classes.get(i).getBookingID() + "\n" + moduleName);
         }
 
         final ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, classDetails);
@@ -121,6 +122,10 @@ public class StaffMainActivity extends AppCompatActivity {
     public void loadStaffModules(View v)
     {
         Intent i = new Intent (getBaseContext(), staff_modules.class);
+
+        StaffController sc = new StaffController();
+        staff_modules.modules = sc.getAllModules();
+
         StaffMainActivity.this.startActivity(i);
     }
 

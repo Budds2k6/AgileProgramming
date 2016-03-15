@@ -20,4 +20,7 @@ public class Module
 		this.moduleID = moduleID;
 		this.name = name;
 	}
+
+	public String getModuleName(){ return this.name; }
+
 }

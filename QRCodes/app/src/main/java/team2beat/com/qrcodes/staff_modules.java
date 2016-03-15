@@ -14,8 +14,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import team2beat.com.src.DataObjects.Module;
+
 
 public class staff_modules extends AppCompatActivity {
+
+    public static ArrayList<Module> modules = new ArrayList<Module>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,13 +30,10 @@ public class staff_modules extends AppCompatActivity {
 
         final ListView moduleList = (ListView) findViewById(R.id.moduleList);
 
-        String[] modules = new String[]{"Theory of Computation", "Agile Programming"};
-
 
         final ArrayList<String> list = new ArrayList<String>();
-        for (int i = 0; i < modules.length; i++) {
-            list.add(modules[i]);
-
+        for (int i = 0; i < modules.size(); i++) {
+            list.add(modules.get(i).getModuleName());
         }
 
         final ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);

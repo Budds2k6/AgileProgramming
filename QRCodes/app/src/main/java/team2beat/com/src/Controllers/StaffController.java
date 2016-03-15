@@ -1,17 +1,23 @@
 // import.DataModels_Stuff
 
 package team2beat.com.src.Controllers;
+import java.util.ArrayList;
 import java.util.List;
 
+import team2beat.com.src.DataObjects.Module;
 import team2beat.com.src.Models.*;
 
 public class StaffController
-{	
+{
+
+	public ArrayList<Module> getAllModules()
+	{
+		return null;
+	}
+
 	// Constructor
 	public StaffController ()
-	{
-		
-	}
+	{}
 	
 	// Creates a new staff user via the model
 	public void createStaff ()

@@ -1,7 +1,10 @@
 
 package team2beat.com.src.Models;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import team2beat.com.src.DataObjects.Module;
 
 public class StaffModel
 {
@@ -17,4 +20,10 @@ public class StaffModel
 	{
 		return null;
 	}
+
+	public ArrayList<Module> getAllModules()
+	{
+		return null;
+	}
+
 }
