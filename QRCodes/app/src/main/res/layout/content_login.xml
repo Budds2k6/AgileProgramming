@@ -11,7 +11,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="team2beat.com.qrcodes.LoginActivity"
     tools:showIn="@layout/activity_login"
-    android:id="@+id/rlRelativeLayout">
+    android:theme="@style/AppTheme">
 
     <LinearLayout
         android:orientation="vertical"
