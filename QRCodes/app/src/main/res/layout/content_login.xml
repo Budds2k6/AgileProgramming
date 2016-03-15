@@ -23,17 +23,22 @@
                 android:id="@+id/imageView"
                 android:layout_gravity="center"
                 android:src="@drawable/universityofdundeecrest"
-                android:scaleType="fitCenter" />
+                android:scaleType="fitCenter"
+                android:cropToPadding="false" />
         </FrameLayout>
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="307dp">
+            android:layout_height="307dp"
+            android:measureAllChildren="false"
+            android:minHeight="500sp"
+            android:nestedScrollingEnabled="false">
 
             <LinearLayout
                 android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_width="300dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
