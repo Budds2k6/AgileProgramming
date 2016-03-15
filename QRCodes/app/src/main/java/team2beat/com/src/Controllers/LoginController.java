@@ -18,7 +18,7 @@ public class LoginController {
     //change to String [] return
     public String [] doLogin() {
         LoginModel lm = new LoginModel(username, password);
-    return lm.doLogin();
+        return lm.doLogin();
 
     }
 
