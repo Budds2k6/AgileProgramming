@@ -102,7 +102,6 @@ public class RegisterAsync extends ActionBarActivity
             } catch (Exception e) {
                 e.printStackTrace();
                 System.out.println("PINEAPPLE broken");
-
             }
 
             // end the function
