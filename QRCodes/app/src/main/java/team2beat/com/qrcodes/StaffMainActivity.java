@@ -103,12 +103,23 @@ public class StaffMainActivity extends AppCompatActivity {
             String classType = classes.get(i).getClassType();
             String moduleName = classes.get(i).getModuleName();
 
-            classDetails.add(building + " (" + roomNumber + ")\n" + startTime + "\n" + classType + " (Booking ID = " + classes.get(i).getBookingID() + ")\n" + moduleName);
+            String output = "";
+
+            if(classes.get(i).getEndTime() != null)
+            {
+                output += "[ENDED] \n";
+            }
+
+            output += (building + " (" + roomNumber + ")\n" + startTime + "\n" + classType + " (Booking ID = " + classes.get(i).getBookingID() + ")\n" + moduleName);
+
+            classDetails.add(output);
+
         }
 
         final ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, classDetails);
 
-        moduleList.setAdapter(adapter); moduleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        moduleList.setAdapter(adapter);
+        moduleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Intent i = new Intent(getBaseContext(), QrDisplayActivity.class);

@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.common.BitMatrix;
@@ -62,9 +63,14 @@ public class QrDisplayActivity extends AppCompatActivity {
         bookingController = new BookingController(theBooking.getBookingID());
 
 		setClassLabels();
-			
-        // create a QR Code, representing the attendance list ID
-        generateQRCode(theBooking.getBookingID());
+
+        if(theBooking.getEndTime() == null){
+            // create a QR Code, representing the attendance list ID
+            generateQRCode(theBooking.getBookingID());
+        }else
+        {
+            Toast t = Toast.makeText(this, "Please Note: This class has ended", Toast.LENGTH_LONG);
+        }
 
     }
 

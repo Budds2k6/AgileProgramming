@@ -1,8 +1,12 @@
 // import.DataModels_Stuff
 
 package team2beat.com.src.Controllers;
+import java.util.ArrayList;
 import java.util.List;
 
+import team2beat.com.src.DataObjects.Booking;
+import team2beat.com.src.DataObjects.ShouldAttend;
+import team2beat.com.src.DataObjects.Student;
 import team2beat.com.src.Models.*;
 
 public class ModuleController
@@ -12,7 +16,9 @@ public class ModuleController
 	{
 		
 	}
-	
+
+
+
 	public void CreateModule ()
 	{
 		// Ensure correctly logged-in
@@ -88,4 +94,16 @@ public class ModuleController
 		else
 		{ return false; }
 	}
+
+	public ArrayList<ShouldAttend> getStudentListForModule(int moduleID)
+	{
+		ModuleModel mm = new ModuleModel();
+		return mm.getStudentsForModule(moduleID);
+	}
+	public ArrayList<Booking> getBookingListForModule(int moduleID)
+	{
+		ModuleModel mm = new ModuleModel();
+		return mm.getBookingsForModule(moduleID);
+	}
+
 }

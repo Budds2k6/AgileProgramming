@@ -14,11 +14,22 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import team2beat.com.src.Controllers.ModuleController;
+import team2beat.com.src.DataObjects.Booking;
+import team2beat.com.src.DataObjects.Module;
+import team2beat.com.src.DataObjects.ShouldAttend;
+import team2beat.com.src.DataObjects.Student;
+
 public class module_statistics extends AppCompatActivity {
+
     ListView classList;
     ArrayList<String> list;
     ListAdapter adapter;
     String[] foldString;
+    ArrayList<ShouldAttend> studentList;
+    ArrayList<Booking> bookingList;
+    Module moduleSelected;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,19 +38,40 @@ public class module_statistics extends AppCompatActivity {
         Intent _intent = getIntent();
         Bundle bundleModuleSelected = _intent.getExtras();
 
-        String moduleSelected = bundleModuleSelected.getString("moduleSelected");
+
+        // TODO: maybe fix this - unable to test for now -------------------------------------------
+        //String moduleSelected = bundleModuleSelected.getString("moduleSelected");
+        moduleSelected = (Module) bundleModuleSelected.getParcelable("moduleSelected");
+        // TODO: Up to this bit --------------------------------------------------------------------
 
         TextView moduleText = (TextView) findViewById(R.id.textView3);
-        moduleText.setText(moduleSelected);
+        moduleText.setText(moduleSelected.getModuleName());
 
         classList = (ListView) findViewById(R.id.foldList);
+
+
+
+
+
+        // read students
+        ModuleController mc = new ModuleController();
+        studentList = mc.getStudentListForModule(Integer.valueOf(moduleSelected.getModuleCode()));
+
+        // read bookings
+        mc = new ModuleController();
+        bookingList = mc.getBookingListForModule(Integer.valueOf(moduleSelected.getModuleCode()));
+
+
+
+
+
+
         foldString = new String[]{"Wolfson 0900", "Dalhousie 1S05F12b 1400"};
 
 
         list = new ArrayList<String>();
         for (int i = 0; i < foldString.length; i++) {
             list.add(foldString[i]);
-
         }
 
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
