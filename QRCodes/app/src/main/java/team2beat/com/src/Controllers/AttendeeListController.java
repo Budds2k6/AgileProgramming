@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import team2beat.com.src.DataObjects.Attendee;
+import team2beat.com.src.DataObjects.ShouldAttend;
 import team2beat.com.src.Models.*;
 
 //Refactored - AttendeeListController moved to servlet on the server, therefore deprecated here
@@ -54,6 +55,12 @@ public class AttendeeListController
 		{ return true; }
 		else
 		{ return false; }
+	}
+
+	public ArrayList<ShouldAttend> getShouldAttend(int attID)
+	{
+		AttendanceListModel alm = new AttendanceListModel();
+		return alm.getWhoShouldAttend(attID);
 	}
 
 	public ArrayList<Attendee> getAttendanceListByID(int attendanceListID)

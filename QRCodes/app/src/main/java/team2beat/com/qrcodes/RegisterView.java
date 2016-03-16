@@ -28,12 +28,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
 import java.sql.Time;
 import java.util.ArrayList;
 
 import team2beat.com.src.Controllers.AttendeeListController;
 import team2beat.com.src.Controllers.BookingController;
 import team2beat.com.src.DataObjects.Attendee;
+import team2beat.com.src.DataObjects.ShouldAttend;
 
 public class RegisterView extends AppCompatActivity {
 
@@ -66,24 +68,103 @@ public class RegisterView extends AppCompatActivity {
         bookingID = Integer.valueOf(detailBundle.getString("bookingID"));
 
         AttendeeListController alc = new AttendeeListController();
+
+        // people who have signed in
         ArrayList<Attendee> attendees = alc.getAttendanceListByID(attendanceListID);
 
-        createStudentLabels(attendees);
+        // people who should attend
+        ArrayList<ShouldAttend> shouldAttend = alc.getShouldAttend(bookingID);
+        //ArrayList<ShouldAttend> shouldAttend = new ArrayList<ShouldAttend>();
+
+        createStudentLabels(attendees, shouldAttend);
 
     }
 
-    public void createStudentLabels(ArrayList<Attendee> attendees)
+    public void createStudentLabels(ArrayList<Attendee> attendees, ArrayList<ShouldAttend> shouldAttend)
     {
+        ArrayList<Boolean> isOnList = new ArrayList<Boolean>();
+
+        // convert attendees to the new format
+        ArrayList<ShouldAttend> whoHasSignedIn = new ArrayList<ShouldAttend>();
+
+        for(int i = 0; i < attendees.size(); i++)
+        {
+            ShouldAttend newSA = new ShouldAttend(attendees.get(i).getStudentName(), attendees.get(i).getUserID());
+            whoHasSignedIn.add(newSA);
+        }
+
+
+        for(int i = 0; i < shouldAttend.size(); i++)
+        {
+
+            isOnList.add(false);
+
+            String userID = shouldAttend.get(i).getUserID();
+
+            for(int j = 0; j < whoHasSignedIn.size(); j++)
+            {
+                if(userID.equals(whoHasSignedIn.get(j).getUserID()))
+                {
+                    isOnList.set(i, true);
+                    shouldAttend.remove(i);
+                    i--;
+
+                    break;
+                }
+            }
+        }
+
+
+        ArrayList<ShouldAttend> signedInButNotOnList = new ArrayList<ShouldAttend>();
+
+
+
+
+
+
+
+
+
+
+        for(int i = 0; i < whoHasSignedIn.size(); i++)
+        {
+            if(isOnList.get(i))
+            {
+                signedInButNotOnList.add(whoHasSignedIn.get(i));
+                isOnList.remove(i);
+                whoHasSignedIn.remove(i);
+                i--;
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
         final ListView moduleList = (ListView) findViewById(R.id.listStudents);
 
         ArrayList<String> studentDetails = new ArrayList<String>();
 
-        for(int i = 0; i < attendees.size(); i++)
-        {
-            String name = attendees.get(i).getStudentName();
 
-            studentDetails.add(name);
+        for(int i = 0; i < signedInButNotOnList.size(); i++)
+        {
+            studentDetails.add("???    " + signedInButNotOnList.get(i).getStudentName() + "    ???");
         }
+        for(int i = 0; i < whoHasSignedIn.size(); i++)
+        {
+            studentDetails.add("*****    " + whoHasSignedIn.get(i).getStudentName() + "    *****");
+        }
+        for(int i = 0; i < shouldAttend.size(); i++)
+        {
+            studentDetails.add("X    " + shouldAttend.get(i).getStudentName());
+        }
+
 
         final ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, studentDetails);
 

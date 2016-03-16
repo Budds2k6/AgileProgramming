@@ -6,8 +6,10 @@ import java.util.ArrayList;
 
 import team2beat.com.src.AsyncClasses.TodaysClassesAsync;
 import team2beat.com.src.AsyncClasses.ViewRegisterAsync;
+import team2beat.com.src.AsyncClasses.WhoShouldAttendAsync;
 import team2beat.com.src.DataObjects.Attendee;
 import team2beat.com.src.DataObjects.Booking;
+import team2beat.com.src.DataObjects.ShouldAttend;
 
 public class AttendanceListModel {
     private String attListID;
@@ -18,6 +20,7 @@ public class AttendanceListModel {
     }
 
     public ArrayList<Attendee> getRegisterByID(int attendanceID) {
+
         try {
 
             ViewRegisterAsync vra = new ViewRegisterAsync(attendanceID);
@@ -25,7 +28,6 @@ public class AttendanceListModel {
             while (!vra.complete) {
                 returnedAttendees = vra.toReturn;
             }
-
 
             ArrayList<Attendee> attendeeList = new ArrayList<Attendee>();
 
@@ -50,6 +52,41 @@ public class AttendanceListModel {
 
         }
     }
+
+    public ArrayList<ShouldAttend> getWhoShouldAttend(int attID)
+    {
+        try {
+
+            WhoShouldAttendAsync wsaa = new WhoShouldAttendAsync(attID);
+
+            // loop until a response is found
+            while (!wsaa.complete) {
+                returnedAttendees = wsaa.toReturn;
+            }
+
+            ArrayList<ShouldAttend> attendeeList = new ArrayList<ShouldAttend>();
+
+            for (int i = 0; i < returnedAttendees.size(); i++) {
+
+                String[] current = returnedAttendees.get(i);
+
+                // extract the fields from the returned data
+                String name = current[0] + " " + current[1];
+                String studentID = current[2];
+                String username = current[3];
+
+                ShouldAttend sa = new ShouldAttend(name, studentID);
+                attendeeList.add(sa);
+            }
+
+            return attendeeList;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+
+        }
+    }
+
 }
 
 
