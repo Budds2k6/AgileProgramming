@@ -65,31 +65,33 @@ public class BookingController {
 
 
     // Sets the student as logged in
-    public boolean setAttendance(PresentRecord pRecord) {
-        try {
+    public boolean setAttendance(PresentRecord pRecord)
+    {
+        try
+        {
             BookingModel bookingModel = new BookingModel();
 
             // Update attendee status
             String[] retrieved = bookingModel.setStudentPresent(pRecord.studentID, pRecord.bookingID);
 
-            if (retrieved != null) {
-                if (retrieved[1].equals("true")) {
-
+            if (retrieved != null)
+            {
+                if (retrieved[1].equals("true"))
+                {
                     return true;
-
-                } else {
-
+                }
+                else
+                {
                     return false;
                 }
-
-
-            } else {
+            }
+            else
+            {
                 return false;
-
             }
 
-        } catch (Exception e) {
-
+        } catch (Exception e)
+        {
             e.printStackTrace();
             return false;
         }

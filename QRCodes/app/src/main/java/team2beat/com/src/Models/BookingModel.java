@@ -154,34 +154,25 @@ public class BookingModel
 	// Sets the student present
 	public String [] setStudentPresent (String studentID, int bookingID)
 	{
-		// TODO: Access database, and set attendance
-		//CallableStatement callState = null;
-
 		try
 		{
-			// FIXME: Replace with correct Stored Procedure call
-			//String query = "{call TEMP_PROCEDURE (?, ?)}";
-			//callState = _conn.prepareCall(query);
-
-			//callState.close();
 			String bid = String.valueOf(bookingID);
 			RegisterAsync ra = new RegisterAsync(bid, studentID);
 
-			while (registerSuccess == null || registerSuccess[0] == null || registerSuccess[1] == null || registerSuccess[0].equals("") ||  registerSuccess[1].equals("")) {
+			while (registerSuccess == null || registerSuccess[0] == null || registerSuccess[1] == null || registerSuccess[0].equals("") ||  registerSuccess[1].equals(""))
+			{
 				registerSuccess = ra.toReturn;
-
 			}
 
-			try {
+			try
+			{
 				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
+			}
+			catch (InterruptedException e)
+			{
 				e.printStackTrace();
 				return null;
 			}
-
-
-
 		}
 		catch (Exception e)
 		{
