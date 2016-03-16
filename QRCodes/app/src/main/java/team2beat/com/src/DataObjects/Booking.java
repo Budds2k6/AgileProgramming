@@ -31,7 +31,7 @@ public class Booking implements Parcelable
 	private Module module;
 
 	// Constructor
-	public Booking (String bookingID, String classID, Time start, Time end,Date theDate, String locationID, String staffID, String attListID, String moduleID, String className, String classType, String roomNum, String building)
+	public Booking (String bookingID, String classID, Time start, Time end, Date theDate, String locationID, String staffID, String attListID, String moduleID, String className, String classType, String roomNum, String building)
 	{
 		this.bookingID = bookingID;
 		this.classID = classID;

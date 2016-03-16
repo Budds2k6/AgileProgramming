@@ -24,8 +24,7 @@ public class StaffModel
 	}
 
 	public ArrayList<Module> getAllModules(String staffID)
-	{
-		StaffAsync sa = new StaffAsync(staffID);
+	{StaffAsync sa = new StaffAsync(staffID);
 
 		while (!sa.complete) {
 			returnData = sa.toReturn;
@@ -49,6 +48,7 @@ public class StaffModel
 		}
 
 		return moduleList;
+
 
 	}
 
