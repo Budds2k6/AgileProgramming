@@ -26,6 +26,7 @@ import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.sql.Time;
 import java.util.ArrayList;
@@ -122,6 +123,16 @@ public class RegisterView extends AppCompatActivity {
 
                 BookingController bc = new BookingController();
                 boolean success = bc.setAttendance(pr);
+
+                if(!success)
+                {
+                    Toast toast = Toast.makeText(getBaseContext(), "ERROR. Could not sign student in", Toast.LENGTH_LONG);
+                    toast.show();
+                }else
+                {
+                    Toast toast = Toast.makeText(getBaseContext(), "Student Successfully signed in", Toast.LENGTH_LONG);
+                    toast.show();
+                }
 
             }
         });

@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void submitLogin(View v) {
 
-        if (isConnectionAvailable()) {
+        //if (isConnectionAvailable()) {
 
             try {
 
@@ -83,13 +83,13 @@ public class LoginActivity extends AppCompatActivity {
                 toast.show();
                 e.printStackTrace();
             }
-        }
+        /*}
         else
         {
             // No connection available
             Toast toast = Toast.makeText(this, "No Connection available", Toast.LENGTH_LONG);
             toast.show();
-        }
+        }*/
     }
 
     public void dummyLogin(View v, Staff theStaff) {

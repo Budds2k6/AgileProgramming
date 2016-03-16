@@ -204,9 +204,9 @@ public class MainActivity extends AppCompatActivity {
         // TODO pass object to controller to write to database
         BookingController bc = new BookingController();
 
-        boolean returned = bc.setAttendance(pr);
+        boolean studentReturned = bc.setAttendance(pr);
 
-        Toast toast = Toast.makeText(this, "Did it succeed? " + returned, Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(this, "Did it succeed? " + studentReturned, Toast.LENGTH_LONG);
         toast.show();
         // TODO get class name from database
 
