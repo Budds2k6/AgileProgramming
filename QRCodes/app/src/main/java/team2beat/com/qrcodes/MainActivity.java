@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Vibrator;
@@ -14,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -180,11 +182,16 @@ public class MainActivity extends AppCompatActivity {
                     Toast toast = Toast.makeText(this, "SUCCESSFULLY SCANNED INTO CLASS" + contents, Toast.LENGTH_LONG);
 
                     toast.show();
+                    ConfirmFeedback();
+
 
                     // if the string does not convert, catch the exception and inform the user
                 }catch (Exception e)
                 {
                     Toast toast = Toast.makeText(this, "QR Code not recognised", Toast.LENGTH_LONG);
+
+                    TextView QRErrorlbl = (TextView) findViewById(R.id.textView5);
+                    QRErrorlbl.setText("Please Scan again");
 
                     toast.show();
                 }
@@ -192,6 +199,16 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
+    public void ConfirmFeedback()
+    {
+        TextView Confirmlbl = (TextView) findViewById(R.id.textView5);
+        Confirmlbl.setText("You are signed in.");
+
+        ImageView Confirmed = (ImageView) findViewById(R.id.imageView2);
+        Confirmed.setImageResource(R.drawable.checkmark);
+
+    }
 
 
     /*
