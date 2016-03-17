@@ -121,18 +121,19 @@ public class ModuleModel
 			//Booking b = new Booking();
 
 			// convert 2 and 3 to Times, 4 to dates.
+			Time timeS = null;
+			Time timeE = null;
 			Date dateS = null;
-			Date dateE = null;
-
 
 			try {
 				DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
-				dateS = new Date(formatter.parse(currBooking[2]).getTime());
-				dateE = new Date(formatter.parse(currBooking[3]).getTime());
+				timeS = new Time(formatter.parse(currBooking[2]).getTime());
+				timeE = new Time(formatter.parse(currBooking[3]).getTime());
+				dateS = new Date(formatter.parse(currBooking[3]).getDate());
 			}catch(Exception e){}
 
-			Booking b = null;
-			//Booking b = new Booking (currBooking[0], currBooking[1], dateS, dateE, null, currBooking[5], currBooking[6], currBooking[7], currBooking[8], currBooking[9], currBooking[10], currBooking[11], currBooking[12]);
+			
+			Booking b = new Booking (currBooking[0], currBooking[1], timeS, timeE, dateS, currBooking[5], currBooking[6], currBooking[7], currBooking[8], currBooking[9], currBooking[10], currBooking[11], currBooking[12]);
 			studentList.add(b);
 		}
 
