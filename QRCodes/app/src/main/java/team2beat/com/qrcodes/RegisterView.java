@@ -3,6 +3,7 @@ package team2beat.com.qrcodes;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -32,6 +33,8 @@ import java.lang.reflect.Array;
 import java.sql.Time;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.regex.Pattern;
 
 import team2beat.com.src.Controllers.AttendeeListController;
 import team2beat.com.src.Controllers.BookingController;
@@ -143,22 +146,52 @@ public class RegisterView extends AppCompatActivity {
         // output with formatting to show who is there and who is not
         for(int i = 0; i < signedInButNotOnList.size(); i++)
         {
-            studentDetails.add("???    " + signedInButNotOnList.get(i).getStudentName() + "    ???");
+            studentDetails.add("[Not on Register]" + signedInButNotOnList.get(i).getStudentName());
         }
         for(int i = 0; i < whoHasSignedIn.size(); i++)
         {
-            studentDetails.add("*****    " + whoHasSignedIn.get(i).getStudentName() + "    *****");
+            studentDetails.add(whoHasSignedIn.get(i).getStudentName());
         }
         for(int i = 0; i < shouldAttend.size(); i++)
         {
-            studentDetails.add("X    " + shouldAttend.get(i).getStudentName());
+            studentDetails.add("[Not Present]" + shouldAttend.get(i).getStudentName());
         }
 
 
         final ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, studentDetails);
 
         moduleList.setAdapter(adapter);
+        View v;
 
+
+        int count = moduleList.getCount();
+        int count2 = moduleList.getChildCount();
+
+        //moduleList.deferNotifyDataSetChanged();
+        //.notifyAll();
+
+        for(int i = 0; i < moduleList.getCount(); i++ )
+    {
+
+        v = moduleList.getAdapter().getView(i, null, moduleList);
+
+        //v = moduleList.getChildAt(i);
+
+
+        TextView txtView = (TextView)v;
+        String text = String.valueOf(txtView.getText());
+
+        if(text.contains("Not on Register"))
+        {
+            v.setBackgroundColor(Color.YELLOW);
+        }
+        else if(text.contains("Not Present"))
+        {
+            v.setBackgroundColor(Color.RED);
+        }
+        else
+            v.setBackgroundColor(Color.GREEN);
+    }
 
 
         String percentage = calculateAttendancePercentage(whoHasSignedIn.size(), shouldAttend.size(), signedInButNotOnList.size());
