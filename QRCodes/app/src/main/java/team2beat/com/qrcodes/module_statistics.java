@@ -28,20 +28,20 @@ public class module_statistics extends AppCompatActivity {
     //String[] foldString;
     ArrayList<ShouldAttend> studentList;
     ArrayList<Booking> bookingList;
-    Module moduleSelected;
+    public static Module moduleSelected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_module_statistics);
 
-        Intent _intent = getIntent();
-        Bundle bundleModuleSelected = _intent.getExtras();
+        //Intent _intent = getIntent();
+        //Bundle bundleModuleSelected = _intent.getExtras();
 
 
         // TODO: maybe fix this - unable to test for now -------------------------------------------
         //String moduleSelected = bundleModuleSelected.getString("moduleSelected");
-        moduleSelected = (Module) bundleModuleSelected.getParcelable("moduleSelected");
+        //moduleSelected = (Module) bundleModuleSelected.getParcelable("moduleSelected");
         // TODO: Up to this bit --------------------------------------------------------------------
 
         TextView moduleText = (TextView) findViewById(R.id.textView3);
@@ -55,13 +55,13 @@ public class module_statistics extends AppCompatActivity {
 
         // read students
         ModuleController mc = new ModuleController();
-        //studentList = mc.getStudentListForModule(Integer.valueOf(moduleSelected.getModuleCode()));
-        studentList = new ArrayList<>();
+        studentList = mc.getStudentListForModule(moduleSelected.getModuleCode());
+        //studentList = new ArrayList<>();
 
         // read bookings
         mc = new ModuleController();
-        //bookingList = mc.getBookingListForModule(Integer.valueOf(moduleSelected.getModuleCode()));
-        bookingList = new ArrayList<>();
+        bookingList = mc.getBookingListForModule(moduleSelected.getModuleCode());
+        //bookingList = new ArrayList<>();
 
 
 

@@ -89,8 +89,8 @@ public class RegisterView extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart(){
-        super.onStart();
+    protected void onResume(){
+        super.onResume();
         setLabelColors();
     }
 
@@ -194,18 +194,6 @@ public class RegisterView extends AppCompatActivity {
         for(int i = moduleList.getFirstVisiblePosition(); i < moduleList.getChildCount(); i++ )
         {
             v = moduleList.getChildAt(i);
-            while(v  == null || i == 1000)
-            {
-                i++;
-                v = moduleList.getChildAt(moduleList.getFirstVisiblePosition() - i);
-            }
-
-
-
-
-
-
-
 
 
             TextView txtView = (TextView)v;

@@ -95,12 +95,12 @@ public class ModuleController
 		{ return false; }
 	}
 
-	public ArrayList<ShouldAttend> getStudentListForModule(int moduleID)
+	public ArrayList<ShouldAttend> getStudentListForModule(String moduleID)
 	{
 		ModuleModel mm = new ModuleModel();
 		return mm.getStudentsForModule(moduleID);
 	}
-	public ArrayList<Booking> getBookingListForModule(int moduleID)
+	public ArrayList<Booking> getBookingListForModule(String moduleID)
 	{
 		ModuleModel mm = new ModuleModel();
 		return mm.getBookingsForModule(moduleID);
