@@ -36,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
                 // extract the username and password from the UI
                 EditText usernameBox = (EditText) findViewById(R.id.editText);
                 String username = usernameBox.getText().toString();
+                username = username.trim();
 
                 EditText passwordBox = (EditText) findViewById(R.id.editText2);
                 String password = passwordBox.getText().toString();
