@@ -53,7 +53,7 @@ public class BookingsForModuleAsync extends ActionBarActivity {
         protected Void doInBackground(String... params) {
 
             // the url of the java servlet that carries out the operations
-            String url = "http://silva.computing.dundee.ac.uk/2015-agileteam2/AttendBooking";   // TODO: Change this
+            String url = "http://silva.computing.dundee.ac.uk/2015-agileteam2/BookingsForModule";   // TODO: Change this
 
             // resource: http://hayageek.com/android-http-post-get/
             HttpClient httpClient = new DefaultHttpClient();
@@ -98,12 +98,12 @@ public class BookingsForModuleAsync extends ActionBarActivity {
 
                     // get the other details
                     temp[0] = getElementFromTag("booking_id", curr);
-                    temp[1] = getElementFromTag("classID", curr);
-                    temp[2] = getElementFromTag("startTime", curr);
-                    temp[3] = getElementFromTag("endTime", curr);
-                    temp[4] = getElementFromTag("theDate", curr);
+                    temp[1] = getElementFromTag("class_id", curr);
+                    temp[2] = getElementFromTag("start_time", curr);
+                    temp[3] = getElementFromTag("end_time", curr);
+                    temp[4] = getElementFromTag("the_date", curr);
                     temp[5] = getElementFromTag("location_id", curr);
-                    temp[6] = getElementFromTag("staffID", curr);
+                    temp[6] = getElementFromTag("staff_id", curr);
                     temp[7] = getElementFromTag("attendance_list_id", curr);
                     temp[8] = String.valueOf(moduleID);
                     temp[9] = getElementFromTag("class_name", curr);
