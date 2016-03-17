@@ -26,6 +26,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,6 +60,7 @@ public class RegisterView extends AppCompatActivity {
     private ViewPager mViewPager;
     public static int attendanceListID;
     public static int bookingID;
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -175,7 +177,11 @@ public class RegisterView extends AppCompatActivity {
 
         v = moduleList.getAdapter().getView(i, null, moduleList);
 
-        //v = moduleList.getChildAt(i);
+
+
+
+
+
 
 
         TextView txtView = (TextView)v;
