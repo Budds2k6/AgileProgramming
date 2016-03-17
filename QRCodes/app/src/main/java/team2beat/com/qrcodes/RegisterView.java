@@ -30,6 +30,7 @@ import android.widget.Toast;
 
 import java.lang.reflect.Array;
 import java.sql.Time;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import team2beat.com.src.Controllers.AttendeeListController;
@@ -53,19 +54,20 @@ public class RegisterView extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
-    int bookingID;
+    public static int attendanceListID;
+    public static int bookingID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_view);
 
-        Intent i = getIntent();
+        //Intent i = this.getIntent();
 
-        Bundle detailBundle = i.getExtras();
+        //Bundle detailBundle = i.getExtras();
 
-        int attendanceListID = Integer.valueOf(detailBundle.getString("attendanceID"));
-        bookingID = Integer.valueOf(detailBundle.getString("bookingID"));
+        //attendanceListID = Integer.valueOf(detailBundle.getString("attendanceID"));
+        //bookingID = Integer.valueOf(detailBundle.getString("bookingID"));
 
         AttendeeListController alc = new AttendeeListController();
 
@@ -82,11 +84,14 @@ public class RegisterView extends AppCompatActivity {
 
     public void createStudentLabels(ArrayList<Attendee> attendees, ArrayList<ShouldAttend> shouldAttend)
     {
+
         ArrayList<Boolean> isOnList = new ArrayList<Boolean>();
 
         // convert attendees to the new format
         ArrayList<ShouldAttend> whoHasSignedIn = new ArrayList<ShouldAttend>();
 
+
+        // Convert Student objects into the required type
         for(int i = 0; i < attendees.size(); i++)
         {
             ShouldAttend newSA = new ShouldAttend(attendees.get(i).getStudentName(), attendees.get(i).getUserID());
@@ -94,9 +99,9 @@ public class RegisterView extends AppCompatActivity {
         }
 
 
+        // remove the students who have attended from the list of students who SHOULD attend
         for(int i = 0; i < shouldAttend.size(); i++)
         {
-
             isOnList.add(false);
 
             String userID = shouldAttend.get(i).getUserID();
@@ -117,15 +122,7 @@ public class RegisterView extends AppCompatActivity {
 
         ArrayList<ShouldAttend> signedInButNotOnList = new ArrayList<ShouldAttend>();
 
-
-
-
-
-
-
-
-
-
+        // work out which students have signed in but are not 'meant to' be there
         for(int i = 0; i < whoHasSignedIn.size(); i++)
         {
             if(isOnList.get(i))
@@ -138,20 +135,12 @@ public class RegisterView extends AppCompatActivity {
         }
 
 
-
-
-
-
-
-
-
-
-
         final ListView moduleList = (ListView) findViewById(R.id.listStudents);
 
         ArrayList<String> studentDetails = new ArrayList<String>();
 
 
+        // output with formatting to show who is there and who is not
         for(int i = 0; i < signedInButNotOnList.size(); i++)
         {
             studentDetails.add("???    " + signedInButNotOnList.get(i).getStudentName() + "    ???");
@@ -170,6 +159,43 @@ public class RegisterView extends AppCompatActivity {
 
         moduleList.setAdapter(adapter);
 
+
+
+        String percentage = calculateAttendancePercentage(whoHasSignedIn.size(), shouldAttend.size(), signedInButNotOnList.size());
+
+        TextView txtAttendance = (TextView) findViewById(R.id.textView2);
+        txtAttendance.setText(percentage);
+
+    }
+
+
+    String calculateAttendancePercentage(int attended, int missing, int extra)
+    {
+
+        int total = attended + missing;
+
+        float percent = ((float)attended / (float)total) * 100;
+
+        DecimalFormat df = new DecimalFormat("#.#");
+
+        String returnVal = "Attendance: " + df.format(percent) + "%";
+
+        if(extra > 0)
+        {
+            returnVal += " + " + extra + " students who are here unexpectedly";
+        }
+
+        return returnVal;
+    }
+
+
+    public void refresh(View v)
+    {
+        Intent i = new Intent(getBaseContext(), RegisterView.class);
+        i.putExtra("bookingID", bookingID);
+        i.putExtra("attendanceID", attendanceListID);
+        finish();
+        RegisterView.this.startActivity(i);
     }
 
     public void BackToQR(View v)

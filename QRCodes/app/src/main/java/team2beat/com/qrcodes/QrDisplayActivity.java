@@ -103,9 +103,12 @@ public class QrDisplayActivity extends AppCompatActivity {
 
     public void BackToRegister(View v)
     {
+        RegisterView.attendanceListID = Integer.valueOf(theBooking.getAttListID());
+        RegisterView.bookingID = Integer.valueOf(theBooking.getBookingID());
+
         Intent i = new Intent(getBaseContext(), RegisterView.class);
-        i.putExtra("attendanceID", theBooking.getAttListID());
-        i.putExtra("bookingID", theBooking.getBookingID());
+        //i.putExtra("attendanceID", theBooking.getAttListID());
+        //i.putExtra("bookingID", theBooking.getBookingID());
         QrDisplayActivity.this.startActivity(i);
     }
 
