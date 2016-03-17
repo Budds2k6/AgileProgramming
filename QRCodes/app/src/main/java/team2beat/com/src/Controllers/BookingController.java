@@ -97,15 +97,14 @@ public class BookingController {
         }
     }
 
-
-    public boolean mockSetAttendance(PresentRecord pRecord)
+    //Test-driven dev method
+    public boolean setStudentAttendance(PresentRecord pRecord)
     {
         try
         {
             BookingModel bookingModel = new BookingModel();
 
-            // Update attendee status
-            String[] retrieved = bookingModel.setStudentPresentMock(pRecord.studentID, pRecord.bookingID);
+            String [] retrieved = bookingModel.setStudentAttPresent(pRecord.studentID, pRecord.bookingID);
 
             if (retrieved != null)
             {
@@ -123,7 +122,8 @@ public class BookingController {
                 return false;
             }
 
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             e.printStackTrace();
             return false;
