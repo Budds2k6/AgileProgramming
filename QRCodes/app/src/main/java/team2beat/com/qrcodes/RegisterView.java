@@ -60,6 +60,9 @@ public class RegisterView extends AppCompatActivity {
     private ViewPager mViewPager;
     public static int attendanceListID;
     public static int bookingID;
+
+    public static boolean isLive = false;
+
     ArrayList<ShouldAttend> shouldAttend;
     ArrayList<Attendee> attendees;
     ListView moduleList;
@@ -240,8 +243,15 @@ public class RegisterView extends AppCompatActivity {
 
     public void BackToQR(View v)
     {
-        Intent i = new Intent(getBaseContext(), QrDisplayActivity.class);
-        RegisterView.this.startActivity(i);
+        if(isLive)
+        {
+            Intent i = new Intent(getBaseContext(), QrDisplayActivity.class);
+            RegisterView.this.startActivity(i);
+        }else
+        {
+            Intent i = new Intent(getBaseContext(), ClassDetails.class);
+            RegisterView.this.startActivity(i);
+        }
     }
 
 

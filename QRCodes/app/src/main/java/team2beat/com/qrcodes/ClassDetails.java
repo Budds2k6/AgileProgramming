@@ -65,6 +65,7 @@ public class ClassDetails extends AppCompatActivity {
     {
         RegisterView.attendanceListID = Integer.valueOf(theBooking.getAttListID());
         RegisterView.bookingID = Integer.valueOf(theBooking.getBookingID());
+        RegisterView.isLive = false;
 
         Intent i = new Intent(getBaseContext(), RegisterView.class);
         //i.putExtra("attendanceID", theBooking.getAttListID());
