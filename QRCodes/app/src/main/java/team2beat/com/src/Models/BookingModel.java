@@ -40,6 +40,7 @@ import team2beat.com.src.DataObjects.Booking;
 import team2beat.com.src.DataObjects.Lecture;
 import team2beat.com.src.DataObjects.Location;
 import team2beat.com.src.DataObjects.Module;
+import team2beat.com.src.MockTestClasses.MockRegisterAsync;
 
 //Refactored - code for BookingModel moved to servlet due to the necessity of them being on the server
 
@@ -181,6 +182,31 @@ public class BookingModel
 		}
 		return registerSuccess;
 	}
+
+
+
+
+	public String [] setStudentPresentMock(String studentID,int bookingID)
+	{
+		try {
+			String [] success = new String [2];
+			String bid = String.valueOf(bookingID);
+			MockRegisterAsync ra = new MockRegisterAsync(bid, studentID);
+
+			while (!ra.completed) {
+
+			}
+			success = ra.toReturn;
+			return success;
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+
+	}
+
 
 	// Set the reason for absence
 	public void updateAttendanceReason (String studentID, int bookingID, String moduleID, String reason)
