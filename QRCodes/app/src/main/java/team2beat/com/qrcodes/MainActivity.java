@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
                     vibrate.vibrate(once, -1);
                 }
 
-                displayToast();
+
 
                 // called when activity exists. Gives the result it found - with any additional data
                 String contents = intent.getStringExtra("SCAN_RESULT");
@@ -181,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
 
                     // tell the user that they scanned in
                     //Toast toast = Toast.makeText(this, "SUCCESSFULLY SCANNED INTO CLASS" + contents, Toast.LENGTH_LONG);
-
+                    displayToast();
                     //toast.show();
                     ConfirmFeedback();
 
