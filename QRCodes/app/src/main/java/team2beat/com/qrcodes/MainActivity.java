@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
 
             // If the activity does not exist - i.e. no scanner found
         } catch (ActivityNotFoundException e) {
-            // if theZXing scanner is not found, ask the user if they wish to download one
+            // if the ZXing scanner is not found, ask the user if they wish to download one
             showDialog(MainActivity.this, "No Scanner Found", "Download a scanner code activity?", "Yes", "No").show();
         }
     }

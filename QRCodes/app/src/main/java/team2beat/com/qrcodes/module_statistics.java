@@ -39,10 +39,8 @@ public class module_statistics extends AppCompatActivity {
         //Bundle bundleModuleSelected = _intent.getExtras();
 
 
-        // TODO: maybe fix this - unable to test for now -------------------------------------------
         //String moduleSelected = bundleModuleSelected.getString("moduleSelected");
         //moduleSelected = (Module) bundleModuleSelected.getParcelable("moduleSelected");
-        // TODO: Up to this bit --------------------------------------------------------------------
 
         TextView moduleText = (TextView) findViewById(R.id.textView3);
         moduleText.setText(moduleSelected.getModuleName());
@@ -100,6 +98,7 @@ public class module_statistics extends AppCompatActivity {
         classList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ClassDetails.theBooking = bookingList.get(position);
                 Intent i = new Intent(getBaseContext(), ClassDetails.class);
                 i.putExtra("classSelected", ((TextView) view).getText());
                 module_statistics.this.startActivity(i);

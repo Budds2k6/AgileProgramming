@@ -14,7 +14,12 @@ import android.widget.Toast;
 
 import java.io.Console;
 
+import team2beat.com.src.DataObjects.Booking;
+
 public class ClassDetails extends AppCompatActivity {
+
+
+    public static Booking theBooking;
 
     TextView lecture, title, room, location, date;
 
@@ -29,11 +34,7 @@ public class ClassDetails extends AppCompatActivity {
         location = (TextView) findViewById(R.id.textLocation);
         date = (TextView) findViewById(R.id.textDate);
 
-        Intent _intent = getIntent();
-        Bundle bundleModuleSelected = _intent.getExtras();
-        String lectureSelected = bundleModuleSelected.getString("classSelected");
-        lecture.setText(lectureSelected);
-
+        lecture.setText(theBooking.getClassName());
 
     }
 
@@ -57,6 +58,18 @@ public class ClassDetails extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    public void viewAttendance(View v)
+    {
+        RegisterView.attendanceListID = Integer.valueOf(theBooking.getAttListID());
+        RegisterView.bookingID = Integer.valueOf(theBooking.getBookingID());
+
+        Intent i = new Intent(getBaseContext(), RegisterView.class);
+        //i.putExtra("attendanceID", theBooking.getAttListID());
+        //i.putExtra("bookingID", theBooking.getBookingID());
+        ClassDetails.this.startActivity(i);
     }
 
     public void displayToast()

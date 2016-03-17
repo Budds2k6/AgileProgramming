@@ -11,7 +11,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginRight="6dip"
         android:contentDescription="TODO"
-        android:src="@drawable/crossmark" />
+        android:src="@drawable/crossmark"
+        android:maxHeight="100dp" />
 
     <TextView
         android:id="@+id/firstLine"
@@ -23,7 +24,7 @@
         android:layout_toRightOf="@id/icon"
         android:background="#FF0000"
         android:gravity="center_vertical"
-        android:text="Example application"
+        android:text="Example"
         android:textSize="16sp" />
 
 </RelativeLayout>
