@@ -123,14 +123,25 @@ public class ModuleModel
 			// convert 2 and 3 to Times, 4 to dates.
 			Time timeS = null;
 			Time timeE = null;
+			java.util.Date utildate = null;
 			Date dateS = null;
 
 			try {
 				DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
-				timeS = new Time(formatter.parse(currBooking[2]).getTime());
-				timeE = new Time(formatter.parse(currBooking[3]).getTime());
-				dateS = new Date(formatter.parse(currBooking[2]).getDate());
-			}catch(Exception e){}
+				try {
+					timeS = new Time(formatter.parse(currBooking[2]).getTime());
+					timeE = new Time(formatter.parse(currBooking[3]).getTime());
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+
+				//dateS = new Date(formatter.parse(currBooking[2]).getDate());
+				utildate = formatter.parse(currBooking[2]);
+				dateS = new Date(utildate.getTime());
+
+			}catch(Exception e){
+				e.printStackTrace();
+			}
 
 
 			Booking b = new Booking (currBooking[0], currBooking[1], timeS, timeE, dateS, currBooking[4], currBooking[5], currBooking[6], currBooking[7], currBooking[8], currBooking[9], currBooking[10], currBooking[11]);

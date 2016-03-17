@@ -99,10 +99,9 @@ public class StaffMainActivity extends AppCompatActivity {
 
         java.util.Date currDate = new java.util.Date();
 
+        //Gets current time
         Calendar c = Calendar.getInstance();
         c.setTime(currDate);
-
-
 
         Time classDuration;
 
@@ -123,11 +122,15 @@ public class StaffMainActivity extends AppCompatActivity {
             }
 
             // checks if happening NOW
+            //Should get start time
             Calendar c2 = Calendar.getInstance();
             c2.setTime(classes.get(i).getStartTime());
 
+            // gets the 'end time' of the class - for now it is just an hour (HARDCODED)
             Calendar c3 = c2;
             c3.add(Calendar.HOUR_OF_DAY, 1);
+
+            // if the current time is after the start time but before the end time, the class is happening right now
 
             if(c.after(c2) && c.before(c3))
             {

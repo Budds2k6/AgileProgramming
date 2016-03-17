@@ -87,7 +87,16 @@ public class module_statistics extends AppCompatActivity {
 
         list = new ArrayList<>();
         for (int i = 0; i < bookingList.size(); i++) {
-            list.add(String.valueOf(bookingList.get(i).getStartTime()));
+            // date time place type
+            String toAdd;
+            String start = String.valueOf(bookingList.get(i).getStartTime());
+            String room = String.valueOf(bookingList.get(i).getBuilding()) + " " + String.valueOf(bookingList.get(i).getRoomNumber());
+            String date = String.valueOf(bookingList.get(i).getDate());
+            String type = String.valueOf(bookingList.get(i).getClassType());
+
+            toAdd = date + " | " + start + " | " + type + " | " + room;
+
+            list.add(toAdd);
 
         }
 

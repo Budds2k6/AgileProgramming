@@ -64,6 +64,7 @@ public class Booking implements Parcelable
 	public Booking(){}
 
 	public String getBuilding() { return this.building; }
+	public Date getDate(){return this.theDate; }
 	public String getRoomNumber() { return this.roomNumber; }
 	public Time getStartTime() { return this.start; }
 	public String getClassType() { return this.classType; }
