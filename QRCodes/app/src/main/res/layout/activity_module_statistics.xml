@@ -35,6 +35,17 @@
                 android:layout_gravity="center"
                 android:textSize="45dp"
                 android:textColor="#ffffff"/>
+
+            <Button
+                android:layout_width="169dp"
+                android:layout_height="wrap_content"
+                android:text="Back"
+                android:id="@+id/cmdBack"
+                android:onClick="goBack"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_gravity="center_horizontal" />
         </LinearLayout>
 
         <RelativeLayout

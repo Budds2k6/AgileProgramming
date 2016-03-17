@@ -109,7 +109,7 @@ public class module_statistics extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ClassDetails.theBooking = bookingList.get(position);
                 Intent i = new Intent(getBaseContext(), ClassDetails.class);
-                i.putExtra("classSelected", ((TextView) view).getText());
+                //i.putExtra("classSelected", ((TextView) view).getText());
                 module_statistics.this.startActivity(i);
             }
         });
@@ -133,6 +133,13 @@ public class module_statistics extends AppCompatActivity {
 
     }
 
+
+    public void goBack(View v)
+    {
+        Intent i = new Intent (getBaseContext(), staff_modules.class);
+        //i.putExtra("moduleSelected",  modules.get(position));
+        module_statistics.this.startActivity(i);
+    }
 
 
     @Override

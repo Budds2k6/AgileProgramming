@@ -21,7 +21,7 @@ public class ClassDetails extends AppCompatActivity {
 
     public static Booking theBooking;
 
-    TextView module, title, room, location, date, type;
+    TextView module, room, location, date, type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,16 +29,23 @@ public class ClassDetails extends AppCompatActivity {
         setContentView(R.layout.activity_class_details);
 
         module = (TextView) findViewById(R.id.textLecture);
-        title = (TextView) findViewById(R.id.textTitle);
         room = (TextView) findViewById(R.id.textRoom);
         location = (TextView) findViewById(R.id.textLocation);
         date = (TextView) findViewById(R.id.textDate);
+        type = (TextView) findViewById(R.id.textType);
 
         module.setText(theBooking.getClassName());
         room.setText("Room No.: " + theBooking.getRoomNumber());
         location.setText("Building: " + theBooking.getBuilding());
         date.setText("Date: " + theBooking.getStartTime().toString());
         type.setText("Class Type: " + theBooking.getClassType());
+    }
+
+    public void goBack(View v)
+    {
+        Intent i = new Intent (getBaseContext(), module_statistics.class);
+        //i.putExtra("moduleSelected",  modules.get(position));
+        ClassDetails.this.startActivity(i);
     }
 
     @Override

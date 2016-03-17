@@ -22,10 +22,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:focusable="false"
+        android:id="@+id/linearLayout"
         android:layout_below="@+id/textLecture"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/linearLayout">
+        android:layout_marginTop="39dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -55,14 +56,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Title: "
-            android:id="@+id/textTitle"
-            android:theme="@style/classDetail"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Type: "
             android:id="@+id/textType"
             android:theme="@style/classDetail" />
@@ -77,7 +70,19 @@
         android:layout_gravity="center_horizontal"
         android:nestedScrollingEnabled="false"
         android:onClick="viewAttendance"
+        android:layout_below="@+id/linearLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="29dp" />
+
+    <Button
+        android:layout_width="169dp"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:id="@+id/btnBack"
+        android:onClick="goBack"
+        android:layout_gravity="center_horizontal"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignRight="@+id/cmdAttendance"
+        android:layout_alignEnd="@+id/cmdAttendance" />
 
 </RelativeLayout>
