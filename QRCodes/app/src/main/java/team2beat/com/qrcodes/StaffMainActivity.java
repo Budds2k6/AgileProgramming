@@ -22,6 +22,7 @@ import com.google.zxing.qrcode.QRCodeWriter;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import team2beat.com.src.Controllers.BookingController;
@@ -96,6 +97,15 @@ public class StaffMainActivity extends AppCompatActivity {
         ArrayList<String> classDetails = new ArrayList<String>();
 
 
+        java.util.Date currDate = new java.util.Date();
+
+        Calendar c = Calendar.getInstance();
+        c.setTime(currDate);
+
+
+
+        Time classDuration;
+
 
         for(int i = 0; i < classes.size(); i++)
         {
@@ -112,9 +122,19 @@ public class StaffMainActivity extends AppCompatActivity {
                 output += "[ENDED] \n";
             }
 
+            // checks if happening NOW
+            Calendar c2 = Calendar.getInstance();
+            c2.setTime(classes.get(i).getStartTime());
+
+            Calendar c3 = c2;
+            c3.add(Calendar.HOUR_OF_DAY, 1);
+
+            if(c.after(c2) && c.before(c3))
+            {
+                output += "[RIGHT NOW]\n";
+            }
+
             output += (building + " (" + roomNumber + ")\n" + startTime + "\n" + classType + " (Booking ID = " + classes.get(i).getBookingID() + ")\n" + moduleName);
-
-
 
             classDetails.add(output);
 

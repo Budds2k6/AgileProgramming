@@ -25,7 +25,7 @@ public class module_statistics extends AppCompatActivity {
     ListView classList;
     ArrayList<String> list;
     ListAdapter adapter;
-    String[] foldString;
+    //String[] foldString;
     ArrayList<ShouldAttend> studentList;
     ArrayList<Booking> bookingList;
     Module moduleSelected;
@@ -65,32 +65,31 @@ public class module_statistics extends AppCompatActivity {
 
 
 
+        //foldString = new ArrayList<String>();
 
 
+        //list = new ArrayList<String>();
+        //for (int i = 0; i < bookingList.size(); i++) {
+        //    list.add(String.valueOf(bookingList.get(i).getStartTime()));
+        //}
 
-        foldString = new String[]{"Wolfson 0900", "Dalhousie 1S05F12b 1400"};
+        //adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
 
+        //classList.setAdapter(adapter);
 
-        list = new ArrayList<String>();
-        for (int i = 0; i < foldString.length; i++) {
-            list.add(foldString[i]);
-        }
-
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
-
-        classList.setAdapter(adapter);
+        displayClassesFold(null);
 
     }
 
 
     public void displayClassesFold(View view){
         classList = (ListView) findViewById(R.id.foldList);
-        foldString = new String[]{"Wolfson 0900", "Dalhousie 1S05F12b 1400"};
+
 
 
         list = new ArrayList<>();
-        for (int i = 0; i < foldString.length; i++) {
-            list.add(foldString[i]);
+        for (int i = 0; i < bookingList.size(); i++) {
+            list.add(String.valueOf(bookingList.get(i).getStartTime()));
 
         }
 
@@ -110,13 +109,11 @@ public class module_statistics extends AppCompatActivity {
     }
     public void displayStudentFold(View view){
         classList = (ListView) findViewById(R.id.foldList);
-        foldString = new String[]{"Ryan Robinson", "Lew Bobobo Bo-bo Bobo Bo", "Andy Cobley"};
 
 
         list = new ArrayList<>();
-        for (int i = 0; i < foldString.length; i++) {
-            list.add(foldString[i]);
-
+        for (int i = 0; i < studentList.size(); i++) {
+            list.add(studentList.get(i).getStudentName());
         }
 
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);

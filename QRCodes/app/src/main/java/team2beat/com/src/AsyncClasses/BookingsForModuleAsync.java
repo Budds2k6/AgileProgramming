@@ -91,25 +91,24 @@ public class BookingsForModuleAsync extends ActionBarActivity {
                 toReturn = new ArrayList<String[]>();
 
                 for(int i = 0; i < listChildren.getLength();i++) {
-                    String[] temp = new String[13];
+                    String[] temp = new String[12];
 
                     Element curr = (Element) listChildren.item(i);
 
 
                     // get the other details
                     temp[0] = getElementFromTag("booking_id", curr);
-                    temp[1] = getElementFromTag("class_id", curr);
+                    temp[1] = getElementFromTag("lecture_id", curr);
                     temp[2] = getElementFromTag("start_time", curr);
                     temp[3] = getElementFromTag("end_time", curr);
-                    temp[4] = getElementFromTag("the_date", curr);
-                    temp[5] = getElementFromTag("location_id", curr);
-                    temp[6] = getElementFromTag("staff_id", curr);
-                    temp[7] = getElementFromTag("attendance_list_id", curr);
-                    temp[8] = String.valueOf(moduleID);
-                    temp[9] = getElementFromTag("class_name", curr);
-                    temp[10] = getElementFromTag("class_type", curr);
-                    temp[11] = getElementFromTag("room_number", curr);
-                    temp[12] = getElementFromTag("building", curr);
+                    temp[4] = getElementFromTag("location_id", curr);
+                    temp[5] = getElementFromTag("staff_id", curr);
+                    temp[6] = getElementFromTag("att_list_id", curr);
+                    temp[7] = String.valueOf(moduleID);
+                    temp[8] = getElementFromTag("class_name", curr);
+                    temp[9] = getElementFromTag("class_type", curr);
+                    temp[10] = getElementFromTag("room_number", curr);
+                    temp[11] = getElementFromTag("building", curr);
 
                     toReturn.add(temp);
                 }

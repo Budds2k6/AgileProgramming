@@ -129,11 +129,11 @@ public class ModuleModel
 				DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
 				timeS = new Time(formatter.parse(currBooking[2]).getTime());
 				timeE = new Time(formatter.parse(currBooking[3]).getTime());
-				dateS = new Date(formatter.parse(currBooking[3]).getDate());
+				dateS = new Date(formatter.parse(currBooking[2]).getDate());
 			}catch(Exception e){}
 
 
-			Booking b = new Booking (currBooking[0], currBooking[1], timeS, timeE, dateS, currBooking[5], currBooking[6], currBooking[7], currBooking[8], currBooking[9], currBooking[10], currBooking[11], currBooking[12]);
+			Booking b = new Booking (currBooking[0], currBooking[1], timeS, timeE, dateS, currBooking[4], currBooking[5], currBooking[6], currBooking[7], currBooking[8], currBooking[9], currBooking[10], currBooking[11]);
 			studentList.add(b);
 		}
 

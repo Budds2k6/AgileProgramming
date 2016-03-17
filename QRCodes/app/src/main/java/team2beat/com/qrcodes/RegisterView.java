@@ -182,7 +182,6 @@ public class RegisterView extends AppCompatActivity {
 
 
 
-
         String percentage = calculateAttendancePercentage(whoHasSignedIn.size(), shouldAttend.size(), signedInButNotOnList.size());
 
         TextView txtAttendance = (TextView) findViewById(R.id.textView2);
