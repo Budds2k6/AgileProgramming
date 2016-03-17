@@ -89,6 +89,15 @@ public class StaffMainActivity extends AppCompatActivity {
     }
 
 
+    public void refresh(View v)
+    {
+        Intent i = new Intent(getBaseContext(), StaffMainActivity.class);
+        //i.putExtra("bookingID", bookingID);
+        //i.putExtra("attendanceID", attendanceListID);
+        finish();
+        StaffMainActivity.this.startActivity(i);
+    }
+
     // need to pass a parameter in - the list / array
     public void createClassLabels()
     {
