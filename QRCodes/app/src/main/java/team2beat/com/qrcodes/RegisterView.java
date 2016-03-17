@@ -162,8 +162,7 @@ public class RegisterView extends AppCompatActivity {
 
         moduleList.setAdapter(adapter);
         View v;
-
-        for(int i = 0; i < moduleList.getCount(); i++ )
+        for (int i = 0; i <= moduleList.getLastVisiblePosition() - moduleList.getFirstVisiblePosition(); i++)
     {
         v = moduleList.getChildAt(i);
         if(Pattern.matches("Not on Register",((TextView) v).getText()))
