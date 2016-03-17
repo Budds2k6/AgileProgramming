@@ -170,22 +170,20 @@ public class RegisterView extends AppCompatActivity {
         //moduleList.deferNotifyDataSetChanged();
         //.notifyAll();
 
-        for(int i = 0; i < moduleList.getCount(); i++ )
+        for(int i = moduleList.getFirstVisiblePosition(); i < moduleList.getLastVisiblePosition(); i++ )
     {
 
-        v = moduleList.getAdapter().getView(i, null, moduleList);
+        v = moduleList.getChildAt(i);
 
         //v = moduleList.getChildAt(i);
 
 
         TextView txtView = (TextView)v;
         String text = String.valueOf(txtView.getText());
-
-        if(text.contains("Not on Register"))
+        if (text.contains("Not on Register"))
         {
             v.setBackgroundColor(Color.YELLOW);
-        }
-        else if(text.contains("Not Present"))
+        } else if (text.contains("Not Present"))
         {
             v.setBackgroundColor(Color.RED);
         }
