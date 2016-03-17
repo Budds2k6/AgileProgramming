@@ -175,10 +175,12 @@ public class RegisterView extends AppCompatActivity {
         for(int i = moduleList.getFirstVisiblePosition(); i < moduleList.getCount(); i++ )
     {
         v = moduleList.getChildAt(i);
-        while(v  == null || i == 1000)
+        while(v == null)
         {
             i++;
             v = moduleList.getChildAt(moduleList.getFirstVisiblePosition() - i);
+            v = moduleList.getChildAt(moduleList.getFirstVisiblePosition());
+            v = moduleList.getChildAt(moduleList.getFirstVisiblePosition() + i);
         }
 
 
