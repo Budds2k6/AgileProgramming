@@ -60,8 +60,9 @@ public class RegisterView extends AppCompatActivity {
     private ViewPager mViewPager;
     public static int attendanceListID;
     public static int bookingID;
-    
-
+    ArrayList<ShouldAttend> shouldAttend;
+    ArrayList<Attendee> attendees;
+    ListView moduleList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,15 +78,22 @@ public class RegisterView extends AppCompatActivity {
         AttendeeListController alc = new AttendeeListController();
 
         // people who have signed in
-        ArrayList<Attendee> attendees = alc.getAttendanceListByID(attendanceListID);
+        attendees = alc.getAttendanceListByID(attendanceListID);
 
         // people who should attend
-        ArrayList<ShouldAttend> shouldAttend = alc.getShouldAttend(bookingID);
+        shouldAttend = alc.getShouldAttend(bookingID);
         //ArrayList<ShouldAttend> shouldAttend = new ArrayList<ShouldAttend>();
 
         createStudentLabels(attendees, shouldAttend);
 
     }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+        setLabelColors();
+    }
+
 
     public void createStudentLabels(ArrayList<Attendee> attendees, ArrayList<ShouldAttend> shouldAttend)
     {
@@ -140,7 +148,7 @@ public class RegisterView extends AppCompatActivity {
         }
 
 
-        final ListView moduleList = (ListView) findViewById(R.id.listStudents);
+        moduleList = (ListView) findViewById(R.id.listStudents);
 
         ArrayList<String> studentDetails = new ArrayList<String>();
 
@@ -163,7 +171,7 @@ public class RegisterView extends AppCompatActivity {
         final ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, studentDetails);
 
         moduleList.setAdapter(adapter);
-        View v;
+
 
 
         int count = moduleList.getCount();
@@ -172,37 +180,6 @@ public class RegisterView extends AppCompatActivity {
         //moduleList.deferNotifyDataSetChanged();
         //.notifyAll();
 
-        for(int i = moduleList.getFirstVisiblePosition(); i < moduleList.getCount(); i++ )
-    {
-        v = moduleList.getChildAt(i);
-        while(v == null)
-        {
-            i++;
-            v = moduleList.getChildAt(moduleList.getFirstVisiblePosition() - i);
-            v = moduleList.getChildAt(moduleList.getFirstVisiblePosition());
-            v = moduleList.getChildAt(moduleList.getFirstVisiblePosition() + i);
-        }
-
-
-
-
-
-
-
-
-
-        TextView txtView = (TextView)v;
-        String text = String.valueOf(txtView.getText());
-        if (text.contains("Not on Register"))
-        {
-            v.setBackgroundColor(Color.YELLOW);
-        } else if (text.contains("Not Present"))
-        {
-            v.setBackgroundColor(Color.RED);
-        }
-        else
-            v.setBackgroundColor(Color.GREEN);
-    }
 
 
         String percentage = calculateAttendancePercentage(whoHasSignedIn.size(), shouldAttend.size(), signedInButNotOnList.size());
@@ -212,7 +189,38 @@ public class RegisterView extends AppCompatActivity {
 
     }
 
+    public void setLabelColors(){
+        View v;
+        for(int i = moduleList.getFirstVisiblePosition(); i < moduleList.getChildCount(); i++ )
+        {
+            v = moduleList.getChildAt(i);
+            while(v  == null || i == 1000)
+            {
+                i++;
+                v = moduleList.getChildAt(moduleList.getFirstVisiblePosition() - i);
+            }
 
+
+
+
+
+
+
+
+
+            TextView txtView = (TextView)v;
+            String text = String.valueOf(txtView.getText());
+            if (text.contains("Not on Register"))
+            {
+                v.setBackgroundColor(Color.YELLOW);
+            } else if (text.contains("Not Present"))
+            {
+                v.setBackgroundColor(Color.RED);
+            }
+            else
+                v.setBackgroundColor(Color.GREEN);
+        }
+    }
     String calculateAttendancePercentage(int attended, int missing, int extra)
     {
 
