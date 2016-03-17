@@ -97,6 +97,41 @@ public class BookingController {
         }
     }
 
+
+    public boolean mockSetAttendance(PresentRecord pRecord)
+    {
+        try
+        {
+            BookingModel bookingModel = new BookingModel();
+
+            // Update attendee status
+            String[] retrieved = bookingModel.setStudentPresentMock(pRecord.studentID, pRecord.bookingID);
+
+            if (retrieved != null)
+            {
+                if (retrieved[1].equals("true"))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
+
     // Updates the reason for the student
     public void updateAttendanceReason(String studentID, int bookingID, String moduleID, String reason) {
         //BookingModel bookingModel = new BookingModel();

@@ -14,64 +14,46 @@ public class BookingControllerTest extends TestCase {
 
     @Test
 // Lecturer adding student manually
-    public void testAddStudent ()
+    public void testAddStudentValid ()
     {
         BookingController bc = new BookingController();
         PresentRecord pr = new PresentRecord(257, "080003474");
-        PresentRecord wrongPr = new PresentRecord(257, "049382839");
 
-
-        // Test invalid studentID
-        //assertFalse("Fail! - Invalid student should not have been added; invalid ID!", bc.setAttendance(wrongPr));
-
-        // Test valid studentID, and not already registered
-        //assertTrue("Fail! - Student should have been added; valid entry!", bc.setAttendance(pr));
-
-        // Test valid student ID, and is already registered
-        //assertFalse("Fail! - Student should not have been added; already on list!", bc.setAttendance(pr));
-    }
-
-    @Test
-// Lecturer adding student manually
-    public void testAddStudentOne ()
-    {
-        BookingController bc = new BookingController();
-        PresentRecord pr = new PresentRecord(257, "080003474");
-        PresentRecord wrongPr = new PresentRecord(257, "049382839");
-
-        // Test invalid studentID
-        //assertFalse("Fail! - Invalid student should not have been added; invalid ID!", bc.setAttendance(wrongPr));
-
-
-        // Test valid studentID, and not already registered
-
-
-        boolean returnedValue = bc.setAttendance(pr);
+        boolean returnedValue = bc.mockSetAttendance(pr);
         assertTrue("Fail! - Student should have been added; valid entry!", returnedValue);
 
-        // Test valid student ID, and is already registered
-        //assertFalse("Fail! - Student should not have been added; already on list!", bc.setAttendance(pr));
+    }
+
+    @Test
+// Lecturer adding student manually
+    public void testAddStudentInvalid()
+    {
+        BookingController bc = new BookingController();
+        PresentRecord wrongPr = new PresentRecord(257, "0493828x5");
+
+
+        // Test invalid studentID
+        boolean returnedValue = bc.mockSetAttendance(wrongPr);
+        assertFalse("Fail! - Invalid student should not have been added; invalid ID!", returnedValue);
+
+
+
     }
 
 
     @Test
 // Lecturer adding student manually
-    public void testAddStudentTwo ()
+    public void testAddStudentAlreadySigned ()
     {
         BookingController bc = new BookingController();
-        PresentRecord pr = new PresentRecord(257, "080003474");
-        PresentRecord wrongPr = new PresentRecord(257, "049382839");
-
-        // Test invalid studentID
-        //assertFalse("Fail! - Invalid student should not have been added; invalid ID!", bc.setAttendance(wrongPr));
-
-        // Test valid studentID, and not already registered
-        //assertTrue("Fail! - Student should have been added; valid entry!", bc.setAttendance(pr));
-
+        PresentRecord prAlreadySigned = new PresentRecord(257,"130005440");
 
 
         // Test valid student ID, and is already registered
-        //assertFalse("Fail! - Student should not have been added; already on list!", bc.setAttendance(pr));
+        boolean returnedValue = bc.mockSetAttendance(prAlreadySigned);
+        assertFalse("Fail! - Student should not have been added; already on list!", returnedValue);
+
+
     }
 
 
