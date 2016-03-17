@@ -11,15 +11,17 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:weightSum="1">
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="223dp">
+            android:layout_height="223dp"
+            android:layout_weight="1.29">
 
             <ImageView
-                android:layout_width="253dp"
-                android:layout_height="match_parent"
+                android:layout_width="288dp"
+                android:layout_height="250dp"
                 android:id="@+id/imageView"
                 android:layout_gravity="center"
                 android:src="@drawable/universityofdundeecrest"
@@ -29,7 +31,7 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="307dp"
+            android:layout_height="266dp"
             android:measureAllChildren="false"
             android:minHeight="500sp"
             android:nestedScrollingEnabled="false">
@@ -86,7 +88,7 @@
                     android:theme="@style/classDetail"/>
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="LOGIN"
                     android:id="@+id/loginMusic"
