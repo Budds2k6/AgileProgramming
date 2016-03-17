@@ -162,20 +162,35 @@ public class RegisterView extends AppCompatActivity {
 
         moduleList.setAdapter(adapter);
         View v;
-        for (int i = 0; i <= moduleList.getLastVisiblePosition() - moduleList.getFirstVisiblePosition(); i++)
+
+
+        int count = moduleList.getCount();
+        int count2 = moduleList.getChildCount();
+
+        //moduleList.deferNotifyDataSetChanged();
+        //.notifyAll();
+
+        for(int i = 0; i < moduleList.getCount(); i++ )
     {
-        v = moduleList.getChildAt(i);
-        if(Pattern.matches("Not on Register",((TextView) v).getText()))
+
+        v = moduleList.getAdapter().getView(i, null, moduleList);
+
+        //v = moduleList.getChildAt(i);
+
+
+        TextView txtView = (TextView)v;
+        String text = String.valueOf(txtView.getText());
+
+        if(text.contains("Not on Register"))
         {
             v.setBackgroundColor(Color.YELLOW);
         }
-        else if(Pattern.matches("Not Present",((TextView) v).getText()))
+        else if(text.contains("Not Present"))
         {
             v.setBackgroundColor(Color.RED);
         }
         else
             v.setBackgroundColor(Color.GREEN);
-
     }
 
 
