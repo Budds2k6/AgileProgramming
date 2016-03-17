@@ -53,7 +53,7 @@ public class StudentsForModuleAsync extends ActionBarActivity {
         protected Void doInBackground(String... params) {
 
             // the url of the java servlet that carries out the operations
-            String url = "http://silva.computing.dundee.ac.uk/2015-agileteam2/AttendBooking";   // TODO: Change this
+            String url = "http://silva.computing.dundee.ac.uk/2015-agileteam2/StudentsForModule";   // TODO: Change this
 
             // resource: http://hayageek.com/android-http-post-get/
             HttpClient httpClient = new DefaultHttpClient();
