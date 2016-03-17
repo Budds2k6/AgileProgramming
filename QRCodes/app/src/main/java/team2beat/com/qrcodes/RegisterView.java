@@ -172,10 +172,15 @@ public class RegisterView extends AppCompatActivity {
         //moduleList.deferNotifyDataSetChanged();
         //.notifyAll();
 
-        for(int i = moduleList.getFirstVisiblePosition(); i < moduleList.getLastVisiblePosition(); i++ )
+        for(int i = moduleList.getFirstVisiblePosition(); i < moduleList.getCount(); i++ )
     {
-
         v = moduleList.getChildAt(i);
+        while(v  == null || i == 1000)
+        {
+            i++;
+            v = moduleList.getChildAt(moduleList.getFirstVisiblePosition() - i);
+        }
+
 
 
 
