@@ -126,7 +126,8 @@ public class StaffMainActivity extends AppCompatActivity {
             Calendar c2 = Calendar.getInstance();
             c2.setTime(classes.get(i).getStartTime());
 
-            Calendar c3 = c2;
+            Calendar c3 = Calendar.getInstance();
+            c3.setTime(classes.get(i).getStartTime());
             c3.add(Calendar.HOUR_OF_DAY, 1);
 
             if(c.after(c2) && c.before(c3))
