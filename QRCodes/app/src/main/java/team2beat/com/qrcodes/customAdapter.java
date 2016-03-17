@@ -24,10 +24,17 @@ public class customAdapter extends ArrayAdapter<String> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        System.out.println("getView " + position + " " + convertView);
+        TextView textView;
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        String text = ((TextView)convertView).getText().toString();
-        View rowView;
+        if (convertView == null) {
+            convertView = inflater.inflate(R.layout.not_on_reg, null);
+            textView = (TextView)convertView.findViewById(R.id.secondLine);
+            textView.setText(values[position]);
+        }
+
+       /*
         if (text.contains("Not on Register"))
         {
             rowView= inflater.inflate(R.layout.not_on_reg, parent, false);
@@ -37,8 +44,6 @@ public class customAdapter extends ArrayAdapter<String> {
         }
         else
             rowView=inflater.inflate(R.layout.not_on_reg, parent, false);
-        TextView textView = (TextView) rowView.findViewById(R.id.firstLine);
-        ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
         textView.setText(values[position]);
         // change the icon for Windows and iPhone
         String s = values[position];
@@ -47,7 +52,7 @@ public class customAdapter extends ArrayAdapter<String> {
         } else {
             imageView.setImageResource(R.drawable.checkmark);
         }
-
-        return rowView;
+*/
+        return convertView;
     }
 }
