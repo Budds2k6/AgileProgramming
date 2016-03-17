@@ -95,6 +95,8 @@ public class StaffMainActivity extends AppCompatActivity {
 
         ArrayList<String> classDetails = new ArrayList<String>();
 
+
+
         for(int i = 0; i < classes.size(); i++)
         {
             String building = classes.get(i).getBuilding();
@@ -111,6 +113,8 @@ public class StaffMainActivity extends AppCompatActivity {
             }
 
             output += (building + " (" + roomNumber + ")\n" + startTime + "\n" + classType + " (Booking ID = " + classes.get(i).getBookingID() + ")\n" + moduleName);
+
+
 
             classDetails.add(output);
 
