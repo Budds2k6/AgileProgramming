@@ -175,7 +175,11 @@ public class MainActivity extends AppCompatActivity {
                     sendAttendanceToDatabase(pr);
 
                     // Display it on the form
+<<<<<<< HEAD
+                    TextView theText = (TextView) findViewById(R.id.lblLoggedInAs);
+=======
                     TextView theText = (TextView) findViewById(R.id.textView5);
+>>>>>>> 29ebf4e52f32255ffae6910ddb17225c17e2f778
                     theText.setText(contents);
 
                     // tell the user that they scanned in
@@ -192,6 +196,9 @@ public class MainActivity extends AppCompatActivity {
 
                     TextView QRErrorlbl = (TextView) findViewById(R.id.textView5);
                     QRErrorlbl.setText("Please Scan again");
+                    ImageView QRError = (ImageView) findViewById(R.id.imageView2);
+                    QRError.setImageResource(R.drawable.crossmark);
+                    QRError.setVisibility(View.VISIBLE);
 
                     toast.show();
                 }
@@ -207,6 +214,8 @@ public class MainActivity extends AppCompatActivity {
 
         ImageView Confirmed = (ImageView) findViewById(R.id.imageView2);
         Confirmed.setImageResource(R.drawable.checkmark);
+
+        Confirmed.setVisibility(View.VISIBLE);
 
     }
 
