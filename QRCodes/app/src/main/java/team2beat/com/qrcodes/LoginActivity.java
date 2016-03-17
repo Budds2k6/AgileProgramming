@@ -87,7 +87,7 @@ public class LoginActivity extends AppCompatActivity {
         else
         {
             // No connection available
-            Toast toast = Toast.makeText(this, "No Connection available", Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(this, "Connection Timed Out", Toast.LENGTH_LONG);
             toast.show();
         }
     }
@@ -120,7 +120,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //join to the main thread
         try {
-            Thread.sleep(800);
+            Thread.sleep(1200);
             newThread.join();
         }catch(Exception e)
         {

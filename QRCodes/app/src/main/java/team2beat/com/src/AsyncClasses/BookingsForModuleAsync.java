@@ -29,22 +29,22 @@ import javax.xml.parsers.DocumentBuilderFactory;
  */
 public class BookingsForModuleAsync extends ActionBarActivity {
 
-    int moduleID;
+    String moduleID;
     public ArrayList<String[]> toReturn;
     public boolean complete = false;
 
     // Constructor
-    public BookingsForModuleAsync(int modID)
+    public BookingsForModuleAsync(String modID)
     {
         this.moduleID = modID;
-        new PostClass().execute(String.valueOf(moduleID));
+        new PostClass().execute(moduleID);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView();
-        new PostClass().execute(String.valueOf(moduleID));
+        new PostClass().execute(moduleID);
     }
 
 
@@ -53,7 +53,7 @@ public class BookingsForModuleAsync extends ActionBarActivity {
         protected Void doInBackground(String... params) {
 
             // the url of the java servlet that carries out the operations
-            String url = "http://silva.computing.dundee.ac.uk/2015-agileteam2/BookingsForModule";   // TODO: Change this
+            String url = "http://silva.computing.dundee.ac.uk/2015-agileteam2/BookingsForModule";
 
             // resource: http://hayageek.com/android-http-post-get/
             HttpClient httpClient = new DefaultHttpClient();

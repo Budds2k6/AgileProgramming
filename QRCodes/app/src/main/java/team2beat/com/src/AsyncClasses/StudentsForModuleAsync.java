@@ -29,22 +29,22 @@ import javax.xml.parsers.DocumentBuilderFactory;
  */
 public class StudentsForModuleAsync extends ActionBarActivity {
 
-    int moduleID;
+    String moduleID;
     public ArrayList<String[]> toReturn;
     public boolean complete = false;
 
     // Constructor
-    public StudentsForModuleAsync(int modID)
+    public StudentsForModuleAsync(String modID)
     {
         this.moduleID = modID;
-        new PostClass().execute(String.valueOf(moduleID));
+        new PostClass().execute(moduleID);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView();
-        new PostClass().execute(String.valueOf(moduleID));
+        new PostClass().execute(moduleID);
     }
 
 

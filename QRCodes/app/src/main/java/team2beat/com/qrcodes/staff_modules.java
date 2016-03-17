@@ -43,8 +43,9 @@ public class staff_modules extends AppCompatActivity {
         moduleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                module_statistics.moduleSelected = modules.get(position);
                 Intent i = new Intent (getBaseContext(), module_statistics.class);
-                i.putExtra("moduleSelected",  modules.get(position));
+                //i.putExtra("moduleSelected",  modules.get(position));
                 staff_modules.this.startActivity(i);
             }
         });

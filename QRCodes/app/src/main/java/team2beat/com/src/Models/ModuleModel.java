@@ -61,7 +61,7 @@ public class ModuleModel
 		return null;
 	}
 
-	public ArrayList<ShouldAttend> getStudentsForModule(int moduleID)
+	public ArrayList<ShouldAttend> getStudentsForModule(String moduleID)
 	{
 
 		ArrayList<String[]> returnData = new ArrayList<String[]>();
@@ -93,7 +93,7 @@ public class ModuleModel
 		return studentList;
 	}
 
-	public ArrayList<Booking> getBookingsForModule(int moduleID)
+	public ArrayList<Booking> getBookingsForModule(String moduleID)
 	{
 		ArrayList<String[]> returnData = new ArrayList<String[]>();
 
