@@ -28,12 +28,17 @@ public class customAdapter extends ArrayAdapter<String> {
         TextView textView;
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        if (convertView == null) {
-            convertView = inflater.inflate(R.layout.not_on_reg, null);
-            textView = (TextView)convertView.findViewById(R.id.secondLine);
-            textView.setText(values[position]);
+        if(values[position].contains("Not on Register")) {
+                convertView = inflater.inflate(R.layout.not_on_reg, null);
         }
-
+        else if(values[position].contains("Not Present"))
+        {
+            convertView = inflater.inflate(R.layout.reg_absent, null);
+        }
+        else
+            convertView = inflater.inflate(R.layout.on_reg, null);
+        textView = (TextView) convertView.findViewById(R.id.firstLine);
+        textView.setText(values[position]);
        /*
         if (text.contains("Not on Register"))
         {
