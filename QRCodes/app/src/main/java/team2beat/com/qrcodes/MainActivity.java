@@ -175,13 +175,13 @@ public class MainActivity extends AppCompatActivity {
                     sendAttendanceToDatabase(pr);
 
                     // Display it on the form
-                    TextView theText = (TextView) findViewById(R.id.qrOutput);
+                    TextView theText = (TextView) findViewById(R.id.textView5);
                     theText.setText(contents);
 
                     // tell the user that they scanned in
-                    Toast toast = Toast.makeText(this, "SUCCESSFULLY SCANNED INTO CLASS" + contents, Toast.LENGTH_LONG);
+                    //Toast toast = Toast.makeText(this, "SUCCESSFULLY SCANNED INTO CLASS" + contents, Toast.LENGTH_LONG);
 
-                    toast.show();
+                    //toast.show();
                     ConfirmFeedback();
 
 

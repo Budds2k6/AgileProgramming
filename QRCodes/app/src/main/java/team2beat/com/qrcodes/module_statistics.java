@@ -55,11 +55,13 @@ public class module_statistics extends AppCompatActivity {
 
         // read students
         ModuleController mc = new ModuleController();
-        studentList = mc.getStudentListForModule(Integer.valueOf(moduleSelected.getModuleCode()));
+        //studentList = mc.getStudentListForModule(Integer.valueOf(moduleSelected.getModuleCode()));
+        studentList = new ArrayList<>();
 
         // read bookings
         mc = new ModuleController();
-        bookingList = mc.getBookingListForModule(Integer.valueOf(moduleSelected.getModuleCode()));
+        //bookingList = mc.getBookingListForModule(Integer.valueOf(moduleSelected.getModuleCode()));
+        bookingList = new ArrayList<>();
 
 
 
