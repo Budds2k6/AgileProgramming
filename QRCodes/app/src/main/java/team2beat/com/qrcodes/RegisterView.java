@@ -91,8 +91,8 @@ public class RegisterView extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
-        setLabelColors();
-    }
+	setLabelColors();
+	}
 
 
     public void createStudentLabels(ArrayList<Attendee> attendees, ArrayList<ShouldAttend> shouldAttend)
@@ -168,7 +168,7 @@ public class RegisterView extends AppCompatActivity {
         }
 
 
-        final ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, studentDetails);
+        final customAdapter adapter = new customAdapter(this, studentDetails.toArray(new String[0]));
 
         moduleList.setAdapter(adapter);
 
