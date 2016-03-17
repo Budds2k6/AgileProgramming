@@ -186,14 +186,15 @@ public class BookingModel
 
 
 
-	public String [] setStudentPresentMock(String studentID,int bookingID)
+	public String [] setStudentAttPresent(String studentID,int bookingID)
 	{
 		try {
 			String [] success = new String [2];
 			String bid = String.valueOf(bookingID);
 			MockRegisterAsync ra = new MockRegisterAsync(bid, studentID);
 
-			while (!ra.completed) {
+			while (!ra.completed)
+			{
 
 			}
 			success = ra.toReturn;
