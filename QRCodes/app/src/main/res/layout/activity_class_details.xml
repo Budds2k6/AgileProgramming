@@ -59,6 +59,14 @@
             android:id="@+id/textTitle"
             android:theme="@style/classDetail"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Type: "
+            android:id="@+id/textType"
+            android:theme="@style/classDetail" />
+
     </LinearLayout>
 
     <Button
@@ -67,11 +75,9 @@
         android:text="View Attendance"
         android:id="@+id/cmdAttendance"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="54dp"
-        android:layout_below="@+id/linearLayout"
-        android:layout_alignRight="@+id/textLecture"
-        android:layout_alignEnd="@+id/textLecture"
         android:nestedScrollingEnabled="false"
-        android:onClick="viewAttendance" />
+        android:onClick="viewAttendance"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
