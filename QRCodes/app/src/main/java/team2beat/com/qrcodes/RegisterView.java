@@ -99,7 +99,7 @@ public class RegisterView extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
-	setLabelColors();
+	//setLabelColors();
 	}
 
 
@@ -174,7 +174,7 @@ public class RegisterView extends AppCompatActivity {
         }
         for(int i = 0; i < whoHasSignedIn.size(); i++)
         {
-            studentDetails.add(whoHasSignedIn.get(i).getStudentName());
+            studentDetails.add("[] " + whoHasSignedIn.get(i).getStudentName());
             allStudents.add(whoHasSignedIn.get(i));
             studentStatus.add(true);
         }
@@ -258,7 +258,7 @@ public class RegisterView extends AppCompatActivity {
     public void onBackPressed() {
     }
 
-    public void setLabelColors(){
+    /*public void setLabelColors(){
         View v;
         for(int i = moduleList.getFirstVisiblePosition(); i < moduleList.getChildCount(); i++ )
         {
@@ -276,7 +276,7 @@ public class RegisterView extends AppCompatActivity {
             else
                 v.setBackgroundColor(Color.GREEN);
         }
-    }
+    }*/
     String calculateAttendancePercentage(int attended, int missing, int extra)
     {
 

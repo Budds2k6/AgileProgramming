@@ -40,7 +40,11 @@ public class customAdapter extends ArrayAdapter<String> {
         else
             convertView = inflater.inflate(R.layout.on_reg, null);
         textView = (TextView) convertView.findViewById(R.id.firstLine);
-        textView.setText(values[position]);
+
+        int index = values[position].indexOf(']');
+        String output = values[position].substring(index + 2);
+        textView.setText(output);
+
        /*
         if (text.contains("Not on Register"))
         {

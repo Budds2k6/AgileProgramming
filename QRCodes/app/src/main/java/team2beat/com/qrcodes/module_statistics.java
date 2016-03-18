@@ -130,6 +130,8 @@ public class module_statistics extends AppCompatActivity {
 
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
 
+        classList.setOnItemClickListener(null);
+
 
         // TODO: add event to go to the student attendance data
 
