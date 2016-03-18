@@ -31,21 +31,23 @@ public class StaffAsync extends ActionBarActivity {
 
     public ArrayList<String []> toReturn;
     String staffID;
+    String accessLevel;
     public boolean complete = false;
 
     // Constructor
-    public StaffAsync(String sID)
+    public StaffAsync(String sID, String acc)
     {
         staffID = sID;
+        accessLevel = acc;
 
-        new PostClass().execute(staffID);
+        new PostClass().execute(staffID, accessLevel);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView();
-        new PostClass().execute(staffID);
+        new PostClass().execute(staffID, accessLevel);
     }
 
 
@@ -54,7 +56,7 @@ public class StaffAsync extends ActionBarActivity {
         protected Void doInBackground(String... params) {
 
             // this is the url of the Java Servlet that carrries out the action
-            String url = "http://silva.computing.dundee.ac.uk/2015-agileteam2/StaffModules";
+            String url = "http://silva.computing.dundee.ac.uk/2015-agileteam2/StaffAccessModules";
 
             // resource: http://hayageek.com/android-http-post-get/
             HttpClient httpClient = new DefaultHttpClient();
@@ -64,6 +66,7 @@ public class StaffAsync extends ActionBarActivity {
             // set up the parameters to pass to the servlet - require a name for the parameter along with the actual value
             List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
             nameValuePairs.add(new BasicNameValuePair("staff_id", params[0]));
+            nameValuePairs.add(new BasicNameValuePair("access_level", params[1]));
 
             // attach the parameters to the request
             try {
@@ -99,11 +102,13 @@ public class StaffAsync extends ActionBarActivity {
                     Element curr = (Element) listChildren.item(i);
 
                     // extract the attendanceList id and the booking id from the returned XML file
-                    String[] returned = new String[3];
+                    String[] returned = new String[5];
 
                     returned[0] = getElementFromTag("module_id", curr);
                     returned[1] = getElementFromTag("name", curr);
                     returned[2] = getElementFromTag("coordinator", curr);
+                    returned[3] = getElementFromTag("firstname", curr);
+                    returned[4] = getElementFromTag("surname", curr);
 
                     toReturn.add(returned);
                 }

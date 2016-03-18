@@ -24,12 +24,13 @@ public class customAdapter extends ArrayAdapter<String> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        System.out.println("getView " + position + " " + convertView);
+       System.out.println("getView " + position + " " + convertView);
         TextView textView;
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        String theTag = String.valueOf(parent.getTag());
         System.out.println(parent.getTag());
-        System.out.println(convertView.getTag());
+
         if(values[position].contains("Not on Register")) {
                 convertView = inflater.inflate(R.layout.not_on_reg, null);
         }

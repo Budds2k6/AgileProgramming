@@ -8,6 +8,7 @@ public class Module implements Parcelable
 	private String moduleID;
 	private String name;
 	private String coordinator;
+	private String coordinatorName;
 
 	//region PARCELABLE NECESSITIES
 	@Override
@@ -39,11 +40,12 @@ public class Module implements Parcelable
 	//endregion
 
 	// Constructor
-	public Module (String moduleID, String name, String coordinator)
+	public Module (String moduleID, String name, String coordinator, String fName, String sName)
 	{
 		this.moduleID = moduleID;
 		this.name = name;
 		this.coordinator = coordinator;
+		this.coordinatorName = fName + " " + sName;
 	}
 
 	// Constructor
@@ -55,5 +57,7 @@ public class Module implements Parcelable
 
 	public String getModuleName(){ return this.name; }
 	public String getModuleCode(){ return this.moduleID; }
+	public String getCoordinatorName(){ return this.coordinatorName; }
+	public String getCoordinator(){ return this.coordinator; }
 
 }

@@ -27,6 +27,11 @@ public class Staff extends User
 		return staffID;
 	}
 
+	public String getAccessLevel()
+	{
+		return String.valueOf(accessLevel);
+	}
+
 	/*public String getJobID()
 	{
 		return jobID;

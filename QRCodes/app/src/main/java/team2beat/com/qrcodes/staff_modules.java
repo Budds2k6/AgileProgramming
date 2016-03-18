@@ -22,6 +22,7 @@ import team2beat.com.src.DataObjects.Module;
 public class staff_modules extends AppCompatActivity {
 
     public static ArrayList<Module> modules = new ArrayList<Module>();
+    public static String loggedInStaff;
 
     @Override
     public void onBackPressed() {
@@ -37,7 +38,17 @@ public class staff_modules extends AppCompatActivity {
 
         final ArrayList<String> list = new ArrayList<String>();
         for (int i = 0; i < modules.size(); i++) {
-            list.add(modules.get(i).getModuleName() + " (" + modules.get(i).getModuleCode() + ")");
+            String coordinator;
+
+            if(modules.get(i).getCoordinator().equals(loggedInStaff))
+            {
+                coordinator = modules.get(i).getCoordinatorName().toUpperCase();
+            }else
+            {
+                coordinator = modules.get(i).getCoordinatorName();
+            }
+
+            list.add(modules.get(i).getModuleName() + " (" + modules.get(i).getModuleCode() + ") - " + coordinator);
         }
 
         final ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);

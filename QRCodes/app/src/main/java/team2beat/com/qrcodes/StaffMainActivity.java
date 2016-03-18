@@ -179,7 +179,9 @@ public class StaffMainActivity extends AppCompatActivity {
         Intent i = new Intent (getBaseContext(), staff_modules.class);
 
         StaffController sc = new StaffController();
-        staff_modules.modules = sc.getAllModules(staffDetails.getStaffID());
+
+        staff_modules.modules = sc.getAllModules(staffDetails.getStaffID(), staffDetails.getAccessLevel());
+        staff_modules.loggedInStaff = staffDetails.getStaffID();
 
         StaffMainActivity.this.startActivity(i);
     }
