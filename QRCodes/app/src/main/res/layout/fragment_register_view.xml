@@ -19,27 +19,17 @@
         android:layout_height="wrap_content"
         android:id="@+id/listStudents"
         android:headerDividersEnabled="false"
-        android:layout_above="@+id/button5"
-        android:layout_below="@+id/btnRefresh" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView2"
+        android:layout_above="@+id/btnRefresh" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add by Student ID"
         android:id="@+id/button5"
-        android:layout_above="@+id/BackToQR"
-        android:layout_alignRight="@+id/BackToQR"
-        android:layout_alignEnd="@+id/BackToQR"
-        android:layout_toRightOf="@+id/section_label"
         android:onClick="addStudentByID"
-        android:layout_toEndOf="@+id/section_label" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Back"
-        android:id="@+id/BackToQR"
-        android:onClick="BackToQR"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
@@ -50,7 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Class Register"
+        android:text="RegisterView"
         android:id="@+id/textView2"
         android:textAlignment="center"
         android:layout_alignParentLeft="true"
@@ -63,7 +53,11 @@
         android:text="REFRESH"
         android:id="@+id/btnRefresh"
         android:onClick="refresh"
+        android:layout_above="@+id/button5"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
 
 </RelativeLayout>
