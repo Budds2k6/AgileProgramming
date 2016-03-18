@@ -7,6 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="4dip"
+    android:background="#ADADAD"
     android:clickable="false"
     style="@style/Widget.Design.AppBarLayout">>
 

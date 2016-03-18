@@ -54,7 +54,7 @@
             android:layout_gravity="center_horizontal|bottom">
 
             <Button
-                android:layout_width="185dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/buttonFoldClasses"
                 android:id="@+id/buttonClasses"
@@ -65,14 +65,14 @@
                 android:onClick="displayClassesFold" />
 
             <Button
-                android:layout_width="185dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/buttonFoldStudents"
                 android:id="@+id/buttonStudents"
                 android:layout_gravity="right|bottom"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
+                android:layout_alignParentStart="false"
                 android:onClick="displayStudentFold" />
 
             <FrameLayout
