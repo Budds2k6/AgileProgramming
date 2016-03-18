@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import team2beat.com.src.DataObjects.Module;
@@ -50,6 +51,8 @@ public class staff_modules extends AppCompatActivity {
 
             list.add(modules.get(i).getModuleName() + " (" + modules.get(i).getModuleCode() + ") - " + coordinator);
         }
+
+        Collections.reverse(modules);
 
         final ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
 

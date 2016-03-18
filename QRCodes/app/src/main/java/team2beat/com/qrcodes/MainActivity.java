@@ -185,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
 
                     // tell the user that they scanned in
                     //Toast toast = Toast.makeText(this, "SUCCESSFULLY SCANNED INTO CLASS" + contents, Toast.LENGTH_LONG);
-                    displayToast();
+                    //displayToast();
                     //toast.show();
 
 
@@ -212,7 +212,7 @@ public class MainActivity extends AppCompatActivity {
     public void ConfirmFeedback()
     {
         CountDownTimer ConfirmDisplayTimer;
-        long duration = 30000;
+        long duration = 4000;
         long timeInterval = 1000;
 
         new CountDownTimer(duration,timeInterval) {
@@ -241,7 +241,7 @@ public class MainActivity extends AppCompatActivity {
     public void ErrorFeedback()
     {
         CountDownTimer ErrDisplayTimer;
-        long duration = 30000;
+        long duration = 4000;
         long timeInterval = 1000;
 
         new CountDownTimer(duration,timeInterval) {
@@ -293,10 +293,12 @@ public class MainActivity extends AppCompatActivity {
         if(studentReturned)
         {
             ConfirmFeedback();
+        }else
+        {
+            ErrorFeedback();
         }
         // TODO get class name from database
 
-        // return "Class Name";
     }
 
 }

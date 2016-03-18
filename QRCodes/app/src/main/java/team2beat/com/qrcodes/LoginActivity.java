@@ -51,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (successDetails != null && successDetails[0] != null) {
                     if (!successDetails[0].equals("Login Failed")) {
-                        toast = Toast.makeText(this, "Successfully Logged In as " + successDetails[1] + successDetails[2], Toast.LENGTH_LONG);
+                        toast = Toast.makeText(this, "Successfully Logged In as " + successDetails[1] + " " + successDetails[2], Toast.LENGTH_LONG);
                         if (successDetails[4].equals("staff")) {
 
                             String staffID = successDetails[3];

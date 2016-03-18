@@ -194,7 +194,7 @@ public class RegisterView extends AppCompatActivity {
         moduleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(isLive){ confirmAdd(position); }
+                 confirmAdd(position);
             }
         });
 
