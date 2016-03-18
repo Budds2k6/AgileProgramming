@@ -8,47 +8,58 @@
     android:id="@+id/relativeLayout1"
     android:theme="@style/AppTheme">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Lecture Title"
-        android:id="@+id/textLecture"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:focusable="false"
         android:id="@+id/linearLayout"
-        android:layout_below="@+id/textLecture"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="39dp">
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
+        android:weightSum="1">
+
+        <Button
+            android:layout_width="139dp"
+            android:layout_height="34dp"
+            android:text="Back"
+            android:id="@+id/btnBack"
+            android:onClick="goBack"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_gravity="left" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Lecture Title"
+            android:id="@+id/textLecture"
+            android:layout_below="@+id/btnBack"
+            android:layout_centerHorizontal="true" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Location: "
-            android:id="@+id/textLocation"
-            android:theme="@style/classDetail"/>
+            android:text="Type"
+            android:id="@+id/textType"
+            android:theme="@style/classDetail" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Room No. "
-            android:id="@+id/textRoom"
-            android:theme="@style/classDetail"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Date: "
+            android:text="Date"
             android:id="@+id/textDate"
             android:theme="@style/classDetail"/>
 
@@ -56,33 +67,38 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Type: "
-            android:id="@+id/textType"
+            android:text="Time"
+            android:id="@+id/textTime"
             android:theme="@style/classDetail" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Location"
+            android:id="@+id/textLocation"
+            android:theme="@style/classDetail"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Room No."
+            android:id="@+id/textRoom"
+            android:theme="@style/classDetail"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="View Attendance"
+            android:id="@+id/cmdAttendance"
+            android:nestedScrollingEnabled="false"
+            android:onClick="viewAttendance"
+            android:layout_below="@+id/linearLayout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="29dp"
+            android:layout_gravity="center_horizontal|bottom" />
+
     </LinearLayout>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="View Attendance"
-        android:id="@+id/cmdAttendance"
-        android:layout_gravity="center_horizontal"
-        android:nestedScrollingEnabled="false"
-        android:onClick="viewAttendance"
-        android:layout_below="@+id/linearLayout"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="29dp" />
-
-    <Button
-        android:layout_width="169dp"
-        android:layout_height="wrap_content"
-        android:text="Back"
-        android:id="@+id/btnBack"
-        android:onClick="goBack"
-        android:layout_gravity="center_horizontal"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/cmdAttendance"
-        android:layout_alignEnd="@+id/cmdAttendance" />
 
 </RelativeLayout>

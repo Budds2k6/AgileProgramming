@@ -15,17 +15,30 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="250dp">
+            android:layout_height="250dp"
+            android:weightSum="1">
+
+            <Button
+                android:layout_width="169dp"
+                android:layout_height="wrap_content"
+                android:text="Back"
+                android:id="@+id/cmdBack"
+                android:onClick="goBack"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="74dp"
+                android:layout_height="40dp"
                 android:text="Agile Programming"
                 android:id="@+id/textView3"
                 android:layout_gravity="center_horizontal|top"
                 android:textStyle="bold"
                 android:gravity="top|center"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:layout_weight="0.24" />
+
 
             <TextView
                 android:layout_width="wrap_content"
@@ -36,16 +49,6 @@
                 android:textSize="45dp"
                 android:textColor="#ffffff"/>
 
-            <Button
-                android:layout_width="169dp"
-                android:layout_height="wrap_content"
-                android:text="Back"
-                android:id="@+id/cmdBack"
-                android:onClick="goBack"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_gravity="center_horizontal" />
         </LinearLayout>
 
         <RelativeLayout
@@ -53,16 +56,27 @@
             android:layout_height="329dp"
             android:layout_gravity="center_horizontal|bottom">
 
+            <!-- 'strut' solution from:
+                    http://stackoverflow.com/questions/4961355/percentage-width-in-a-relativelayout
+             -->
+
+            <View android:id="@+id/strut"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_centerHorizontal="true"/>
+
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/buttonFoldClasses"
                 android:id="@+id/buttonClasses"
                 android:layout_gravity="left|bottom"
+                android:layout_alignLeft="@id/strut"
+                android:onClick="displayClassesFold"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:onClick="displayClassesFold" />
+                android:layout_weight=".50" />
 
             <Button
                 android:layout_width="wrap_content"
@@ -70,10 +84,12 @@
                 android:text="@string/buttonFoldStudents"
                 android:id="@+id/buttonStudents"
                 android:layout_gravity="right|bottom"
+                android:layout_alignRight="@id/strut"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="false"
-                android:onClick="displayStudentFold" />
+                android:onClick="displayStudentFold"
+                android:layout_weight=".50" />
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -85,6 +101,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/foldList"
+                    android:divider="#c2b35b"
+                    android:dividerHeight="2dp"
                     android:layout_gravity="center" />
             </FrameLayout>
         </RelativeLayout>
