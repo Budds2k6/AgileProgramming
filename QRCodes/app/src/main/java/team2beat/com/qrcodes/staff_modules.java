@@ -52,6 +52,13 @@ public class staff_modules extends AppCompatActivity {
 
     }
 
+    public void goBack(View v)
+    {
+        Intent i = new Intent (getBaseContext(), StaffMainActivity.class);
+        //i.putExtra("moduleSelected",  modules.get(position));
+        staff_modules.this.startActivity(i);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

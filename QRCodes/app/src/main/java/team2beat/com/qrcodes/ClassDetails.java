@@ -2,8 +2,8 @@ package team2beat.com.qrcodes;
 
 import android.content.Intent;
 import android.os.Debug;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,21 +21,31 @@ public class ClassDetails extends AppCompatActivity {
 
     public static Booking theBooking;
 
-    TextView lecture, title, room, location, date;
+    TextView module, room, location, date, type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_class_details);
 
-        lecture = (TextView) findViewById(R.id.textLecture);
-        title = (TextView) findViewById(R.id.textTitle);
+        module = (TextView) findViewById(R.id.textLecture);
         room = (TextView) findViewById(R.id.textRoom);
         location = (TextView) findViewById(R.id.textLocation);
         date = (TextView) findViewById(R.id.textDate);
+        type = (TextView) findViewById(R.id.textType);
 
-        lecture.setText(theBooking.getClassName());
+        module.setText(theBooking.getClassName());
+        room.setText("Room No.: " + theBooking.getRoomNumber());
+        location.setText("Building: " + theBooking.getBuilding());
+        date.setText("Date: " + theBooking.getStartTime().toString());
+        type.setText("Class Type: " + theBooking.getClassType());
+    }
 
+    public void goBack(View v)
+    {
+        Intent i = new Intent (getBaseContext(), module_statistics.class);
+        //i.putExtra("moduleSelected",  modules.get(position));
+        ClassDetails.this.startActivity(i);
     }
 
     @Override
