@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="team2beat.com.qrcodes.staff_modules">
+    tools:context="team2beat.com.qrcodes.staff_modules"
+    android:theme="@style/AppTheme">
 
 <RelativeLayout  android:layout_width="match_parent"
     android:layout_height="match_parent"
