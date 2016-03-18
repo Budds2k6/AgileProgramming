@@ -274,7 +274,7 @@ public class MainActivity extends AppCompatActivity {
         defTxt.setText("Please Scan a QR code");
 
         ImageView defImg = (ImageView) findViewById(R.id.imageView2);
-        defImg.setVisibility(View.VISIBLE);
+        defImg.setVisibility(View.INVISIBLE);
 
     }
 
