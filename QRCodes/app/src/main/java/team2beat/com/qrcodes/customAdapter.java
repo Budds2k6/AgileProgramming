@@ -25,7 +25,7 @@ public class customAdapter extends ArrayAdapter<String> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
        System.out.println("getView " + position + " " + convertView);
-        TextView textView;
+        TextView textView = null;
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if((int)parent.getTag() == 0) {
@@ -37,14 +37,21 @@ public class customAdapter extends ArrayAdapter<String> {
                 convertView = inflater.inflate(R.layout.on_reg, null);
             textView = (TextView) convertView.findViewById(R.id.firstLine);
 
-            int index = values[position].indexOf(']');
-            String output = values[position].substring(index + 2);
-            textView.setText(output);
+
         }
         else if((int)parent.getTag() == 1) {
-
+            if (values[position].contains("RIGHT NOW")) {
+                convertView = inflater.inflate(R.layout.module_right_now, null);
+            } else if (values[position].contains("ENDED")) {
+                convertView = inflater.inflate(R.layout.module_ended, null);
+            } else
+                convertView = inflater.inflate(R.layout.module_future, null);
+            textView = (TextView) convertView.findViewById(R.id.firstLine);
         }
-
+        int index = values[position].indexOf(']');
+        String output = values[position].substring(index + 2);
+        if(textView != null)
+             textView.setText(output);
        /*
         if (text.contains("Not on Register"))
         {
