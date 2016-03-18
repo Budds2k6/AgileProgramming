@@ -32,7 +32,7 @@
             android:layout_height="208dp"
             android:id="@+id/moduleList"
             android:layout_weight="0.84"
-            android:divider="#c1c25d"
+            android:divider="#c2b35b"
             android:dividerHeight="2dp"
             android:drawSelectorOnTop="false"
             android:contextClickable="false" />
