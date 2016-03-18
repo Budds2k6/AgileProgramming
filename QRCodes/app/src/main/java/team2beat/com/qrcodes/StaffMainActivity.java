@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.common.BitMatrix;
@@ -68,6 +69,10 @@ public class StaffMainActivity extends AppCompatActivity {
         // display the user details on the screen
         TextView txtName = (TextView) findViewById(R.id.lblLoggedInAs);
         txtName.setText("Logged In As: " + staffDetails.getFirstName() + " " + staffDetails.getSurname());
+    }
+
+    @Override
+    public void onBackPressed() {
     }
 
     public void loadQRCode(View v)
@@ -158,14 +163,15 @@ public class StaffMainActivity extends AppCompatActivity {
 
         moduleList.setAdapter(adapter);
         moduleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Intent i = new Intent(getBaseContext(), QrDisplayActivity.class);
-            QrDisplayActivity.staffDetails = staffDetails;
-            QrDisplayActivity.theBooking = classes.get(position);
-            StaffMainActivity.this.startActivity(i);
-        }
-    });
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(getBaseContext(), QrDisplayActivity.class);
+                QrDisplayActivity.staffDetails = staffDetails;
+                QrDisplayActivity.theBooking = classes.get(position);
+                StaffMainActivity.this.startActivity(i);
+                return;
+            }
+        });
     }
 
     public void loadStaffModules(View v)

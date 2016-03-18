@@ -24,6 +24,10 @@ public class staff_modules extends AppCompatActivity {
     public static ArrayList<Module> modules = new ArrayList<Module>();
 
     @Override
+    public void onBackPressed() {
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_staff_modules);

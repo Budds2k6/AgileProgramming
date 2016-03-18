@@ -83,6 +83,10 @@ public class ClassDetails extends AppCompatActivity {
         ClassDetails.this.startActivity(i);
     }
 
+    @Override
+    public void onBackPressed() {
+    }
+
     public void displayToast()
     {
         LayoutInflater inflater = getLayoutInflater();

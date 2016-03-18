@@ -129,7 +129,7 @@ public class LoginAsync  extends ActionBarActivity{
                 String userType = rootElement.getTagName();
 
                 // try to get the username
-                toReturn = new String [5];
+                toReturn = new String [7];
                 toReturn[0] = getElementFromTag("username", rootElement);
 
                 // if the username is not "Login Failed" - i.e. the Login succeeded...
@@ -152,6 +152,10 @@ public class LoginAsync  extends ActionBarActivity{
 
                     // keep getting details
                     toReturn[4] = userType;
+
+
+                    toReturn[5] = getElementFromTag("job_id", rootElement);
+                    toReturn[6] = getElementFromTag("access_level", rootElement);
                 }
             } catch (Exception e) {
                 e.printStackTrace();

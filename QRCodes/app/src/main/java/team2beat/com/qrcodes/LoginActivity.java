@@ -1,6 +1,7 @@
 package team2beat.com.qrcodes;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.net.InetAddress;
@@ -29,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void submitLogin(View v) {
 
-        if (isConnectionAvailable()) {
+        //if (isConnectionAvailable()) {
 
             try {
 
@@ -56,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
                             //String JobID = "2751";
 
                             Staff theStaff = new Staff(staffID, successDetails[0], successDetails[1], successDetails[2]);
-
+                            theStaff.setJob(Integer.valueOf(successDetails[5]), Integer.valueOf(successDetails[6]));
 
                             dummyLogin(v, theStaff);
                         } else if (successDetails[4].equals("student")) {      // password = "pass"
@@ -76,21 +78,30 @@ public class LoginActivity extends AppCompatActivity {
                     toast = Toast.makeText(this, "LOGIN FAILED...", Toast.LENGTH_LONG);
                 }
 
+                TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
+                toastMessage.setBackgroundColor(Color.TRANSPARENT);
+
                 toast.show();
             } catch (Exception e) {
 
                 // pop up message - pop up... toast... get it? Clever Android...
                 Toast toast = Toast.makeText(this, "LOGIN FAILED...", Toast.LENGTH_LONG);
+                TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
+                toastMessage.setBackgroundColor(Color.TRANSPARENT);
                 toast.show();
                 e.printStackTrace();
             }
-        }
+        /*}
         else
         {
             // No connection available
             Toast toast = Toast.makeText(this, "Connection Timed Out", Toast.LENGTH_LONG);
             toast.show();
-        }
+        }*/
+    }
+
+    @Override
+    public void onBackPressed() {
     }
 
     public void dummyLogin(View v, Staff theStaff) {

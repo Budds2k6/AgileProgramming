@@ -79,6 +79,10 @@ public class module_statistics extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+    }
+
 
     public void displayClassesFold(View view){
         classList = (ListView) findViewById(R.id.foldList);
