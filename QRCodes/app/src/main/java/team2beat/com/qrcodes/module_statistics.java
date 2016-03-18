@@ -23,6 +23,7 @@ import team2beat.com.src.DataObjects.Booking;
 import team2beat.com.src.DataObjects.Module;
 import team2beat.com.src.DataObjects.ShouldAttend;
 import team2beat.com.src.DataObjects.Student;
+import team2beat.com.src.Models.CustomComparator;
 import team2beat.com.src.Models.CustomComparatorDate;
 
 public class module_statistics extends AppCompatActivity {
@@ -180,6 +181,9 @@ public class module_statistics extends AppCompatActivity {
         for (int i = 0; i < studentList.size(); i++) {
             list.add(studentList.get(i).getStudentName());
         }
+
+        // sort the student list
+        Collections.sort(studentList, new CustomComparator());
 
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
 

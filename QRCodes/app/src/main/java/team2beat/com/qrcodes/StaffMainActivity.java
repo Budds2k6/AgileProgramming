@@ -42,12 +42,11 @@ public class StaffMainActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_staff_main);
 
-
             // change this to store the values
             loadModules();
 
+            // display details on the screen
             createClassLabels();
-
             setLabelText();
 
         }catch(Exception e){
@@ -55,13 +54,6 @@ public class StaffMainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
-    /*
-        public void setStaffDetails(Staff staff)
-        {
-            staffDetails = staff;
-        }
-    */
 
     public void setLabelText()
     {
@@ -73,15 +65,6 @@ public class StaffMainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
     }
-
-    public void loadQRCode(View v)
-    {
-        Intent i = new Intent (getBaseContext(), QrDisplayActivity.class);
-        QrDisplayActivity.staffDetails = staffDetails;
-        i.putExtra("bookingSelected", 1000);
-        StaffMainActivity.this.startActivity(i);
-    }
-
 
     public void loadModules()
     {
@@ -95,8 +78,6 @@ public class StaffMainActivity extends AppCompatActivity {
     public void refresh(View v)
     {
         Intent i = new Intent(getBaseContext(), StaffMainActivity.class);
-        //i.putExtra("bookingID", bookingID);
-        //i.putExtra("attendanceID", attendanceListID);
         finish();
         StaffMainActivity.this.startActivity(i);
     }
@@ -108,14 +89,11 @@ public class StaffMainActivity extends AppCompatActivity {
 
         ArrayList<String> classDetails = new ArrayList<String>();
 
-
         java.util.Date currDate = new java.util.Date();
 
         //Gets current time
         Calendar c = Calendar.getInstance();
         c.setTime(currDate);
-
-        Time classDuration;
 
 
         for(int i = 0; i < classes.size(); i++)
@@ -130,7 +108,7 @@ public class StaffMainActivity extends AppCompatActivity {
 
 
             // checks if happening NOW
-            //Should get start time
+            // get start time
             Calendar c2 = Calendar.getInstance();
             c2.setTime(classes.get(i).getStartTime());
 
@@ -140,6 +118,7 @@ public class StaffMainActivity extends AppCompatActivity {
 
             c3.add(Calendar.HOUR_OF_DAY, 1);
 
+            // if the current time is after the start time but before the end time, the class is happening right now
             if(classes.get(i).getEndTime() != null)
             {
                 output += "[ENDED] ";
@@ -152,16 +131,14 @@ public class StaffMainActivity extends AppCompatActivity {
             }
 
 
-            // if the current time is after the start time but before the end time, the class is happening right now
-
-
-
+            // display the output
             output += (building + " (" + roomNumber + ")\n" + startTime + "\n" + moduleName + " (" + classType + ")");
 
             classDetails.add(output);
 
         }
 
+        // create the list items
         final customAdapter adapter = new customAdapter(this, classDetails.toArray(new String[0]));
         moduleList.setTag(1);
         moduleList.setAdapter(adapter);
@@ -179,6 +156,8 @@ public class StaffMainActivity extends AppCompatActivity {
 
     public void loadStaffModules(View v)
     {
+
+        // load the page for the staff modules (ALL)
         Intent i = new Intent (getBaseContext(), staff_modules.class);
 
         StaffController sc = new StaffController();

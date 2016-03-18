@@ -36,10 +36,9 @@ public class staff_modules extends AppCompatActivity {
 
         final ListView moduleList = (ListView) findViewById(R.id.moduleList);
 
-
         ArrayList<Module> sortedList = new ArrayList<>();
 
-
+        // get the modules that are actually taught by the current user
         final ArrayList<String> list = new ArrayList<String>();
         for (int i = 0; i < modules.size(); i++) {
             if(modules.get(i).getCoordinator().equals(loggedInStaff)) {
@@ -48,6 +47,7 @@ public class staff_modules extends AppCompatActivity {
             }
         }
 
+        // get the other modules that they can access
         for (int i = 0; i < modules.size(); i++) {
             if(!modules.get(i).getCoordinator().equals(loggedInStaff)) {
                 list.add(modules.get(i).getModuleName() + " (" + modules.get(i).getModuleCode() + ") - " + modules.get(i).getCoordinatorName());
@@ -58,6 +58,7 @@ public class staff_modules extends AppCompatActivity {
         modules = null;
         modules = sortedList;
 
+        // display the modules on the list
         final ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
 
         moduleList.setAdapter(adapter);
@@ -67,7 +68,6 @@ public class staff_modules extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 module_statistics.moduleSelected = modules.get(position);
                 Intent i = new Intent (getBaseContext(), module_statistics.class);
-                //i.putExtra("moduleSelected",  modules.get(position));
                 staff_modules.this.startActivity(i);
             }
         });
