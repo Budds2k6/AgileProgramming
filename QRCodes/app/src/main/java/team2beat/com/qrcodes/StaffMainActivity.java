@@ -130,10 +130,6 @@ public class StaffMainActivity extends AppCompatActivity {
 
             String output = "";
 
-            if(classes.get(i).getEndTime() != null)
-            {
-                output += "[ENDED] \n";
-            }
 
             // checks if happening NOW
             //Should get start time
@@ -146,12 +142,21 @@ public class StaffMainActivity extends AppCompatActivity {
 
             c3.add(Calendar.HOUR_OF_DAY, 1);
 
+            if(classes.get(i).getEndTime() != null)
+            {
+                output += "[ENDED] ";
+            }else if(c.after(c2) && c.before(c3))
+            {
+                output += "[RIGHT NOW] ";
+            }else
+            {
+                output += "[] ";
+            }
+
+
             // if the current time is after the start time but before the end time, the class is happening right now
 
-            if(c.after(c2) && c.before(c3))
-            {
-                output += "[RIGHT NOW]\n";
-            }
+
 
             output += (building + " (" + roomNumber + ")\n" + startTime + "\n" + classType + " (Booking ID = " + classes.get(i).getBookingID() + ")\n" + moduleName);
 
@@ -159,7 +164,7 @@ public class StaffMainActivity extends AppCompatActivity {
 
         }
 
-        final ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, classDetails);
+        final customAdapter adapter = new customAdapter(this, classDetails.toArray(new String[0]));
         moduleList.setTag(1);
         moduleList.setAdapter(adapter);
         moduleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
