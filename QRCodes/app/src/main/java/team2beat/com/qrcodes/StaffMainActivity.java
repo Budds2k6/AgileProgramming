@@ -90,7 +90,6 @@ public class StaffMainActivity extends AppCompatActivity {
         // (store the data in a list / array)
         BookingController bc = new BookingController();
         classes = bc.getTodaysClasses(staffDetails.getStaffID());
-
     }
 
 
@@ -158,7 +157,7 @@ public class StaffMainActivity extends AppCompatActivity {
 
 
 
-            output += (building + " (" + roomNumber + ")\n" + startTime + "\n" + classType + " (Booking ID = " + classes.get(i).getBookingID() + ")\n" + moduleName);
+            output += (building + " (" + roomNumber + ")\n" + startTime + "\n" + moduleName + " (" + classType + ")");
 
             classDetails.add(output);
 

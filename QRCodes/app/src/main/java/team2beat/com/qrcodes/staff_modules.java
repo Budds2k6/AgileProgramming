@@ -37,22 +37,26 @@ public class staff_modules extends AppCompatActivity {
         final ListView moduleList = (ListView) findViewById(R.id.moduleList);
 
 
+        ArrayList<Module> sortedList = new ArrayList<>();
+
+
         final ArrayList<String> list = new ArrayList<String>();
         for (int i = 0; i < modules.size(); i++) {
-            String coordinator;
-
-            if(modules.get(i).getCoordinator().equals(loggedInStaff))
-            {
-                coordinator = modules.get(i).getCoordinatorName().toUpperCase();
-            }else
-            {
-                coordinator = modules.get(i).getCoordinatorName();
+            if(modules.get(i).getCoordinator().equals(loggedInStaff)) {
+                list.add(modules.get(i).getModuleName() + " (" + modules.get(i).getModuleCode() + ") - " + modules.get(i).getCoordinatorName());
+                sortedList.add(modules.get(i));
             }
-
-            list.add(modules.get(i).getModuleName() + " (" + modules.get(i).getModuleCode() + ") - " + coordinator);
         }
 
-        Collections.reverse(modules);
+        for (int i = 0; i < modules.size(); i++) {
+            if(!modules.get(i).getCoordinator().equals(loggedInStaff)) {
+                list.add(modules.get(i).getModuleName() + " (" + modules.get(i).getModuleCode() + ") - " + modules.get(i).getCoordinatorName());
+                sortedList.add(modules.get(i));
+            }
+        }
+
+        modules = null;
+        modules = sortedList;
 
         final ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
 

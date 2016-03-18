@@ -35,6 +35,8 @@ import java.lang.reflect.Array;
 import java.sql.Time;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.regex.Pattern;
 
@@ -43,6 +45,7 @@ import team2beat.com.src.Controllers.BookingController;
 import team2beat.com.src.DataObjects.Attendee;
 import team2beat.com.src.DataObjects.ShouldAttend;
 import team2beat.com.src.DataObjects.Student;
+import team2beat.com.src.Models.CustomComparator;
 
 public class RegisterView extends AppCompatActivity {
 
@@ -164,6 +167,15 @@ public class RegisterView extends AppCompatActivity {
 
         ArrayList<String> studentDetails = new ArrayList<String>();
 
+        try {
+            Collections.sort(signedInButNotOnList, new CustomComparator());
+            Collections.sort(whoHasSignedIn, new CustomComparator());
+            Collections.sort(shouldAttend, new CustomComparator());
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+            e.printStackTrace();
+        }
 
         // output with formatting to show who is there and who is not
         for(int i = 0; i < signedInButNotOnList.size(); i++)
