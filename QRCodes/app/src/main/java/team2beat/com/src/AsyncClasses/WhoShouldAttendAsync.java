@@ -38,6 +38,7 @@ public class WhoShouldAttendAsync extends ActionBarActivity {
     {
         this.attendanceListID = attID;
         new PostClass().execute(String.valueOf(attendanceListID));
+        //complete = false;
     }
 
     @Override
@@ -45,6 +46,7 @@ public class WhoShouldAttendAsync extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         //setContentView();
         new PostClass().execute(String.valueOf(attendanceListID));
+        //complete = false;
     }
 
 

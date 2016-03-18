@@ -31,7 +31,8 @@ public class LoginActivity extends AppCompatActivity {
 
     public void submitLogin(View v) {
 
-        //if (isConnectionAvailable()) {
+        // check that there is a connection to the server available
+        if (isConnectionAvailable()) {
 
             try {
 
@@ -49,24 +50,33 @@ public class LoginActivity extends AppCompatActivity {
 
                 Toast toast;
 
+                // check for nulls - ERROR HANDLING
                 if (successDetails != null && successDetails[0] != null) {
+
+                    // the the login succeeded...
                     if (!successDetails[0].equals("Login Failed")) {
+
+                        // get the values needed
                         toast = Toast.makeText(this, "Successfully Logged In as " + successDetails[1] + " " + successDetails[2], Toast.LENGTH_LONG);
+
+                        // check if staff or student. Create an object of the relevant type
                         if (successDetails[4].equals("staff")) {
 
                             String staffID = successDetails[3];
-                            //String JobID = "2751";
 
                             Staff theStaff = new Staff(staffID, successDetails[0], successDetails[1], successDetails[2]);
                             theStaff.setJob(Integer.valueOf(successDetails[5]), Integer.valueOf(successDetails[6]));
 
+                            // login in as staff
                             dummyLogin(v, theStaff);
+
                         } else if (successDetails[4].equals("student")) {      // password = "pass"
 
                             String studentID = successDetails[3];
 
                             Student theStudent = new Student(studentID, successDetails[0], successDetails[1], successDetails[2]);
 
+                            // login as student
                             dummyLoginStudent(v, theStudent);
 
                         }
@@ -78,10 +88,12 @@ public class LoginActivity extends AppCompatActivity {
                     toast = Toast.makeText(this, "LOGIN FAILED...", Toast.LENGTH_LONG);
                 }
 
+                // show the message to tell the user if the login was successful or not
                 TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
                 toastMessage.setBackgroundColor(Color.TRANSPARENT);
 
                 toast.show();
+
             } catch (Exception e) {
 
                 // pop up message - pop up... toast... get it? Clever Android...
@@ -91,13 +103,13 @@ public class LoginActivity extends AppCompatActivity {
                 toast.show();
                 e.printStackTrace();
             }
-        /*}
+        }
         else
         {
             // No connection available
             Toast toast = Toast.makeText(this, "Connection Timed Out", Toast.LENGTH_LONG);
             toast.show();
-        }*/
+        }
     }
 
     @Override
@@ -108,7 +120,6 @@ public class LoginActivity extends AppCompatActivity {
         Intent i = new Intent(getBaseContext(), StaffMainActivity.class);
 
         // the staff members details need to be passed
-        //i.putExtra("details", theStaff);
         StaffMainActivity.staffDetails = theStaff;
         LoginActivity.this.startActivity(i);
     }
@@ -132,7 +143,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //join to the main thread
         try {
-            Thread.sleep(1200);
+            Thread.sleep(4000);
             newThread.join();
         }catch(Exception e)
         {

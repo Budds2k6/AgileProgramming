@@ -1,10 +1,11 @@
 package team2beat.com.src.Models;
 
 import java.util.Comparator;
+import java.util.Date;
 
 import team2beat.com.src.DataObjects.ShouldAttend;
 
-public class CustomComparator implements Comparator<ShouldAttend> {
+public class CustomComparator implements Comparator<ShouldAttend>{
     @Override
     public int compare(ShouldAttend s1, ShouldAttend s2) {
 

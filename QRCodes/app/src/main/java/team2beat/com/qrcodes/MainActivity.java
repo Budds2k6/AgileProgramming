@@ -220,8 +220,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTick(long millisUntilFinished) {
 
+                // set the image and text to the relevant items
                 TextView Confirmlbl = (TextView) findViewById(R.id.textView5);
-                Confirmlbl.setText("You are signed in.");
+                Confirmlbl.setText("You have been signed in!");
 
                 ImageView Confirmed = (ImageView) findViewById(R.id.imageView2);
                 Confirmed.setImageResource(R.drawable.checkmark);
@@ -238,6 +239,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    // timer to show an error image if the scan was unsuccessful
     public void ErrorFeedback()
     {
         CountDownTimer ErrDisplayTimer;
@@ -249,6 +251,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTick(long millisUntilFinished) {
 
+                // set the image and text to the relevant items
                 TextView QRErrorlbl = (TextView) findViewById(R.id.textView5);
                 QRErrorlbl.setText("Please Scan again");
 
@@ -269,13 +272,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void DefaultScreen()
     {
-
+        // set up the default values
         TextView defTxt = (TextView) findViewById(R.id.textView5);
         defTxt.setText("Please Scan a QR code");
 
         ImageView defImg = (ImageView) findViewById(R.id.imageView2);
         defImg.setVisibility(View.INVISIBLE);
-
     }
 
     /*
@@ -285,9 +287,10 @@ public class MainActivity extends AppCompatActivity {
     * */
     public void sendAttendanceToDatabase(PresentRecord pr)
     {
-        // TODO pass object to controller to write to database
+
         BookingController bc = new BookingController();
 
+        // sign the student in to the class - return a boolean to indicate success (or lack of!)
         boolean studentReturned = bc.setAttendance(pr);
 
         if(studentReturned)
@@ -297,8 +300,6 @@ public class MainActivity extends AppCompatActivity {
         {
             ErrorFeedback();
         }
-        // TODO get class name from database
-
     }
 
 }

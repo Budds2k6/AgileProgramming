@@ -12,13 +12,18 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 
+import team2beat.com.src.Controllers.AttendeeListController;
 import team2beat.com.src.Controllers.ModuleController;
+import team2beat.com.src.DataObjects.Attendee;
 import team2beat.com.src.DataObjects.Booking;
 import team2beat.com.src.DataObjects.Module;
 import team2beat.com.src.DataObjects.ShouldAttend;
 import team2beat.com.src.DataObjects.Student;
+import team2beat.com.src.Models.CustomComparatorDate;
 
 public class module_statistics extends AppCompatActivity {
 
@@ -35,94 +40,142 @@ public class module_statistics extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_module_statistics);
 
-        //Intent _intent = getIntent();
-        //Bundle bundleModuleSelected = _intent.getExtras();
-
-
-        //String moduleSelected = bundleModuleSelected.getString("moduleSelected");
-        //moduleSelected = (Module) bundleModuleSelected.getParcelable("moduleSelected");
-
+        // set the text view value
         TextView moduleText = (TextView) findViewById(R.id.textView3);
         moduleText.setText(moduleSelected.getModuleName());
 
         classList = (ListView) findViewById(R.id.foldList);
 
-
-
-
-
         // read students
         ModuleController mc = new ModuleController();
         studentList = mc.getStudentListForModule(moduleSelected.getModuleCode());
-        //studentList = new ArrayList<>();
 
         // read bookings
         mc = new ModuleController();
         bookingList = mc.getBookingListForModule(moduleSelected.getModuleCode());
-        //bookingList = new ArrayList<>();
 
+        // sort the booking list by date
+        Collections.sort(bookingList, new CustomComparatorDate());
 
+        AttendeeListController alc = new AttendeeListController();
 
-        //foldString = new ArrayList<String>();
+        int totalAttended = 0;
+        int totalExpected = 0;
 
+        // calculate the total attendance for the module - all ENDED classes
+        for(int i = 0; i < bookingList.size(); i++)
+        {
+            // if the current class has ended
+            if(bookingList.get(i).getEndTime() != null)
+            {
+                // add the values (who has attended and who should have attended) to the relevant fields
+                ArrayList<Attendee> list = alc.getAttendanceListByID(Integer.valueOf(bookingList.get(i).getAttListID()));
+                ArrayList<ShouldAttend> list2 = alc.getShouldAttend(Integer.valueOf(bookingList.get(i).getBookingID()));
 
-        //list = new ArrayList<String>();
-        //for (int i = 0; i < bookingList.size(); i++) {
-        //    list.add(String.valueOf(bookingList.get(i).getStartTime()));
-        //}
+                totalAttended += list.size();
+                totalExpected += list2.size();
+            }
+        }
 
-        //adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
+        // output the percent
+        TextView txtPercentage = (TextView)findViewById(R.id.txtPercent);
+        String percentString = calculateAttendancePercentage(totalAttended, totalExpected);
 
-        //classList.setAdapter(adapter);
+        // check for errors
+        if(percentString.contains("NaN"))
+        {
+            percentString = "0%";
+        }
+        txtPercentage.setText(percentString);
 
+        // display the list of classes
         displayClassesFold(null);
 
+    }
+
+
+    String calculateAttendancePercentage(int attended, int missing)
+    {
+        // calculate the percentage of the attendance
+        int total = attended + missing;
+
+        float percent = ((float)attended / (float)total) * 100;
+
+        DecimalFormat df = new DecimalFormat("#.#");
+
+        // return as a string
+        String returnVal = "Total Attendance: \n" + df.format(percent) + "%";
+
+        return returnVal;
     }
 
     @Override
     public void onBackPressed() {
     }
 
-
     public void displayClassesFold(View view){
+
+        // the list to display the items
         classList = (ListView) findViewById(R.id.foldList);
 
 
-
+        // add all the items
         list = new ArrayList<>();
         for (int i = 0; i < bookingList.size(); i++) {
             // date time place type
-            String toAdd;
+            String toAdd = "";
             String start = String.valueOf(bookingList.get(i).getStartTime());
             String room = String.valueOf(bookingList.get(i).getBuilding()) + " " + String.valueOf(bookingList.get(i).getRoomNumber());
             String date = String.valueOf(bookingList.get(i).getDate());
             String type = String.valueOf(bookingList.get(i).getClassType());
 
-            toAdd = date + " | " + start + " | " + type + " | " + room;
+            if(bookingList.get(i).getEndTime() != null)
+            {
+                toAdd += "*";
+            }
+
+            toAdd += date + " | " + start + " | " + type + " | " + room;
 
             list.add(toAdd);
-
         }
 
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
+        if(list.size() > 0)
+        {
+            adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
 
-        classList.setAdapter(adapter);
+            classList.setAdapter(adapter);
 
-        classList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ClassDetails.theBooking = bookingList.get(position);
-                Intent i = new Intent(getBaseContext(), ClassDetails.class);
-                //i.putExtra("classSelected", ((TextView) view).getText());
-                module_statistics.this.startActivity(i);
-            }
-        });
+            classList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    ClassDetails.theBooking = bookingList.get(position);
+                    Intent i = new Intent(getBaseContext(), ClassDetails.class);
+                    //i.putExtra("classSelected", ((TextView) view).getText());
+                    module_statistics.this.startActivity(i);
+                }
+            });
 
+
+            // if there are no classes for that module, output a message
+        }
+        else
+        {
+            list.add("NO CLASSES FOR THIS MODULE");
+
+            adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
+
+            classList.setAdapter(adapter);
+
+            classList.setOnItemClickListener(null);     // shouldn't do anything when clicked
+        }
     }
+
+    // display the student list
     public void displayStudentFold(View view){
+
         classList = (ListView) findViewById(R.id.foldList);
 
-
+        // get the student details
         list = new ArrayList<>();
         for (int i = 0; i < studentList.size(); i++) {
             list.add(studentList.get(i).getStudentName());
@@ -130,20 +183,17 @@ public class module_statistics extends AppCompatActivity {
 
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
 
-        classList.setOnItemClickListener(null);
-
-
-        // TODO: add event to go to the student attendance data
+        classList.setOnItemClickListener(null);     // does not go anywhere when clicked
+        // TODO: onClick will take the user to the information about the student's attendance
 
         classList.setAdapter(adapter);
 
     }
 
-
+    // go bacl to the staff modules page
     public void goBack(View v)
     {
         Intent i = new Intent (getBaseContext(), staff_modules.class);
-        //i.putExtra("moduleSelected",  modules.get(position));
         module_statistics.this.startActivity(i);
     }
 

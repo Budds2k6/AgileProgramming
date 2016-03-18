@@ -42,7 +42,6 @@ public class StaffMainActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_staff_main);
 
-            //Bundle detailsBundle = getIntent().getExtras();
 
             // change this to store the values
             loadModules();

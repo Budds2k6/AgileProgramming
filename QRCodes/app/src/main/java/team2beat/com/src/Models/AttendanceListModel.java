@@ -79,6 +79,7 @@ public class AttendanceListModel {
                 attendeeList.add(sa);
             }
 
+            System.out.println("");
             return attendeeList;
         } catch (Exception e) {
             e.printStackTrace();

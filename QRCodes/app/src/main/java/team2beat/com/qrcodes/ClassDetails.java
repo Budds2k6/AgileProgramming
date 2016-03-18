@@ -28,12 +28,14 @@ public class ClassDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_class_details);
 
+        // find the text components of the activity
         module = (TextView) findViewById(R.id.textLecture);
         room = (TextView) findViewById(R.id.textRoom);
         location = (TextView) findViewById(R.id.textLocation);
         date = (TextView) findViewById(R.id.textDate);
         type = (TextView) findViewById(R.id.textType);
 
+        // set the text to the correct values
         module.setText(theBooking.getClassName());
         room.setText("Room No.: " + theBooking.getRoomNumber());
         location.setText("Building: " + theBooking.getBuilding());
@@ -43,8 +45,8 @@ public class ClassDetails extends AppCompatActivity {
 
     public void goBack(View v)
     {
+        // go back to the module statistics page
         Intent i = new Intent (getBaseContext(), module_statistics.class);
-        //i.putExtra("moduleSelected",  modules.get(position));
         ClassDetails.this.startActivity(i);
     }
 
@@ -73,13 +75,13 @@ public class ClassDetails extends AppCompatActivity {
 
     public void viewAttendance(View v)
     {
+        // set the variables for the Register page
         RegisterView.attendanceListID = Integer.valueOf(theBooking.getAttListID());
         RegisterView.bookingID = Integer.valueOf(theBooking.getBookingID());
         RegisterView.isLive = false;
 
+        // load the page
         Intent i = new Intent(getBaseContext(), RegisterView.class);
-        //i.putExtra("attendanceID", theBooking.getAttListID());
-        //i.putExtra("bookingID", theBooking.getBookingID());
         ClassDetails.this.startActivity(i);
     }
 
@@ -89,6 +91,7 @@ public class ClassDetails extends AppCompatActivity {
 
     public void displayToast()
     {
+        // custom toast
         LayoutInflater inflater = getLayoutInflater();
         View view = inflater.inflate(R.layout.custom_toast,
                 (ViewGroup) findViewById(R.id.toastLayout));

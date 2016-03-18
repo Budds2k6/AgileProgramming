@@ -60,14 +60,19 @@ public class QrDisplayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qr_display);
 
+
         bookingController = new BookingController(theBooking.getBookingID());
 
+        // set up the labels
 		setClassLabels();
 
+        // if the class is stll active (i.e. not ended), show the QR code
         if(theBooking.getEndTime() == null){
             // create a QR Code, representing the attendance list ID
             generateQRCode(theBooking.getBookingID());
-        }else
+        }
+        //if it has ended, inform the user
+        else
         {
             Toast toast = Toast.makeText(this, "Please Note: This class has ended", Toast.LENGTH_LONG);
 
@@ -85,61 +90,43 @@ public class QrDisplayActivity extends AppCompatActivity {
 
     public void setClassLabels()
     {
-        // display details on QR screen
+        // display details on the screen
         TextView txtModID = (TextView) findViewById(R.id.lblModuleID);
         String classID = "Module: " + theBooking.getModuleID();
         txtModID.setText(classID);
 
-    /*    TextView txtModName = (TextView) findViewById(R.id.lblClassName);
-        txtModName.setText(theBooking.getModuleName());
-
-        TextView txtClassType = (TextView) findViewById(R.id.lblClassType);
-        txtClassType.setText(theBooking.getClassType());
-
-        TextView txtBuildingName = (TextView) findViewById(R.id.lblBuldingName);
-        txtBuildingName.setText(theBooking.getBuilding());
-
-        TextView txtRoomName = (TextView) findViewById(R.id.lblRoomNum);
-        txtRoomName.setText("Room: " + theBooking.getRoomNumber());
-
-*/
         TextView txtStartTime = (TextView) findViewById(R.id.lblStartTime);
         txtStartTime.setText(String.valueOf(theBooking.getStartTime()));
-
-
     }
 
     public void BackToRegister(View v)
     {
+        // go the register page
         RegisterView.attendanceListID = Integer.valueOf(theBooking.getAttListID());
         RegisterView.bookingID = Integer.valueOf(theBooking.getBookingID());
         RegisterView.isLive = true;
 
+        // show the register
         Intent i = new Intent(getBaseContext(), RegisterView.class);
-        //i.putExtra("attendanceID", theBooking.getAttListID());
-        //i.putExtra("bookingID", theBooking.getBookingID());
         QrDisplayActivity.this.startActivity(i);
     }
 
     public void backToStaffMenu(View v)
     {
+        // show the home page - passing the correct details
         Intent i = new Intent(getBaseContext(), StaffMainActivity.class);
-        i.putExtra("details", staffDetails);
+        StaffMainActivity.staffDetails = staffDetails;
         QrDisplayActivity.this.startActivity(i);
     }
 
     public void endClass(View v)
     {
+        // end the class
         bookingController.endClass();
         StaffMainActivity.staffDetails = staffDetails;
         backToStaffMenu(v);
     }
 
-    /*public void BackToBooking(View v)
-    {
-        Intent i = new Intent(getBaseContext(), staff_modules.class);
-        QrDisplayActivity.this.startActivity(i);
-    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

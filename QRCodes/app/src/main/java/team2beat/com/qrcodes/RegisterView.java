@@ -131,7 +131,6 @@ public class RegisterView extends AppCompatActivity {
         // remove the students who have attended from the list of students who SHOULD attend
         for(int i = 0; i < shouldAttend.size(); i++)
         {
-
             String userID = shouldAttend.get(i).getUserID();
 
             for(int j = 0; j < whoHasSignedIn.size(); j++)
@@ -167,6 +166,8 @@ public class RegisterView extends AppCompatActivity {
 
         ArrayList<String> studentDetails = new ArrayList<String>();
 
+
+        // sort the lists into alphabetical order
         try {
             Collections.sort(signedInButNotOnList, new CustomComparator());
             Collections.sort(whoHasSignedIn, new CustomComparator());
@@ -197,12 +198,12 @@ public class RegisterView extends AppCompatActivity {
             studentStatus.add(false);
         }
 
-
+        // set the values of the module list
         final customAdapter adapter = new customAdapter(this, studentDetails.toArray(new String[0]));
         moduleList.setTag(0);
         moduleList.setAdapter(adapter);
 
-
+        // add a click listener to the student items in the list
         moduleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -211,28 +212,27 @@ public class RegisterView extends AppCompatActivity {
         });
 
 
-        int count = moduleList.getCount();
-        int count2 = moduleList.getChildCount();
-
-        //moduleList.deferNotifyDataSetChanged();
-        //.notifyAll();
-
+        // calculate the percentage for the class attendance, and display on the screen
         String percentage = calculateAttendancePercentage(whoHasSignedIn.size(), shouldAttend.size(), signedInButNotOnList.size());
 
         TextView txtAttendance = (TextView) findViewById(R.id.textView2);
         txtAttendance.setText(percentage);
     }
 
+
     void confirmAdd(final int pos)
     {
+        // create a pop up message to ask the user to confirm or cancel their choice
         boolean signedIn = studentStatus.get(pos);
 
+        // check that the student has not already been signed in
         if(!signedIn) {
+
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
+            // ask for confirmation
             builder.setTitle("Confirm");
             builder.setMessage("Are you sure you wish to sign " + allStudents.get(pos).getStudentName() + " into this class?");
-
 
             // Set up the buttons
             builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
@@ -250,6 +250,7 @@ public class RegisterView extends AppCompatActivity {
                 }
             });
 
+            // create the alert and change the button colours
             AlertDialog alert = builder.create();
             alert.show();
             Button nbutton = alert.getButton(DialogInterface.BUTTON_NEGATIVE);
@@ -259,6 +260,7 @@ public class RegisterView extends AppCompatActivity {
 
         }else
         {
+            // if the student has already been signed in, tell the user
             Toast toast = Toast.makeText(getBaseContext(), allStudents.get(pos).getStudentName() + " has already been signed in!", Toast.LENGTH_LONG);
             TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
             toastMessage.setBackgroundColor(Color.TRANSPARENT);
@@ -270,28 +272,11 @@ public class RegisterView extends AppCompatActivity {
     public void onBackPressed() {
     }
 
-    /*public void setLabelColors(){
-        View v;
-        for(int i = moduleList.getFirstVisiblePosition(); i < moduleList.getChildCount(); i++ )
-        {
-            v = moduleList.getChildAt(i);
 
-            TextView txtView = (TextView)v;
-            String text = String.valueOf(txtView.getText());
-            if (text.contains("Not on Register"))
-            {
-                v.setBackgroundColor(Color.YELLOW);
-            } else if (text.contains("Not Present"))
-            {
-                v.setBackgroundColor(Color.RED);
-            }
-            else
-                v.setBackgroundColor(Color.GREEN);
-        }
-    }*/
     String calculateAttendancePercentage(int attended, int missing, int extra)
     {
 
+        // calculate the attendance for the class
         int total = attended + missing;
 
         float percent = ((float)attended / (float)total) * 100;
@@ -311,15 +296,15 @@ public class RegisterView extends AppCompatActivity {
 
     public void refresh(View v)
     {
+        // refresh the same page
         Intent i = new Intent(getBaseContext(), RegisterView.class);
-        i.putExtra("bookingID", bookingID);
-        i.putExtra("attendanceID", attendanceListID);
         finish();
         RegisterView.this.startActivity(i);
     }
 
     public void BackToQR(View v)
     {
+        // navigate to the correct page
         if(isLive)
         {
             Intent i = new Intent(getBaseContext(), QrDisplayActivity.class);
@@ -336,6 +321,7 @@ public class RegisterView extends AppCompatActivity {
     //http://stackoverflow.com/questions/10903754/input-text-dialog-android
     public void addStudentByID(View v)
     {
+        // give the user an option of which student to add - an input box in which they can type the students ID
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Enter Student ID");
 
@@ -375,6 +361,7 @@ public class RegisterView extends AppCompatActivity {
         BookingController bc = new BookingController();
         boolean success = bc.setAttendance(pr);
 
+        // if errors, tell the user
         if(!success)
         {
             Toast toast = Toast.makeText(getBaseContext(), "ERROR. Could not sign student in", Toast.LENGTH_LONG);
@@ -384,11 +371,13 @@ public class RegisterView extends AppCompatActivity {
             return false;
         }else
         {
+            // if success, tell the user
             Toast toast = Toast.makeText(getBaseContext(), "Student Successfully signed in", Toast.LENGTH_LONG);
             TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
             toastMessage.setBackgroundColor(Color.TRANSPARENT);
             toast.show();
 
+            // refresh the screen
             refresh(null);
 
             return true;
