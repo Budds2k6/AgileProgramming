@@ -21,7 +21,7 @@ public class ClassDetails extends AppCompatActivity {
 
     public static Booking theBooking;
 
-    TextView module, room, location, date, type;
+    TextView module, room, location, time, type, date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +33,29 @@ public class ClassDetails extends AppCompatActivity {
         location = (TextView) findViewById(R.id.textLocation);
         date = (TextView) findViewById(R.id.textDate);
         type = (TextView) findViewById(R.id.textType);
+        time = (TextView) findViewById(R.id.textTime);
 
         module.setText(theBooking.getClassName());
-        room.setText("Room No.: " + theBooking.getRoomNumber());
+        room.setText("Room No: " + theBooking.getRoomNumber());
         location.setText("Building: " + theBooking.getBuilding());
-        date.setText("Date: " + theBooking.getStartTime().toString());
-        type.setText("Class Type: " + theBooking.getClassType());
+        date.setText("Date: " + theBooking.getDate().toString());
+        time.setText("Time: " + theBooking.getStartTime().toString());
+
+        String lectureType = theBooking.getClassType();
+        if (lectureType.contains("Lec"))
+        {
+            lectureType = "Lecture";
+        }
+        else if (lectureType.contains("Tut"))
+        {
+            lectureType = "Tutorial";
+        }
+        else if (lectureType.contains("Sem"))
+        {
+            lectureType = "Seminar";
+        }
+
+        type.setText("Class Type: " + lectureType);
     }
 
     public void goBack(View v)
