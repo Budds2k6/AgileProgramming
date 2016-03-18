@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.io.Console;
+
 /**
  * Created by arturpopov on 17/03/2016.
  */
@@ -26,6 +28,8 @@ public class customAdapter extends ArrayAdapter<String> {
         TextView textView;
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        System.out.println(parent.getTag());
+        System.out.println(convertView.getTag());
         if(values[position].contains("Not on Register")) {
                 convertView = inflater.inflate(R.layout.not_on_reg, null);
         }

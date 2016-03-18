@@ -187,7 +187,7 @@ public class RegisterView extends AppCompatActivity {
 
 
         final customAdapter adapter = new customAdapter(this, studentDetails.toArray(new String[0]));
-
+        moduleList.setTag(0);
         moduleList.setAdapter(adapter);
 
 
