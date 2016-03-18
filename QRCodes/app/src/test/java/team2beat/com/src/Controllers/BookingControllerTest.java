@@ -16,9 +16,9 @@ public class BookingControllerTest extends TestCase
     public void testAddStudentFunctions()
     {
         BookingController bc = new BookingController();
-        PresentRecord pr = new PresentRecord(257, "080d03474");
-        PresentRecord wrongPr = new PresentRecord(257, "080003474");
-        PresentRecord prAlreadySigned = new PresentRecord(257,"130005540");
+        PresentRecord pr = new PresentRecord(257, "080003474");
+        PresentRecord wrongPr = new PresentRecord(257, "0493828x5");
+        PresentRecord prAlreadySigned = new PresentRecord(257,"130005440");
 
         //Test valid entry
         assertTrue("Fail! - Student should have been added; valid entry!", bc.setStudentAttendance(pr));

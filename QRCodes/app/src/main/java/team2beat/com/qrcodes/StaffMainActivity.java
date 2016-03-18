@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.common.BitMatrix;
@@ -70,6 +71,10 @@ public class StaffMainActivity extends AppCompatActivity {
         txtName.setText("Logged In As: " + staffDetails.getFirstName() + " " + staffDetails.getSurname());
     }
 
+    @Override
+    public void onBackPressed() {
+    }
+
     public void loadQRCode(View v)
     {
         Intent i = new Intent (getBaseContext(), QrDisplayActivity.class);
@@ -89,6 +94,15 @@ public class StaffMainActivity extends AppCompatActivity {
     }
 
 
+    public void refresh(View v)
+    {
+        Intent i = new Intent(getBaseContext(), StaffMainActivity.class);
+        //i.putExtra("bookingID", bookingID);
+        //i.putExtra("attendanceID", attendanceListID);
+        finish();
+        StaffMainActivity.this.startActivity(i);
+    }
+
     // need to pass a parameter in - the list / array
     public void createClassLabels()
     {
@@ -99,10 +113,9 @@ public class StaffMainActivity extends AppCompatActivity {
 
         java.util.Date currDate = new java.util.Date();
 
+        //Gets current time
         Calendar c = Calendar.getInstance();
         c.setTime(currDate);
-
-
 
         Time classDuration;
 
@@ -123,11 +136,17 @@ public class StaffMainActivity extends AppCompatActivity {
             }
 
             // checks if happening NOW
+            //Should get start time
             Calendar c2 = Calendar.getInstance();
             c2.setTime(classes.get(i).getStartTime());
 
-            Calendar c3 = c2;
+
+            Calendar c3 = Calendar.getInstance();
+            c3.setTime(classes.get(i).getStartTime());
+
             c3.add(Calendar.HOUR_OF_DAY, 1);
+
+            // if the current time is after the start time but before the end time, the class is happening right now
 
             if(c.after(c2) && c.before(c3))
             {
@@ -144,14 +163,15 @@ public class StaffMainActivity extends AppCompatActivity {
 
         moduleList.setAdapter(adapter);
         moduleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Intent i = new Intent(getBaseContext(), QrDisplayActivity.class);
-            QrDisplayActivity.staffDetails = staffDetails;
-            QrDisplayActivity.theBooking = classes.get(position);
-            StaffMainActivity.this.startActivity(i);
-        }
-    });
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(getBaseContext(), QrDisplayActivity.class);
+                QrDisplayActivity.staffDetails = staffDetails;
+                QrDisplayActivity.theBooking = classes.get(position);
+                StaffMainActivity.this.startActivity(i);
+                return;
+            }
+        });
     }
 
     public void loadStaffModules(View v)

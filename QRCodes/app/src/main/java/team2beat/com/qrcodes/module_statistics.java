@@ -39,10 +39,8 @@ public class module_statistics extends AppCompatActivity {
         //Bundle bundleModuleSelected = _intent.getExtras();
 
 
-        // TODO: maybe fix this - unable to test for now -------------------------------------------
         //String moduleSelected = bundleModuleSelected.getString("moduleSelected");
         //moduleSelected = (Module) bundleModuleSelected.getParcelable("moduleSelected");
-        // TODO: Up to this bit --------------------------------------------------------------------
 
         TextView moduleText = (TextView) findViewById(R.id.textView3);
         moduleText.setText(moduleSelected.getModuleName());
@@ -81,6 +79,10 @@ public class module_statistics extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+    }
+
 
     public void displayClassesFold(View view){
         classList = (ListView) findViewById(R.id.foldList);
@@ -89,7 +91,16 @@ public class module_statistics extends AppCompatActivity {
 
         list = new ArrayList<>();
         for (int i = 0; i < bookingList.size(); i++) {
-            list.add(String.valueOf(bookingList.get(i).getStartTime()));
+            // date time place type
+            String toAdd;
+            String start = String.valueOf(bookingList.get(i).getStartTime());
+            String room = String.valueOf(bookingList.get(i).getBuilding()) + " " + String.valueOf(bookingList.get(i).getRoomNumber());
+            String date = String.valueOf(bookingList.get(i).getDate());
+            String type = String.valueOf(bookingList.get(i).getClassType());
+
+            toAdd = date + " | " + start + " | " + type + " | " + room;
+
+            list.add(toAdd);
 
         }
 
@@ -100,8 +111,9 @@ public class module_statistics extends AppCompatActivity {
         classList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ClassDetails.theBooking = bookingList.get(position);
                 Intent i = new Intent(getBaseContext(), ClassDetails.class);
-                i.putExtra("classSelected", ((TextView) view).getText());
+                //i.putExtra("classSelected", ((TextView) view).getText());
                 module_statistics.this.startActivity(i);
             }
         });
@@ -118,10 +130,20 @@ public class module_statistics extends AppCompatActivity {
 
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
 
+
+        // TODO: add event to go to the student attendance data
+
         classList.setAdapter(adapter);
 
     }
 
+
+    public void goBack(View v)
+    {
+        Intent i = new Intent (getBaseContext(), staff_modules.class);
+        //i.putExtra("moduleSelected",  modules.get(position));
+        module_statistics.this.startActivity(i);
+    }
 
 
     @Override

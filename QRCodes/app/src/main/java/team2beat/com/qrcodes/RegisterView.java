@@ -23,6 +23,7 @@ import android.view.ViewGroup;
 
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -41,6 +42,7 @@ import team2beat.com.src.Controllers.AttendeeListController;
 import team2beat.com.src.Controllers.BookingController;
 import team2beat.com.src.DataObjects.Attendee;
 import team2beat.com.src.DataObjects.ShouldAttend;
+import team2beat.com.src.DataObjects.Student;
 
 public class RegisterView extends AppCompatActivity {
 
@@ -60,6 +62,12 @@ public class RegisterView extends AppCompatActivity {
     private ViewPager mViewPager;
     public static int attendanceListID;
     public static int bookingID;
+
+    ArrayList<ShouldAttend> allStudents = new ArrayList<>();
+    ArrayList<Boolean> studentStatus = new ArrayList<>();
+
+    public static boolean isLive = false;
+
     ArrayList<ShouldAttend> shouldAttend;
     ArrayList<Attendee> attendees;
     ListView moduleList;
@@ -111,11 +119,15 @@ public class RegisterView extends AppCompatActivity {
             whoHasSignedIn.add(newSA);
         }
 
+        for(int i = 0; i < whoHasSignedIn.size(); i++)
+        {
+            isOnList.add(false);
+        }
+
 
         // remove the students who have attended from the list of students who SHOULD attend
         for(int i = 0; i < shouldAttend.size(); i++)
         {
-            isOnList.add(false);
 
             String userID = shouldAttend.get(i).getUserID();
 
@@ -123,7 +135,7 @@ public class RegisterView extends AppCompatActivity {
             {
                 if(userID.equals(whoHasSignedIn.get(j).getUserID()))
                 {
-                    isOnList.set(i, true);
+                    isOnList.set(j, true);
                     shouldAttend.remove(i);
                     i--;
 
@@ -138,7 +150,7 @@ public class RegisterView extends AppCompatActivity {
         // work out which students have signed in but are not 'meant to' be there
         for(int i = 0; i < whoHasSignedIn.size(); i++)
         {
-            if(isOnList.get(i))
+            if(!isOnList.get(i))
             {
                 signedInButNotOnList.add(whoHasSignedIn.get(i));
                 isOnList.remove(i);
@@ -156,15 +168,21 @@ public class RegisterView extends AppCompatActivity {
         // output with formatting to show who is there and who is not
         for(int i = 0; i < signedInButNotOnList.size(); i++)
         {
-            studentDetails.add("[Not on Register]" + signedInButNotOnList.get(i).getStudentName());
+            studentDetails.add("[Not on Register] " + signedInButNotOnList.get(i).getStudentName());
+            allStudents.add(signedInButNotOnList.get(i));
+            studentStatus.add(true);
         }
         for(int i = 0; i < whoHasSignedIn.size(); i++)
         {
             studentDetails.add(whoHasSignedIn.get(i).getStudentName());
+            allStudents.add(whoHasSignedIn.get(i));
+            studentStatus.add(true);
         }
         for(int i = 0; i < shouldAttend.size(); i++)
         {
-            studentDetails.add("[Not Present]" + shouldAttend.get(i).getStudentName());
+            studentDetails.add("[Not Present] " + shouldAttend.get(i).getStudentName());
+            allStudents.add(shouldAttend.get(i));
+            studentStatus.add(false);
         }
 
 
@@ -173,6 +191,13 @@ public class RegisterView extends AppCompatActivity {
         moduleList.setAdapter(adapter);
 
 
+        moduleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if(isLive){ confirmAdd(position); }
+            }
+        });
+
 
         int count = moduleList.getCount();
         int count2 = moduleList.getChildCount();
@@ -180,13 +205,57 @@ public class RegisterView extends AppCompatActivity {
         //moduleList.deferNotifyDataSetChanged();
         //.notifyAll();
 
-
-
         String percentage = calculateAttendancePercentage(whoHasSignedIn.size(), shouldAttend.size(), signedInButNotOnList.size());
 
         TextView txtAttendance = (TextView) findViewById(R.id.textView2);
         txtAttendance.setText(percentage);
+    }
 
+    void confirmAdd(final int pos)
+    {
+        boolean signedIn = studentStatus.get(pos);
+
+        if(!signedIn) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+            builder.setTitle("Confirm");
+            builder.setMessage("Are you sure you wish to sign " + allStudents.get(pos).getStudentName() + " into this class?");
+
+
+            // Set up the buttons
+            builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    ShouldAttend s = allStudents.get(pos);
+                    PresentRecord pr = new PresentRecord(bookingID, s.getUserID());
+                    manuallySignInStudent(pr);
+                }
+            });
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    return;
+                }
+            });
+
+            AlertDialog alert = builder.create();
+            alert.show();
+            Button nbutton = alert.getButton(DialogInterface.BUTTON_NEGATIVE);
+            nbutton.setBackgroundColor(Color.argb(255, 150, 0, 0));
+            Button pbutton = alert.getButton(DialogInterface.BUTTON_POSITIVE);
+            pbutton.setBackgroundColor(Color.argb(255, 0, 150, 0));
+
+        }else
+        {
+            Toast toast = Toast.makeText(getBaseContext(), allStudents.get(pos).getStudentName() + " has already been signed in!", Toast.LENGTH_LONG);
+            TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
+            toastMessage.setBackgroundColor(Color.TRANSPARENT);
+            toast.show();
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
     }
 
     public void setLabelColors(){
@@ -194,7 +263,6 @@ public class RegisterView extends AppCompatActivity {
         for(int i = moduleList.getFirstVisiblePosition(); i < moduleList.getChildCount(); i++ )
         {
             v = moduleList.getChildAt(i);
-
 
             TextView txtView = (TextView)v;
             String text = String.valueOf(txtView.getText());
@@ -240,8 +308,15 @@ public class RegisterView extends AppCompatActivity {
 
     public void BackToQR(View v)
     {
-        Intent i = new Intent(getBaseContext(), QrDisplayActivity.class);
-        RegisterView.this.startActivity(i);
+        if(isLive)
+        {
+            Intent i = new Intent(getBaseContext(), QrDisplayActivity.class);
+            RegisterView.this.startActivity(i);
+        }else
+        {
+            Intent i = new Intent(getBaseContext(), ClassDetails.class);
+            RegisterView.this.startActivity(i);
+        }
     }
 
 
@@ -268,18 +343,7 @@ public class RegisterView extends AppCompatActivity {
                 // call the controller
                 PresentRecord pr = new PresentRecord(bookingID, inputID);
 
-                BookingController bc = new BookingController();
-                boolean success = bc.setAttendance(pr);
-
-                if(!success)
-                {
-                    Toast toast = Toast.makeText(getBaseContext(), "ERROR. Could not sign student in", Toast.LENGTH_LONG);
-                    toast.show();
-                }else
-                {
-                    Toast toast = Toast.makeText(getBaseContext(), "Student Successfully signed in", Toast.LENGTH_LONG);
-                    toast.show();
-                }
+                manuallySignInStudent(pr);
 
             }
         });
@@ -292,6 +356,31 @@ public class RegisterView extends AppCompatActivity {
 
         builder.show();
 
+    }
+
+    boolean manuallySignInStudent(PresentRecord pr)
+    {
+        BookingController bc = new BookingController();
+        boolean success = bc.setAttendance(pr);
+
+        if(!success)
+        {
+            Toast toast = Toast.makeText(getBaseContext(), "ERROR. Could not sign student in", Toast.LENGTH_LONG);
+            TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
+            toastMessage.setBackgroundColor(Color.TRANSPARENT);
+            toast.show();
+            return false;
+        }else
+        {
+            Toast toast = Toast.makeText(getBaseContext(), "Student Successfully signed in", Toast.LENGTH_LONG);
+            TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
+            toastMessage.setBackgroundColor(Color.TRANSPARENT);
+            toast.show();
+
+            refresh(null);
+
+            return true;
+        }
     }
 
     @Override

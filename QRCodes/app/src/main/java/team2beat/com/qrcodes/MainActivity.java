@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
 
             // If the activity does not exist - i.e. no scanner found
         } catch (ActivityNotFoundException e) {
-            // if theZXing scanner is not found, ask the user if they wish to download one
+            // if the ZXing scanner is not found, ask the user if they wish to download one
             showDialog(MainActivity.this, "No Scanner Found", "Download a scanner code activity?", "Yes", "No").show();
         }
     }
@@ -183,7 +183,6 @@ public class MainActivity extends AppCompatActivity {
                     //Toast toast = Toast.makeText(this, "SUCCESSFULLY SCANNED INTO CLASS" + contents, Toast.LENGTH_LONG);
                     displayToast();
                     //toast.show();
-                    ConfirmFeedback();
 
 
                     // if the string does not convert, catch the exception and inform the user
@@ -197,12 +196,18 @@ public class MainActivity extends AppCompatActivity {
                     QRError.setImageResource(R.drawable.crossmark);
                     QRError.setVisibility(View.VISIBLE);
 
+                    TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
+                    toastMessage.setBackgroundColor(Color.TRANSPARENT);
+
                     toast.show();
                 }
             }
         }
     }
 
+    @Override
+    public void onBackPressed() {
+    }
 
     public void ConfirmFeedback()
     {
@@ -229,8 +234,10 @@ public class MainActivity extends AppCompatActivity {
 
         boolean studentReturned = bc.setAttendance(pr);
 
-        Toast toast = Toast.makeText(this, "Did it succeed? " + studentReturned, Toast.LENGTH_LONG);
-        toast.show();
+        if(studentReturned)
+        {
+            ConfirmFeedback();
+        }
         // TODO get class name from database
 
         // return "Class Name";

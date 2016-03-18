@@ -69,11 +69,19 @@ public class QrDisplayActivity extends AppCompatActivity {
             generateQRCode(theBooking.getBookingID());
         }else
         {
-            Toast t = Toast.makeText(this, "Please Note: This class has ended", Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(this, "Please Note: This class has ended", Toast.LENGTH_LONG);
+
+            TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
+            toastMessage.setBackgroundColor(Color.TRANSPARENT);
+
+            toast.show();
         }
 
     }
 
+    @Override
+    public void onBackPressed() {
+    }
 
     public void setClassLabels()
     {
@@ -105,6 +113,7 @@ public class QrDisplayActivity extends AppCompatActivity {
     {
         RegisterView.attendanceListID = Integer.valueOf(theBooking.getAttListID());
         RegisterView.bookingID = Integer.valueOf(theBooking.getBookingID());
+        RegisterView.isLive = true;
 
         Intent i = new Intent(getBaseContext(), RegisterView.class);
         //i.putExtra("attendanceID", theBooking.getAttListID());
