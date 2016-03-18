@@ -6,8 +6,8 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:background="#F5A716"
-    android:layout_height="50dp"
-    android:padding="6dip"
+    android:layout_height="30dp"
+    android:padding="4dip"
     android:layout_marginTop="2dp"
     android:clickable="false"
     style="@style/Widget.Design.AppBarLayout">>
@@ -20,8 +20,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentTop="true"
         android:contentDescription="TODO"
-        android:padding="4dp"
-        android:paddingLeft="10dp"
+        android:padding="2dp"
+        android:paddingLeft="4dp"
         android:src="@drawable/question_mark"
         style="@style/Widget.Design.AppBarLayout" />
 

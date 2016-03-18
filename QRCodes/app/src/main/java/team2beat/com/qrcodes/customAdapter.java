@@ -28,23 +28,22 @@ public class customAdapter extends ArrayAdapter<String> {
         TextView textView;
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        String theTag = String.valueOf(parent.getTag());
-        System.out.println(parent.getTag());
-
-        if(values[position].contains("Not on Register")) {
+        if((int)parent.getTag() == 0) {
+            if (values[position].contains("Not on Register")) {
                 convertView = inflater.inflate(R.layout.not_on_reg, null);
-        }
-        else if(values[position].contains("Not Present"))
-        {
-            convertView = inflater.inflate(R.layout.reg_absent, null);
-        }
-        else
-            convertView = inflater.inflate(R.layout.on_reg, null);
-        textView = (TextView) convertView.findViewById(R.id.firstLine);
+            } else if (values[position].contains("Not Present")) {
+                convertView = inflater.inflate(R.layout.reg_absent, null);
+            } else
+                convertView = inflater.inflate(R.layout.on_reg, null);
+            textView = (TextView) convertView.findViewById(R.id.firstLine);
 
-        int index = values[position].indexOf(']');
-        String output = values[position].substring(index + 2);
-        textView.setText(output);
+            int index = values[position].indexOf(']');
+            String output = values[position].substring(index + 2);
+            textView.setText(output);
+        }
+        else if((int)parent.getTag() == 1) {
+
+        }
 
        /*
         if (text.contains("Not on Register"))
