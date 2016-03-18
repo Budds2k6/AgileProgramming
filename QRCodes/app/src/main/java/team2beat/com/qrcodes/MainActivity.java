@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.os.CountDownTimer;
 
 
 import com.google.android.gms.appindexing.Action;
@@ -33,6 +34,9 @@ import android.graphics.Color;
 import team2beat.com.src.Controllers.BookingController;
 import team2beat.com.src.DataObjects.Staff;
 import team2beat.com.src.DataObjects.Student;
+
+
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -190,11 +194,7 @@ public class MainActivity extends AppCompatActivity {
                 {
                     Toast toast = Toast.makeText(this, "QR Code not recognised", Toast.LENGTH_LONG);
 
-                    TextView QRErrorlbl = (TextView) findViewById(R.id.textView5);
-                    QRErrorlbl.setText("Please Scan again");
-                    ImageView QRError = (ImageView) findViewById(R.id.imageView2);
-                    QRError.setImageResource(R.drawable.crossmark);
-                    QRError.setVisibility(View.VISIBLE);
+                    ErrorFeedback();
 
                     TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
                     toastMessage.setBackgroundColor(Color.TRANSPARENT);
@@ -211,16 +211,72 @@ public class MainActivity extends AppCompatActivity {
 
     public void ConfirmFeedback()
     {
-        TextView Confirmlbl = (TextView) findViewById(R.id.textView5);
-        Confirmlbl.setText("You are signed in.");
+        CountDownTimer ConfirmDisplayTimer;
+        long duration = 30000;
+        long timeInterval = 1000;
 
-        ImageView Confirmed = (ImageView) findViewById(R.id.imageView2);
-        Confirmed.setImageResource(R.drawable.checkmark);
+        new CountDownTimer(duration,timeInterval) {
 
-        Confirmed.setVisibility(View.VISIBLE);
+            @Override
+            public void onTick(long millisUntilFinished) {
+
+                TextView Confirmlbl = (TextView) findViewById(R.id.textView5);
+                Confirmlbl.setText("You are signed in.");
+
+                ImageView Confirmed = (ImageView) findViewById(R.id.imageView2);
+                Confirmed.setImageResource(R.drawable.checkmark);
+
+                Confirmed.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onFinish() {
+                DefaultScreen();
+            }
+
+        }.start();
 
     }
 
+    public void ErrorFeedback()
+    {
+        CountDownTimer ErrDisplayTimer;
+        long duration = 30000;
+        long timeInterval = 1000;
+
+        new CountDownTimer(duration,timeInterval) {
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+
+                TextView QRErrorlbl = (TextView) findViewById(R.id.textView5);
+                QRErrorlbl.setText("Please Scan again");
+
+                ImageView QRError = (ImageView) findViewById(R.id.imageView2);
+                QRError.setImageResource(R.drawable.crossmark);
+
+                QRError.setVisibility(View.VISIBLE);
+
+            }
+
+            @Override
+            public void onFinish() {
+                    DefaultScreen();
+            }
+
+        }.start();
+    }
+
+    public void DefaultScreen()
+    {
+
+        TextView defTxt = (TextView) findViewById(R.id.textView5);
+        defTxt.setText("Please Scan a QR code");
+
+        ImageView defImg = (ImageView) findViewById(R.id.imageView2);
+        defImg.setVisibility(View.VISIBLE);
+
+    }
 
     /*
     *
