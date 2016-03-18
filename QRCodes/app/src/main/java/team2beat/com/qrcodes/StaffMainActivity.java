@@ -160,7 +160,7 @@ public class StaffMainActivity extends AppCompatActivity {
         }
 
         final ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, classDetails);
-
+        moduleList.setTag(1);
         moduleList.setAdapter(adapter);
         moduleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

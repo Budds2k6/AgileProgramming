@@ -18,8 +18,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/listStudents"
-        android:layout_marginTop="30dp"
-        android:headerDividersEnabled="false" />
+        android:headerDividersEnabled="false"
+        android:layout_above="@+id/button5"
+        android:layout_below="@+id/btnRefresh" />
 
     <Button
         android:layout_width="wrap_content"
